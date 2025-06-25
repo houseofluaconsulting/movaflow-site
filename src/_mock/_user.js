@@ -9,6 +9,14 @@ export const USER_STATUS_OPTIONS = [
   { value: 'rejected', label: 'Rejected' },
 ];
 
+export const LEAD_STATUS_OPTIONS = [
+  { value: 'Active', label: 'Active' },
+  { value: 'No Contact', label: 'No Contact' },
+  { value: 'Contacted', label: 'Contacted' },
+  { value: 'Sold', label: 'Sold' },
+  
+];
+
 export const _userAbout = {
   id: _mock.id(1),
   role: _mock.role(1),
@@ -127,8 +135,8 @@ export const _userPlans = [
 export const _userList = Array.from({ length: 20 }, (_, index) => ({
   id: _mock.id(index),
   zipCode: '85807',
-  state: 'Virginia',
-  city: 'Rancho Cordova',
+  state: _mock.state(index),
+  city: _mock.city(index),
   role: _mock.role(index),
   email: _mock.email(index),
   address: '908 Jack Locks',
@@ -140,4 +148,24 @@ export const _userList = Array.from({ length: 20 }, (_, index) => ({
   phoneNumber: _mock.phoneNumber(index),
   status:
     (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
+}));
+
+export const _leadList = Array.from({ length: 20 }, (_, index) => ({
+  id: _mock.id(index),
+  state: _mock.state(index),
+  city: _mock.city(index),
+  role: _mock.role(index),
+  zipcode: _mock.zipcode(index),
+  email: _mock.email(index),
+  address: '908 Jack Locks',
+  name: _mock.fullName(index),
+  isVerified: _mock.boolean(index),
+  company: _mock.companyNames(index),
+  country: _mock.countryNames(index),
+  avatarUrl: _mock.image.avatar(index),
+  phoneNumber: _mock.phoneNumber(index),
+  status:
+    (index % 2 && 'No Contact') || (index % 3 && 'Contacted') || (index % 4 && 'Sold') || 'Active',
+  beneficiary:
+    (index % 2 && 'Spouse') || (index % 3 && 'Children') || (index % 4 && 'Other') || 'N/A',
 }));
