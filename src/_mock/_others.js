@@ -142,7 +142,6 @@ export const _pricingPlans = [
     labelAction: 'Purchase',
   },
   {
-    labelAction: 'Choose starter',
     subscription: '30 Mortgage Leads',
     price: 1000.00,
     caption: '$33 per lead',
