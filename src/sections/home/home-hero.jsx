@@ -73,9 +73,9 @@ export function HomeHero({ sx, ...other }) {
         ]}
       >
         <Box component="span" sx={{ width: 1, opacity: 0.24 }}>
-          Boost your building
+          Get Started
         </Box>
-        process with
+        with
         <Box
           component={m.span}
           animate={{ backgroundPosition: '200% center' }}
@@ -95,7 +95,7 @@ export function HomeHero({ sx, ...other }) {
             }),
           ]}
         >
-          Minimal
+          lifejacket leads
         </Box>
       </Box>
     </m.div>
@@ -113,145 +113,9 @@ export function HomeHero({ sx, ...other }) {
           }),
         ]}
       >
-        {`The starting point for your next project is based on MUI. \nEasy customization helps you build apps faster and better.`}
+        {`Make more money from less leads. \n`}
       </Typography>
     </m.div>
-  );
-
-  const renderRatings = () => (
-    <m.div {...motionProps}>
-      <Box
-        sx={{
-          gap: 1.5,
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          typography: 'subtitle2',
-          justifyContent: 'center',
-        }}
-      >
-        <AvatarGroup
-          sx={{
-            [`& .${avatarClasses.root}`]: {
-              width: 32,
-              height: 32,
-            },
-          }}
-        >
-          {Array.from({ length: 3 }, (_, index) => (
-            <Avatar
-              key={_mock.fullName(index + 1)}
-              alt={_mock.fullName(index + 1)}
-              src={_mock.image.avatar(index + 1)}
-            />
-          ))}
-        </AvatarGroup>
-        160+ Happy customers
-      </Box>
-    </m.div>
-  );
-
-  const renderButtons = () => (
-    <Box
-      sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: { xs: 1.5, sm: 2 },
-      }}
-    >
-      <m.div {...motionProps}>
-        <Stack spacing={2.5} sx={{ alignItems: 'center' }}>
-          <Button
-            component={RouterLink}
-            href={paths.dashboard.root}
-            color="inherit"
-            size="large"
-            variant="contained"
-            startIcon={<Iconify width={24} icon="custom:flash-outline" />}
-            sx={{ height: 52 }}
-          >
-            <span>
-              Live preview
-              <Box
-                component="small"
-                sx={[
-                  (theme) => ({
-                    mt: '-4px',
-                    opacity: 0.64,
-                    display: 'flex',
-                    lineHeight: '18px',
-                    fontSize: theme.typography.pxToRem(10),
-                    fontWeight: theme.typography.fontWeightMedium,
-                  }),
-                ]}
-              >
-                v{CONFIG.appVersion}
-              </Box>
-            </span>
-          </Button>
-
-          <Link
-            color="inherit"
-            variant="body2"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={paths.freeUI}
-            underline="always"
-            sx={{ gap: 0.75, alignItems: 'center', display: 'inline-flex' }}
-          >
-            <Iconify width={16} icon="eva:external-link-fill" />
-            Try free version
-          </Link>
-        </Stack>
-      </m.div>
-
-      <m.div {...motionProps}>
-        <Button
-          color="inherit"
-          size="large"
-          variant="outlined"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={paths.figmaUrl}
-          startIcon={<Iconify width={24} icon="solar:figma-outline" />}
-          sx={{ height: 52, borderColor: 'currentColor' }}
-        >
-          Figma preview
-        </Button>
-      </m.div>
-    </Box>
-  );
-
-  const renderIcons = () => (
-    <Stack spacing={3} sx={{ textAlign: 'center' }}>
-      <m.div {...motionProps}>
-        <Typography variant="overline" sx={{ opacity: 0.4 }}>
-          Available For
-        </Typography>
-      </m.div>
-
-      <Box sx={{ gap: 2.5, display: 'flex' }}>
-        {['js', 'ts', 'nextjs', 'vite', 'figma'].map((platform) => (
-          <m.div {...motionProps} key={platform}>
-            <Box
-              component="img"
-              alt={platform}
-              src={`${CONFIG.assetsDir}/assets/icons/platforms/ic-${platform}.svg`}
-              sx={[
-                (theme) => ({
-                  width: 24,
-                  height: 24,
-                  ...theme.applyStyles('dark', {
-                    ...(platform === 'nextjs' && { filter: 'invert(1)' }),
-                  }),
-                }),
-              ]}
-            />
-          </m.div>
-        ))}
-      </Box>
-    </Stack>
   );
 
   return (
@@ -315,13 +179,8 @@ export function HomeHero({ sx, ...other }) {
             <m.div style={{ y: y1 }}>{renderHeading()}</m.div>
             <m.div style={{ y: y2 }}>{renderText()}</m.div>
           </Stack>
-
-          <m.div style={{ y: y3 }}>{renderRatings()}</m.div>
-          <m.div style={{ y: y4 }}>{renderButtons()}</m.div>
-          <m.div style={{ y: y5 }}>{renderIcons()}</m.div>
         </Container>
 
-        <HeroBackground />
       </Box>
     </Box>
   );

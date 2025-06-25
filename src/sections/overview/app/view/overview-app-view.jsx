@@ -47,38 +47,39 @@ export function OverviewAppView() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
-            title="Total active users"
-            percent={2.6}
-            total={18765}
+            title="Total Leads"
+            percent={17.4}
+            total={574}
             chart={{
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-              series: [15, 18, 12, 51, 68, 11, 39, 37],
+              series: [102, 47, 68, 39, 71, 63, 78, 106],
             }}
           />
         </Grid>
 
         <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
-            title="Total installed"
-            percent={0.2}
-            total={4876}
+            title="Leads Sold"
+            percent={6.7}
+            total={92}
             chart={{
               colors: [theme.palette.info.main],
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-              series: [20, 41, 63, 33, 28, 35, 50, 46],
+              series: [7, 11, 14, 9, 8, 13, 12, 17],
             }}
           />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 4 }}>
-          <AppWidgetSummary
-            title="Total downloads"
-            percent={-0.1}
-            total={678}
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
+          <AppCurrentDownload
+            title="Conversion"
+            subheader="Lead Disposition"
             chart={{
-              colors: [theme.palette.error.main],
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-              series: [18, 19, 31, 8, 16, 37, 12, 33],
+              series: [
+                { label: 'No Contact', value: 146 },
+                { label: 'Contacted', value: 336 },
+                { label: 'Sold', value: 92 },
+              ],
             }}
           />
         </Grid>
