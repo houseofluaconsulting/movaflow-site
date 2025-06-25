@@ -36,50 +36,12 @@ export function PricingView() {
   return (
     <Container sx={{ pt: { xs: 3, md: 5 }, pb: 10 }}>
       <Typography variant="h3" align="center" sx={{ mb: 2 }}>
-        Flexible plans for your
-        <br /> {`community's size and needs`}
+        Purchase Leads
       </Typography>
 
       <Typography align="center" sx={{ color: 'text.secondary' }}>
-        Choose your plan and make modern online conversation magic
+        Choose your plan...
       </Typography>
-
-      <Box sx={{ mt: 9, mb: 5, position: 'relative' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Typography variant="overline">MONTHLY</Typography>
-
-          <Switch
-            sx={{ mx: 1 }}
-            slotProps={{
-              input: {
-                id: 'yearly-pricing-switch',
-                'aria-label': 'Yearly pricing switch',
-              },
-            }}
-          />
-
-          <Box sx={{ position: 'relative' }}>
-            <Box
-              sx={{
-                left: 12,
-                bottom: 12,
-                display: 'flex',
-                position: 'absolute',
-              }}
-            >
-              {arrowIcon()}
-              <Box
-                component="span"
-                sx={{ whiteSpace: 'nowrap', color: 'success.main', typography: 'overline' }}
-              >
-                save 10%
-              </Box>
-            </Box>
-
-            <Typography variant="overline">YEARLY</Typography>
-          </Box>
-        </Box>
-      </Box>
 
       <Box
         sx={{
