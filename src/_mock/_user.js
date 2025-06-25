@@ -164,6 +164,7 @@ export const _leadList = Array.from({ length: 20 }, (_, index) => ({
   country: _mock.countryNames(index),
   avatarUrl: _mock.image.avatar(index),
   phoneNumber: _mock.phoneNumber(index),
+  timeStamp : _mock.timeStamp(index),
   status:
     (index % 2 && 'No Contact') || (index % 3 && 'Contacted') || (index % 4 && 'Sold') || 'Active',
   beneficiary:

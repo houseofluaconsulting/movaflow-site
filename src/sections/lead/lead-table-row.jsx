@@ -122,6 +122,8 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell>
 
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.timeStamp}</TableCell>
+
         <TableCell>
           <Label
             variant="soft"

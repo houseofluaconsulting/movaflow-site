@@ -80,10 +80,10 @@ export function UserTableToolbar({ filters, options, onResetPage }) {
         }}
       >
         <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
-          <InputLabel htmlFor="filter-role-select">State</InputLabel>
+          <InputLabel htmlFor="filter-role-select">Role</InputLabel>
           <Select
             multiple
-            label="State"
+            label="Role"
             value={currentFilters.role}
             onChange={handleFilterRole}
             renderValue={(selected) => selected.map((value) => value).join(', ')}

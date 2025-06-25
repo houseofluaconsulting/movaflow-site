@@ -8,6 +8,7 @@ import {
   _roles,
   _stateNames,
   _cityNames,
+  _timeStamps,
   _zipCodes,
   _prices,
   _emails,
@@ -45,6 +46,7 @@ export const _mock = {
   state: (index) => _stateNames[index],
   city: (index) => _cityNames[index],
   zipcode: (index) => _zipCodes[index],
+  timeStamp: (index) => _timeStamps[index],
   role: (index) => _roles[index],
   // Text
   courseNames: (index) => _courseNames[index],

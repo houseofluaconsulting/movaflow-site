@@ -49,6 +49,7 @@ const TABLE_HEAD = [
   { id: 'phoneNumber', label: 'Phone number', width: 180 },
   { id: 'state', label: 'State', width: 220 },
   { id: 'beneficiary', label: 'Beneficiary', width: 180 },
+  { id: 'timeStamp', label: 'Recieved', width: 180 },
   { id: 'status', label: 'Status', width: 100 },
   { id: '', width: 88 },
 ];
