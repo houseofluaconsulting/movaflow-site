@@ -16,6 +16,8 @@ import { usePathname } from '../hooks';
 
 // Overview
 const IndexPage = lazy(() => import('src/pages/dashboard'));
+const LeadsPage = lazy(() => import('src/pages/dashboard/leads'));
+const PurchasePage = lazy(() => import('src/pages/dashboard/purchase'));
 const OverviewEcommercePage = lazy(() => import('src/pages/dashboard/ecommerce'));
 const OverviewAnalyticsPage = lazy(() => import('src/pages/dashboard/analytics'));
 const OverviewBankingPage = lazy(() => import('src/pages/dashboard/banking'));
@@ -109,6 +111,8 @@ export const dashboardRoutes = [
     element: CONFIG.auth.skip ? dashboardLayout() : <AuthGuard>{dashboardLayout()}</AuthGuard>,
     children: [
       { index: true, element: <IndexPage /> },
+      { path: 'leads', element: <LeadsPage /> },
+      { path: 'purchase', element: <PurchasePage /> },
       { path: 'ecommerce', element: <OverviewEcommercePage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
       { path: 'banking', element: <OverviewBankingPage /> },
