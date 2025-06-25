@@ -24,8 +24,6 @@ import { _workspaces } from '../nav-config-workspace';
 import { MenuButton } from '../components/menu-button';
 import { AccountDrawer } from '../components/account-drawer';
 import { SettingsButton } from '../components/settings-button';
-import { LanguagePopover } from '../components/language-popover';
-import { ContactsPopover } from '../components/contacts-popover';
 import { WorkspacesPopover } from '../components/workspaces-popover';
 import { navData as dashboardNavData } from '../nav-config-dashboard';
 import { dashboardLayoutVars, dashboardNavColorVars } from './css-vars';
@@ -112,11 +110,6 @@ export function DashboardLayout({ sx, cssVars, children, slotProps, layoutQuery 
             <VerticalDivider sx={{ [theme.breakpoints.up(layoutQuery)]: { display: 'flex' } }} />
           )}
 
-          {/** @slot Workspace popover */}
-          <WorkspacesPopover
-            data={_workspaces}
-            sx={{ ...(isNavHorizontal && { color: 'var(--layout-nav-text-primary-color)' }) }}
-          />
         </>
       ),
       rightArea: (
@@ -124,14 +117,8 @@ export function DashboardLayout({ sx, cssVars, children, slotProps, layoutQuery 
           {/** @slot Searchbar */}
           <Searchbar data={navData} />
 
-          {/** @slot Language popover */}
-          <LanguagePopover data={allLangs} />
-
           {/** @slot Notifications popover */}
-          <NotificationsDrawer data={_notifications} />
-
-          {/** @slot Contacts popover */}
-          <ContactsPopover data={_contacts} />
+          {/* <NotificationsDrawer data={_notifications} /> */}
 
           {/** @slot Settings button */}
           <SettingsButton />
