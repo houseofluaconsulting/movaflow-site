@@ -22,12 +22,12 @@ import { fShortenNumber } from 'src/utils/format-number';
 import { Image } from 'src/components/image';
 import { Iconify } from 'src/components/iconify';
 
-import { useMockedUser } from 'src/auth/hooks';
+import { useAuthContext } from 'src/auth/hooks';
 
 // ----------------------------------------------------------------------
 
 export function ProfilePostItem({ post }) {
-  const { user } = useMockedUser();
+  const { user } = useAuthContext();
 
   const fileRef = useRef(null);
   const commentRef = useRef(null);
