@@ -1,9 +1,15 @@
-const openNewTab = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer');
-};
+import axios, { fetcher, endpoints } from 'src/lib/axios';
 
-export async function getStripeCheckout() {
-    openNewTab('https://checkout.stripe.com/c/pay/cs_test_a1e1akAIFluLdGbKblgovMYskMWxgjVymv4rLcmFYjWmvW0bsyjkMz9BTI#fidkdWxOYHwnPyd1blpxYHZxWjA0V1FRYk1UQENDfF9EV0BcVnw8QktKQTxmdktoTDxyclVEbGBUQUo2dEZCa3JMMjVkNzFoYlV%2FSG1gck1PTDZ8QlxoTm9kVk9OMjdrS0hCR1dJQXNfbW1oNTV3bFNtYH9vfScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl')
+// ----------------------------------------------------------------------
 
-    // return 'https://checkout.stripe.com/c/pay/cs_test_a1e1akAIFluLdGbKblgovMYskMWxgjVymv4rLcmFYjWmvW0bsyjkMz9BTI#fidkdWxOYHwnPyd1blpxYHZxWjA0V1FRYk1UQENDfF9EV0BcVnw8QktKQTxmdktoTDxyclVEbGBUQUo2dEZCa3JMMjVkNzFoYlV%2FSG1gck1PTDZ8QlxoTm9kVk9OMjdrS0hCR1dJQXNfbW1oNTV3bFNtYH9vfScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl'
+const enableServer = true;
+
+const CHECKOUT_ENDPOINT = endpoints.checkout;
+
+export async function createCheckoutSession(priceId, customerId, quantity) {
+    if (enableServer) {
+        const data = { priceId, customerId, quantity };
+        const response = await axios.post(CHECKOUT_ENDPOINT, data, { params: { endpoint: 'create-checkout-session' } });
+        window.location.replace(response.data.url);
+    }
 }

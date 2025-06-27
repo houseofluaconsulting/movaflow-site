@@ -56,6 +56,7 @@ export const endpoints = {
   // checkout: '/api/checkout',
   chat: '/api/chat',
   kanban: '/api/kanban',
+  checkout: '/api/checkout',
   calendar: '/api/calendar',
   auth: {
     me: '/api/auth/me',
