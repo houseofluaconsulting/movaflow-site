@@ -1,0 +1,9 @@
+const openNewTab = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+};
+
+export async function getStripeCheckout() {
+    openNewTab('https://checkout.stripe.com/c/pay/cs_test_a1e1akAIFluLdGbKblgovMYskMWxgjVymv4rLcmFYjWmvW0bsyjkMz9BTI#fidkdWxOYHwnPyd1blpxYHZxWjA0V1FRYk1UQENDfF9EV0BcVnw8QktKQTxmdktoTDxyclVEbGBUQUo2dEZCa3JMMjVkNzFoYlV%2FSG1gck1PTDZ8QlxoTm9kVk9OMjdrS0hCR1dJQXNfbW1oNTV3bFNtYH9vfScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl')
+
+    // return 'https://checkout.stripe.com/c/pay/cs_test_a1e1akAIFluLdGbKblgovMYskMWxgjVymv4rLcmFYjWmvW0bsyjkMz9BTI#fidkdWxOYHwnPyd1blpxYHZxWjA0V1FRYk1UQENDfF9EV0BcVnw8QktKQTxmdktoTDxyclVEbGBUQUo2dEZCa3JMMjVkNzFoYlV%2FSG1gck1PTDZ8QlxoTm9kVk9OMjdrS0hCR1dJQXNfbW1oNTV3bFNtYH9vfScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl'
+}

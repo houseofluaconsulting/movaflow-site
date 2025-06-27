@@ -140,6 +140,8 @@ export const _pricingPlans = [
     caption: '$37 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
+    priceId: 'price_1Rdg56QEFFyZAREYkQiqRdJP',
+
   },
   {
     subscription: '30 Mortgage Leads',
@@ -147,6 +149,7 @@ export const _pricingPlans = [
     caption: '$33 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
+    priceId: 'price_1Rdg5UQEFFyZAREYO1SFvEDk',
   },
   {
     subscription: '40 Mortgage Leads',
@@ -154,6 +157,7 @@ export const _pricingPlans = [
     caption: '$31 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
+    priceId: 'price_1RdgBPQEFFyZAREYcuRujqMk',
   },
 ];
 

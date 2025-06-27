@@ -57,4 +57,8 @@ export const CONFIG = {
     url: import.meta.env.VITE_SUPABASE_URL ?? '',
     key: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
   },
+  stripe: {
+    publishable_key: import.meta.env.STRIPE_PUBLISHABLE_KEY ?? '',
+    secret_key: import.meta.env.STRIPE_SECRET_KEY ?? '',
+  },
 };

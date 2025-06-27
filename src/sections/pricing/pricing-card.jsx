@@ -8,6 +8,8 @@ import Divider from '@mui/material/Divider';
 import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 
+import { CONFIG } from 'src/global-config';
+import { getStripeCheckout } from 'src/actions/checkout';
 import { PlanFreeIcon, PlanStarterIcon, PlanPremiumIcon } from 'src/assets/icons';
 
 import { Label } from 'src/components/label';
@@ -16,7 +18,7 @@ import { Iconify } from 'src/components/iconify';
 // ----------------------------------------------------------------------
 
 export function PricingCard({ card, sx, ...other }) {
-  const { subscription, price, caption, lists, labelAction } = card;
+  const { subscription, price, caption, lists, labelAction, priceId } = card;
 
   const arrowIcon = () => (
     <SvgIcon
@@ -177,6 +179,8 @@ export function PricingCard({ card, sx, ...other }) {
       {renderList()}
 
       <Button
+        onClick={getStripeCheckout}
+        type="submit"
         fullWidth
         size="medium"
         variant="contained"
@@ -184,6 +188,8 @@ export function PricingCard({ card, sx, ...other }) {
       >
         {labelAction}
       </Button>
+
+
     </Box>
   );
 }

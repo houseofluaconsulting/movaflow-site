@@ -92,10 +92,10 @@ export async function updateColumn(columnId, columnName) {
         const columns = board.columns.map((column) =>
           column.id === columnId
             ? {
-                // Update data when found
-                ...column,
-                name: columnName,
-              }
+              // Update data when found
+              ...column,
+              name: columnName,
+            }
             : column
         );
 
@@ -256,10 +256,10 @@ export async function updateTask(columnId, taskData) {
         const updateTasks = tasksInColumn.map((task) =>
           task.id === taskData.id
             ? {
-                // Update data when found
-                ...task,
-                ...taskData,
-              }
+              // Update data when found
+              ...task,
+              ...taskData,
+            }
             : task
         );
 
