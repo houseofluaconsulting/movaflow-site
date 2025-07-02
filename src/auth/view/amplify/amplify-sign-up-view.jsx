@@ -17,6 +17,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
+import { PhoneInput } from 'src/components/phone-input';
 
 import { getErrorMessage } from '../../utils';
 import { signUp } from '../../context/amplify';
@@ -28,6 +29,7 @@ import { SignUpTerms } from '../../components/sign-up-terms';
 export const SignUpSchema = zod.object({
   firstName: zod.string().min(1, { message: 'First name is required!' }),
   lastName: zod.string().min(1, { message: 'Last name is required!' }),
+  phoneNumber: zod.string().min(1, { message: 'Phone Number is required!' }),
   email: zod
     .string()
     .min(1, { message: 'Email is required!' })
@@ -52,6 +54,7 @@ export function AmplifySignUpView() {
     lastName: '',
     email: '',
     password: '',
+    phoneNumber: '',
   };
 
   const methods = useForm({
@@ -76,6 +79,7 @@ export function AmplifySignUpView() {
         password: data.password,
         firstName: data.firstName,
         lastName: data.lastName,
+        phoneNumber: data.phoneNumber
       });
 
       const redirectPath = createRedirectPath(data.email);
@@ -106,6 +110,8 @@ export function AmplifySignUpView() {
       </Box>
 
       <Field.Text name="email" label="Email address" slotProps={{ inputLabel: { shrink: true } }} />
+
+      <Field.Phone name="phoneNumber" label="Phone Number" defaultCountry="US" value='' slotProps={{ inputLabel: { shrink: true } }} />
 
       <Field.Text
         name="password"

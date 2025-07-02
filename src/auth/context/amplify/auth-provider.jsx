@@ -71,15 +71,15 @@ export function AuthProvider({ children }) {
     () => ({
       user: state.user
         ? {
-            ...state.user,
-            id: state.user?.sub,
-            accessToken: state.user?.accessToken?.toString(),
-            displayName:
-              state.user?.given_name &&
-              state.user?.family_name &&
-              `${state.user?.given_name} ${state.user?.family_name}`,
-            role: state.user?.role ?? 'admin',
-          }
+          ...state.user,
+          id: state.user?.sub,
+          accessToken: state.user?.accessToken?.toString(),
+          displayName:
+            state.user?.given_name &&
+            state.user?.family_name &&
+            `${state.user?.given_name} ${state.user?.family_name}`,
+          role: state.user?.role ?? 'admin',
+        }
         : null,
       checkUserSession,
       loading: status === 'loading',

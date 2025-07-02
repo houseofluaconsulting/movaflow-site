@@ -34,14 +34,14 @@ export function OverviewAppView() {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 12 }}>
           <AppWelcome
-            title={`Welcome back 👋 \n ${user?.displayName}`}
-            // description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
-            // img={<SeoIllustration hideBackground />}
-            // action={
-            //   <Button variant="contained" color="primary">
-            //     Go now
-            //   </Button>
-            // }
+            title={`Welcome back 👋 \n ${user?.displayName} \n`}
+          // description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
+          // img={<SeoIllustration hideBackground />}
+          // action={
+          //   <Button variant="contained" color="primary">
+          //     Go now
+          //   </Button>
+          // }
           />
         </Grid>
 

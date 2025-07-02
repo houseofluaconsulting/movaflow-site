@@ -15,9 +15,12 @@ import { PlanFreeIcon, PlanStarterIcon, PlanPremiumIcon } from 'src/assets/icons
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 
+import { useAuthContext } from 'src/auth/hooks';
+
 // ----------------------------------------------------------------------
 
 export function PricingCard({ card, sx, ...other }) {
+  const { user } = useAuthContext();
   const { subscription, price, caption, lists, labelAction, priceId } = card;
 
   const arrowIcon = () => (
@@ -129,6 +132,7 @@ export function PricingCard({ card, sx, ...other }) {
           Features
         </Box>
       </Box>
+      {user?.id}
 
       {lists.map((item) => (
         <Box key={item} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
@@ -179,7 +183,7 @@ export function PricingCard({ card, sx, ...other }) {
       {renderList()}
 
       <Button
-        onClick={() => createCheckoutSession(priceId, 'cus_SQQcpbJpGTAqmt', 1)}
+        onClick={() => createCheckoutSession(priceId, 'cus_SbgW0RM19rPIsg', 1)}
         // type="submit"
         fullWidth
         size="medium"
