@@ -30,8 +30,8 @@ export const UpdateUserSchema = zod.object({
     .min(1, { message: 'Email is required!' })
     .email({ message: 'Email must be a valid email address!' }),
   phoneNumber: schemaHelper.phoneNumber({ isValid: isValidPhoneNumber }),
-  stateList: zod
-    .object({})
+  states: zod.string().array().min(5, { message: 'Choose at 5 states!' }),
+
 });
 
 // ----------------------------------------------------------------------
@@ -40,17 +40,17 @@ export function AccountGeneral() {
   const { user } = useAuthContext();
 
   const currentUser = {
+    id: user?.id,
     displayName: user?.displayName,
     email: user?.email,
     phoneNumber: '+12152050650',
-    stateList: {}
   };
 
   const defaultValues = {
     displayName: '',
     email: '',
     phoneNumber: '',
-    stateList: {}
+    states: []
   };
 
   const methods = useForm({
@@ -69,6 +69,8 @@ export function AccountGeneral() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       toast.success('Update success!');
+      console.log('User Id: ' + currentUser.userId)
+      data.id = currentUser.id
       console.info('DATA', data);
     } catch (error) {
       console.error(error);
@@ -91,25 +93,39 @@ export function AccountGeneral() {
               <Field.Text name="displayName" label="Name" disabled />
               <Field.Text name="email" label="Email address" disabled />
               <Field.Phone name="phoneNumber" label="Phone number" disabled />
-              
+
             </Box>
-                
+            <Stack spacing={3} sx={{ mt: 3 }}>
+              <Typography variant="subtitle2">State Licenses</Typography>
+              <Field.Autocomplete
+                name="states"
+                placeholder="+ States"
+                multiple
+                disableCloseOnSelect
+                options={US_STATE_OPTIONS.map((option) => option)}
+                getOptionLabel={(option) => option}
+                slotProps={{
+                  chip: { color: 'info' },
+                }}
+              />
+            </Stack>
+
 
             <Stack spacing={3} sx={{ mt: 3, alignItems: 'flex-end' }}>
-              <Autocomplete
-                  
-                  fullWidth
-                  multiple
-                  limitTags={20}
-                  options={usStates}
-                  getOptionLabel={(option) => option.state}
-                  renderInput={(params) => (
-                    <TextField {...params} name="stateList" label="State Licenses" />
-                  )}
-                  slotProps={{
-                    chip: { size: 'small', variant: 'soft' },
-                  }}
-                />
+              {/* <Autocomplete
+
+                fullWidth
+                multiple
+                limitTags={20}
+                options={usStates}
+                getOptionLabel={(option) => option.state}
+                renderInput={(params) => (
+                  <TextField {...params} name="stateList" label="State Licenses" />
+                )}
+                slotProps={{
+                  chip: { size: 'small', variant: 'soft' },
+                }}
+              /> */}
 
               <Button type="submit" variant="contained" loading={isSubmitting}>
                 Save changes
@@ -175,4 +191,57 @@ const usStates = [
   { state: 'West Virginia', stateCode: 'WV' },
   { state: 'Wisconsin', stateCode: 'WI' },
   { state: 'Wyoming', stateCode: 'WY' }
+];
+
+export const US_STATE_OPTIONS = [
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennsylvania',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming',
 ];
