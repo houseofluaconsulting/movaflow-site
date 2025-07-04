@@ -69,7 +69,6 @@ export function AccountGeneral() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       toast.success('Update success!');
-      console.log('User Id: ' + currentUser.userId)
       data.id = currentUser.id
       console.info('DATA', data);
     } catch (error) {
