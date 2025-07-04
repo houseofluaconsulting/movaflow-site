@@ -108,9 +108,9 @@ export function PhoneInput({
         input: {
           endAdornment: normalizedValue && (
             <InputAdornment position="end">
-              <IconButton size="small" edge="end" onClick={handleClearInput}>
+              {/* <IconButton size="small" edge="end" onClick={handleClearInput}>
                 <Iconify width={16} icon="mingcute:close-line" />
-              </IconButton>
+              </IconButton> */}
             </InputAdornment>
           ),
         },
