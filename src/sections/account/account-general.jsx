@@ -31,6 +31,8 @@ export const UpdateUserSchema = zod.object({
     .email({ message: 'Email must be a valid email address!' }),
   phoneNumber: schemaHelper.phoneNumber({ isValid: isValidPhoneNumber }),
   states: zod.string().array().min(5, { message: 'Choose at 5 states!' }),
+  sidRingy: zod.string(),
+  authTokenRingy: zod.string(),
 
 });
 
@@ -50,7 +52,10 @@ export function AccountGeneral() {
     displayName: '',
     email: '',
     phoneNumber: '',
-    states: []
+    states: [],
+    sidRingy: '',
+    authTokenRingy: '',
+
   };
 
   const methods = useForm({
@@ -91,7 +96,7 @@ export function AccountGeneral() {
             >
               <Field.Text name="displayName" label="Name" disabled />
               <Field.Text name="email" label="Email address" disabled />
-              <Field.Phone name="phoneNumber" label="Phone number" disabled />
+              <Field.Phone name="phoneNumber" label="Phone Number" disabled />
 
             </Box>
             <Stack spacing={3} sx={{ mt: 3 }}>
@@ -107,6 +112,12 @@ export function AccountGeneral() {
                   chip: { color: 'info' },
                 }}
               />
+            </Stack>
+
+            <Stack spacing={3} sx={{ mt: 3 }}>
+              <Typography variant="subtitle2">Ringy Integration</Typography>
+              <Field.Text name="sidRingy" label="sid" />
+              <Field.Text name="authTokenRingy" label="authToken" />
             </Stack>
 
 
