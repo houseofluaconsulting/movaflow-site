@@ -162,7 +162,7 @@ export const _leadList = Array.from({ length: 20 }, (_, index) => ({
   isVerified: _mock.boolean(index),
   company: _mock.companyNames(index),
   country: _mock.countryNames(index),
-  avatarUrl: _mock.image.avatar(index),
+  // avatarUrl: _mock.image.avatar(index),
   phoneNumber: _mock.phoneNumber(index),
   timeStamp : _mock.timeStamp(index),
   status:
