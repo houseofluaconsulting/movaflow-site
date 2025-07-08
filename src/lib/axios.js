@@ -57,6 +57,7 @@ export const endpoints = {
   chat: '/api/chat',
   kanban: '/api/kanban',
   checkout: '/api/checkout',
+  customer: 'api/customer',
   calendar: '/api/calendar',
   auth: {
     me: '/api/auth/me',

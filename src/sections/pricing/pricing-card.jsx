@@ -9,6 +9,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 
 import { CONFIG } from 'src/global-config';
+// import { getCustomer } from 'src/actions/customer'
 import { createCheckoutSession } from 'src/actions/checkout';
 import { PlanFreeIcon, PlanStarterIcon, PlanPremiumIcon } from 'src/assets/icons';
 
@@ -183,7 +184,7 @@ export function PricingCard({ card, sx, ...other }) {
       {renderList()}
 
       <Button
-        onClick={() => createCheckoutSession(priceId, 'cus_SbocbtMIUO5M22', 1)}
+        onClick={() => createCheckoutSession(priceId, user?.id, 1)}
         // type="submit"
         fullWidth
         size="medium"
