@@ -132,7 +132,7 @@ export function PricingCard({ card, sx, ...other }) {
           Features
         </Box>
       </Box>
-      {user?.id}
+      {/* {user?.id} */}
 
       {lists.map((item) => (
         <Box key={item} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
