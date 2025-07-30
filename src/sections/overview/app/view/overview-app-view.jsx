@@ -1,3 +1,5 @@
+import { useEffect, useState, useCallback } from 'react';
+
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -29,7 +31,30 @@ export function OverviewAppView() {
   const { user } = useAuthContext();
 
   const user_id = user?.id
-  const leadCredit = getLeadCredit(user_id)
+  // const leadCredit = getLeadCredit(user_id)
+
+  const leadCredit = useState([])
+  const [data, setData] = useState([]);
+  
+  useEffect(() => {
+    async function fetchData() {
+      const promise = getLeadCredit(user_id); // returns a Promise that resolves to an array
+      const result = await promise; // result is the array
+      console.log(result)
+      setData(result);
+    }
+
+    fetchData();
+  }, []);
+
+
+  console.log(data)
+
+  
+
+
+
+
   const theme = useTheme();
 
   return (
@@ -52,7 +77,7 @@ export function OverviewAppView() {
           <AppWidgetSummary
             title="Lead Credit"
             percent={17.4}
-            total={0}
+            total={data}
             chart={{
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
               series: [102, 47, 68, 39, 71, 63, 78, 106],
