@@ -121,7 +121,7 @@ export function DashboardLayout({ sx, cssVars, children, slotProps, layoutQuery 
           {/* <NotificationsDrawer data={_notifications} /> */}
 
           {/** @slot Settings button */}
-          <SettingsButton />
+          {/* <SettingsButton /> */}
 
           {/** @slot Account drawer */}
           <AccountDrawer data={_account} />

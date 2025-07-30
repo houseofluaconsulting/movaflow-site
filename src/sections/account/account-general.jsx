@@ -111,6 +111,7 @@ export function AccountGeneral() {
                 slotProps={{
                   chip: { color: 'info' },
                 }}
+                
               />
             </Stack>
 
@@ -137,7 +138,7 @@ export function AccountGeneral() {
                 }}
               /> */}
 
-              <Button type="submit" variant="contained" loading={isSubmitting}>
+              <Button type="submit" variant="contained" loading={isSubmitting} disabled>
                 Save changes
               </Button>
             </Stack>

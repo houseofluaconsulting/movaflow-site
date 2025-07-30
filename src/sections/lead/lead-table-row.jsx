@@ -144,7 +144,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         <TableCell>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Tooltip title="Quick edit" placement="top" arrow>
+            <Tooltip title="More Details" placement="top" arrow>
               <IconButton
                 color={quickEditForm.value ? 'inherit' : 'default'}
                 onClick={quickEditForm.onTrue}

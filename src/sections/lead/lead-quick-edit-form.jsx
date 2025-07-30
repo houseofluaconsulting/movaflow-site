@@ -141,7 +141,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
           <Button variant="outlined" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="contained" loading={isSubmitting}>
+          <Button type="submit" variant="contained" loading={isSubmitting} disabled>
             Update
           </Button>
         </DialogActions>
