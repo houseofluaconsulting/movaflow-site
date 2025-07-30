@@ -148,7 +148,7 @@ export const _userList = Array.from({ length: 20 }, (_, index) => ({
     (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
 }));
 
-export const _leadList2 = Array.from({ length: 20 }, (_, index) => ({
+export const _leadList1 = Array.from({ length: 20 }, (_, index) => ({
   id: _mock.id(index),
   state: _mock.state(index),
   city: _mock.city(index),
@@ -171,8 +171,8 @@ export const _leadList2 = Array.from({ length: 20 }, (_, index) => ({
 
 export const _leadList = [
 	{
-		"Phone": "+18439578647",
 		"ContactID": "yL1gZNzRb8oMDACXNGOC",
+    "Phone": "+18439578647",
 		"LeadType": "FinalExpense",
 		"Beneficiary": "",
 		"Status": "Unsold",
@@ -183,8 +183,8 @@ export const _leadList = [
 		"Name": "James Taylor"
 	},
 	{
-		"Phone": "+12942924045",
 		"ContactID": "34dwZNzRb8oMDACXNGOC",
+    "Phone": "+12942924045",
 		"LeadType": "FinalExpense",
 		"Beneficiary": "",
 		"Status": "Unsold",

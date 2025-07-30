@@ -15,6 +15,7 @@ import IconButton from '@mui/material/IconButton';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { getLeads } from 'src/actions/leads'
 import { DashboardContent } from 'src/layouts/dashboard';
 import { _stateNames, _leadList, LEAD_STATUS_OPTIONS } from 'src/_mock';
 
