@@ -12,7 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 
-import { USER_STATUS_OPTIONS } from 'src/_mock';
+import { LEAD_STATUS_OPTIONS } from 'src/_mock';
 
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
@@ -44,17 +44,14 @@ export const UserQuickEditSchema = zod.object({
 
 export function UserQuickEditForm({ currentUser, open, onClose }) {
   const defaultValues = {
-    name: '',
-    email: '',
-    phoneNumber: '',
-    address: '',
-    country: '',
-    state: '',
-    city: '',
-    zipCode: '',
-    status: '',
-    company: '',
-    role: '',
+    Name: '',
+    Email: '',
+    Phone: '',
+    State: '',
+    Status: '',
+    LeadType: '',
+    Beneficiary: '',
+    Created: '',
   };
 
   const methods = useForm({
@@ -103,12 +100,12 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
         },
       }}
     >
-      <DialogTitle>Quick update</DialogTitle>
+      <DialogTitle>Lead Details</DialogTitle>
 
       <Form methods={methods} onSubmit={onSubmit}>
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Account is waiting for confirmation
+            Lead currently cannot be edited.
           </Alert>
 
           <Box
@@ -119,33 +116,24 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
               gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
             }}
           >
-            <Field.Select name="status" label="Status">
-              {USER_STATUS_OPTIONS.map((status) => (
+            <Field.Select name="Status" label="Status">
+              {LEAD_STATUS_OPTIONS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
-                </MenuItem>
+                </MenuItem >
               ))}
             </Field.Select>
 
             <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
 
-            <Field.Text name="name" label="Full name" />
-            <Field.Text name="email" label="Email address" />
-            <Field.Phone name="phoneNumber" label="Phone number" />
+            <Field.Text name="Name" label="Full name" disabled />
+            <Field.Text name="Email" label="Email address" disabled />
+            <Field.Phone name="Phone" label="Phone number" disabled/>
 
-            <Field.CountrySelect
-              fullWidth
-              name="country"
-              label="Country"
-              placeholder="Choose a country"
-            />
-
-            <Field.Text name="state" label="State/region" />
-            <Field.Text name="city" label="City" />
-            <Field.Text name="address" label="Address" />
-            <Field.Text name="zipCode" label="Zip/code" />
-            <Field.Text name="company" label="Company" />
-            <Field.Text name="role" label="Role" />
+            <Field.Text name="State" label="State" disabled/>
+            <Field.Text name="LeadType" label="Lead Type" disabled/>
+            <Field.Text name="Beneficiary" label="Beneficiary" disabled/>
+            <Field.Text name="Created" label="Recieved" disabled/>
           </Box>
         </DialogContent>
 

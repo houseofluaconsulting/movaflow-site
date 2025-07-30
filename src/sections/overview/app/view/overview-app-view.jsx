@@ -77,7 +77,7 @@ export function OverviewAppView() {
             chart={{
               series: [
                 { label: 'No Contact', value: 146 },
-                { label: 'Contacted', value: 336 },
+                { label: 'Unsold', value: 336 },
                 { label: 'Sold', value: 92 },
               ],
             }}

@@ -135,7 +135,7 @@ export const _socials = [
 
 export const _pricingPlans = [
   {
-    subscription: '20 Mortgage Leads',
+    subscription: '20 Final Expense Leads',
     price: 750.00,
     caption: '$37 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
@@ -144,7 +144,7 @@ export const _pricingPlans = [
 
   },
   {
-    subscription: '30 Mortgage Leads',
+    subscription: '30 Final Expense Leads',
     price: 1000.00,
     caption: '$33 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
@@ -152,7 +152,7 @@ export const _pricingPlans = [
     priceId: 'price_1Rdg5UQEFFyZAREYO1SFvEDk',
   },
   {
-    subscription: '40 Mortgage Leads',
+    subscription: '40 Final Expense Leads',
     price: 1250.00,
     caption: '$31 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],

@@ -46,9 +46,9 @@ export function PricingCard({ card, sx, ...other }) {
     </SvgIcon>
   );
 
-  const isBasic = subscription === '20 Mortgage Leads';
-  const isDiscount10 = subscription === '30 Mortgage Leads';
-  const isDiscount15 = subscription === '40 Mortgage leads';
+  const isBasic = subscription === '20 Final Expense Leads';
+  const isDiscount10 = subscription === '30 Final Expense Leads';
+  const isDiscount15 = subscription === '40 Final Expense leads';
 
   const renderIcon = () => (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -112,7 +112,7 @@ export function PricingCard({ card, sx, ...other }) {
 
       <Typography variant="h2">{price}</Typography>
 
-      <Typography
+      {/* <Typography
         component="span"
         sx={{
           ml: 1,
@@ -122,7 +122,7 @@ export function PricingCard({ card, sx, ...other }) {
         }}
       >
         / mo
-      </Typography>
+      </Typography> */}
     </Box>
   );
 
