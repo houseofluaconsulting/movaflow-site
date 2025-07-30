@@ -114,9 +114,9 @@ export function AccountGeneral() {
                 
               />
             </Stack>
-
-            <Stack spacing={3} sx={{ mt: 3 }}>
-              <Typography variant="subtitle2">Ringy Integration</Typography>
+            <Stack spacing={3} sx={{ mt: 6 }}>
+              <Typography variant="subtitle6">Ringy Integration</Typography>
+                <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
               <Field.Text name="sidRingy" label="sid" />
               <Field.Text name="authTokenRingy" label="authToken" />
             </Stack>
