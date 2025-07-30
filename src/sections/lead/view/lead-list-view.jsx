@@ -83,8 +83,8 @@ export function UserListView() {
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   const handleDeleteRow = useCallback(
-    (id) => {
-      const deleteRow = tableData.filter((row) => row.id !== id);
+    (ContactID) => {
+      const deleteRow = tableData.filter((row) => row.ContactID !== ContactID);
 
       toast.success('Delete success!');
 
@@ -96,7 +96,7 @@ export function UserListView() {
   );
 
   const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !table.selected.includes(row.id));
+    const deleteRows = tableData.filter((row) => !table.selected.includes(row.ContactID));
 
     toast.success('Delete success!');
 
@@ -203,7 +203,7 @@ export function UserListView() {
               onSelectAllRows={(checked) =>
                 table.onSelectAllRows(
                   checked,
-                  dataFiltered.map((row) => row.id)
+                  dataFiltered.map((row) => row.ContactID)
                 )
               }
               action={
@@ -227,7 +227,7 @@ export function UserListView() {
                   onSelectAllRows={(checked) =>
                     table.onSelectAllRows(
                       checked,
-                      dataFiltered.map((row) => row.id)
+                      dataFiltered.map((row) => row.ContactID)
                     )
                   }
                 />
@@ -240,12 +240,12 @@ export function UserListView() {
                     )
                     .map((row) => (
                       <UserTableRow
-                        key={row.id}
+                        key={row.ContactID}
                         row={row}
-                        selected={table.selected.includes(row.id)}
-                        onSelectRow={() => table.onSelectRow(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
-                        editHref={paths.dashboard.user.edit(row.id)}
+                        selected={table.selected.includes(row.ContactID)}
+                        onSelectRow={() => table.onSelectRow(row.ContactID)}
+                        onDeleteRow={() => handleDeleteRow(row.ContactID)}
+                        editHref={paths.dashboard.user.edit(row.ContactID)}
                       />
                     ))}
 
