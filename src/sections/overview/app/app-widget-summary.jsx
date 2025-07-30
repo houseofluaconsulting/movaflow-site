@@ -28,7 +28,7 @@ export function AppWidgetSummary({ title, percent, total, chart, sx, ...other })
 
   const renderTrending = () => (
     <Box sx={{ gap: 0.5, display: 'flex', alignItems: 'center' }}>
-      <Iconify
+      {/* <Iconify
         width={24}
         icon={
           percent < 0
@@ -40,16 +40,16 @@ export function AppWidgetSummary({ title, percent, total, chart, sx, ...other })
           color: 'success.main',
           ...(percent < 0 && { color: 'error.main' }),
         }}
-      />
+      /> */}
 
-      <Box component="span" sx={{ typography: 'subtitle2' }}>
+      {/* <Box component="span" sx={{ typography: 'subtitle2' }}>
         {percent > 0 && '+'}
         {fPercent(percent)}
-      </Box>
+      </Box> */}
 
-      <Box component="span" sx={{ typography: 'body2', color: 'text.secondary' }}>
+      {/* <Box component="span" sx={{ typography: 'body2', color: 'text.secondary' }}>
         last 7 days
-      </Box>
+      </Box> */}
     </Box>
   );
 
@@ -74,13 +74,14 @@ export function AppWidgetSummary({ title, percent, total, chart, sx, ...other })
 
         {renderTrending()}
       </Box>
-
+      
+{/* 
       <Chart
         type="bar"
         series={[{ data: chart.series }]}
         options={chartOptions}
         sx={{ width: 60, height: 40 }}
-      />
+      /> */}
     </Card>
   );
 }
