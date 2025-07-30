@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
 import { varAlpha } from 'minimal-shared/utils';
+import { useEffect, useState, useCallback } from 'react';
 import { useBoolean, useSetState } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
@@ -37,9 +37,12 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 
+import { useAuthContext } from 'src/auth/hooks';
+
 import { UserTableRow } from '../lead-table-row';
 import { UserTableToolbar } from '../lead-table-toolbar';
 import { UserTableFiltersResult } from '../lead-table-filters-result';
+// import { id } from 'zod/dist/types/v4/locales';
 
 // ----------------------------------------------------------------------
 
@@ -61,12 +64,52 @@ const TABLE_HEAD = [
 
 export function UserListView() {
   const table = useTable();
+  const { user } = useAuthContext();
 
   const confirmDialog = useBoolean();
 
-  const [tableData, setTableData] = useState(_leadList);
+  // const leadTableData = useState(getLeads(user?.id));
 
-  const filters = useSetState({ name: '', role: [], Status: 'all' });
+  // const leadTableData = useState(getLeads(user?.id));
+
+  // const tableData = useState(leadTableData);
+  // const setTableData = useState(getLeads(leadTableData));
+
+  const user_id = user?.id
+  console.log(user_id)
+
+
+  // const leadTableData = useState(getLeads(user_id))
+  
+  // const [promise] = useState(getLeads(user_id))
+
+  // const tableData = promise;
+
+  // console.log(typeof leadTableData);
+  // console.log(Array.isArray(leadTableData));
+
+  const [data, setData] = useState([]);
+  const [tableData, setTableData] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      const promise = getLeads(user_id); // returns a Promise that resolves to an array
+      const result = await promise; // result is the array
+      setTableData(result[0]);
+    }
+
+    fetchData();
+  }, []);
+
+  tableData.map((item, index) => (
+        <div key={index}>{item}</div>
+      ))
+
+  console.log(tableData)
+      
+
+
+  const filters = useSetState({ Name: '', role: [], Status: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
 
   const dataFiltered = applyFilter({
@@ -78,7 +121,7 @@ export function UserListView() {
   const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
 
   const canReset =
-    !!currentFilters.name || currentFilters.role.length > 0 || currentFilters.Status !== 'all';
+    !!currentFilters.Name || currentFilters.role.length > 0 || currentFilters.Status !== 'all';
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
@@ -172,7 +215,7 @@ export function UserListView() {
                     }
                   >
                     {['Unsold', 'No Contact', 'Contacted', 'Sold'].includes(tab.value)
-                      ? tableData.filter((user) => user.Status === tab.value).length
+                      ? tableData.filter((leadUser) => leadUser.Status === tab.value).length
                       : tableData.length}
                   </Label>
                 }
@@ -280,7 +323,7 @@ export function UserListView() {
 // ----------------------------------------------------------------------
 
 function applyFilter({ inputData, comparator, filters }) {
-  const { name, Status, role } = filters;
+  const { Name, Status, role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
@@ -292,8 +335,8 @@ function applyFilter({ inputData, comparator, filters }) {
 
   inputData = stabilizedThis.map((el) => el[0]);
 
-  if (name) {
-    inputData = inputData.filter((user) => user.name.toLowerCase().includes(name.toLowerCase()));
+  if (Name) {
+    inputData = inputData.filter((user) => user.Name.toLowerCase().includes(Name.toLowerCase()));
   }
 
   if (Status !== 'all') {
