@@ -51,14 +51,13 @@ export function AccountGeneral() {
     async function fetchData() {
       const promise = getCustomer(user?.id); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
-      console.log(result)      
       setData(result);
+      
     }
-
     fetchData();
   }, []);
 
-  console.log('Customer: ' + userData)
+  // console.log('Customer Phone: ' + userData['Phone'])
   // console.log('Lead Type: ' + userData['LeadType']['FinalExpense']['Fresh']['CRMIntegration']['Ringy']['SID'])
   
 
@@ -68,22 +67,24 @@ export function AccountGeneral() {
     email: user?.email,
     phoneNumber: userData['Phone'],
     stateLicenses: userData['StateLicenses'],
-    // ringySIDFEXNumVerified: userData['LeadType']['FEXNumVerified']['Fresh']['CRMIntegration']['Ringy']['SID'] ?? "",
-    // ringyAuthTokenFEXNumVerified: userData['LeadType']['FEXNumVerified']['Fresh']['CRMIntegration']['Ringy']['AuthToken'] ?? "",
-    // ringySIDFinalExpense: userData['LeadType']['FinalExpense']['Fresh']['CRMIntegration']['Ringy']['SID'] ?? "",
-    // ringyAuthTokenFinalExpense: userData['LeadType']['FinalExpense']['Fresh']['CRMIntegration']['Ringy']['AuthToken'] ?? "",
+    ringySIDFEXNumVerified: userData['RingySIDFEXNumVerified'] ?? "",
+    ringyAuthTokenFEXNumVerified: userData['RingyAuthTokenFEXNumVerified'] ?? "",
+    ringySIDFinalExpense: userData['RingySIDFinalExpense'] ?? "",
+    ringyAuthTokenFinalExpense: userData['RingyAuthTokenFinalExpense'] ?? "",
   };
 
   const defaultValues = {
     displayName: '',
     email: '',
     phoneNumber: '',
-    states: [],
+    stateLicenses: [],
     ringySIDFEXNumVerified: '',
     ringyAuthTokenFEXNumVerified: '',
     ringySIDFinalExpense: '',
     ringyAuthTokenFinalExpense: '',
   };
+
+  console.log("State Licenses:" + currentUser.stateLicenses)
 
   const methods = useForm({
     mode: 'all',
@@ -128,10 +129,8 @@ export function AccountGeneral() {
             </Box>
             <Stack spacing={3} sx={{ mt: 3 }}>
               <Typography variant="subtitle2">State Licenses</Typography>
-              {/* <Field.Text name="stateLicenses" label="Email address" disabled /> */}
               <Field.Autocomplete
                 name="stateLicenses"
-                placeholder="+ States"
                 multiple
                 disableCloseOnSelect
                 options={US_STATE_OPTIONS.map((option) => option)}
@@ -139,10 +138,12 @@ export function AccountGeneral() {
                 slotProps={{
                   chip: { color: 'info' },
                 }}
+                disabled
                 
               />
             </Stack>
             <Stack spacing={3} sx={{ mt: 6 }}>
+              
               <Typography variant="subtitle6">Ringy Integration</Typography>
               <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
               <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
