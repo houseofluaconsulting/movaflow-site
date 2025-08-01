@@ -104,14 +104,14 @@ export function UserCreateEditForm({ currentUser }) {
             {currentUser && (
               <Label
                 color={
-                  (values.status === 'Active' && 'success') ||
+                  (values.status === 'Sold' && 'success') ||
                   (values.status === 'No Contact' && 'error') ||
-                  (values.status === 'Contacted' && 'error') ||
+                  (values.status === 'Unsold' && 'error') ||
                   'warning'
                 }
                 sx={{ position: 'absolute', top: 24, right: 24 }}
               >
-                {values.status}
+                {values.Staus}
               </Label>
             )}
 
@@ -142,7 +142,7 @@ export function UserCreateEditForm({ currentUser }) {
                 labelPlacement="start"
                 control={
                   <Controller
-                    name="status"
+                    name="Status"
                     control={control}
                     render={({ field }) => (
                       <Switch

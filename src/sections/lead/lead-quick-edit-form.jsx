@@ -12,7 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 
-import { USER_STATUS_OPTIONS } from 'src/_mock';
+import { LEAD_STATUS_OPTIONS } from 'src/_mock';
 
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
@@ -44,17 +44,19 @@ export const UserQuickEditSchema = zod.object({
 
 export function UserQuickEditForm({ currentUser, open, onClose }) {
   const defaultValues = {
-    name: '',
+    full_name: '',
     email: '',
-    phoneNumber: '',
-    address: '',
-    country: '',
+    phone_number: '',
     state: '',
-    city: '',
-    zipCode: '',
     status: '',
-    company: '',
-    role: '',
+    LeadType: '',
+    beneficiary: '',
+    created: '',
+    birthday: '',
+    desired_coverage_amount: '',
+    gender: '',
+    health_status: '',
+    tobacco_use: ''
   };
 
   const methods = useForm({
@@ -103,12 +105,12 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
         },
       }}
     >
-      <DialogTitle>Quick update</DialogTitle>
+      <DialogTitle>Lead Details</DialogTitle>
 
       <Form methods={methods} onSubmit={onSubmit}>
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Account is waiting for confirmation
+            Lead currently cannot be edited.
           </Alert>
 
           <Box
@@ -120,32 +122,28 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             }}
           >
             <Field.Select name="status" label="Status">
-              {USER_STATUS_OPTIONS.map((status) => (
+              {LEAD_STATUS_OPTIONS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
-                </MenuItem>
+                </MenuItem >
               ))}
             </Field.Select>
+            <Field.Text name="LeadType" label="Lead Type" disabled/>
 
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
+            {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }} /> */}
 
-            <Field.Text name="name" label="Full name" />
-            <Field.Text name="email" label="Email address" />
-            <Field.Phone name="phoneNumber" label="Phone number" />
+            <Field.Text name="full_name" label="Full name" disabled />
+            <Field.Text name="email" label="Email address" disabled />
+            <Field.Phone name="phone_number" label="Phone number" disabled/>
 
-            <Field.CountrySelect
-              fullWidth
-              name="country"
-              label="Country"
-              placeholder="Choose a country"
-            />
-
-            <Field.Text name="state" label="State/region" />
-            <Field.Text name="city" label="City" />
-            <Field.Text name="address" label="Address" />
-            <Field.Text name="zipCode" label="Zip/code" />
-            <Field.Text name="company" label="Company" />
-            <Field.Text name="role" label="Role" />
+            <Field.Text name="state" label="State" disabled/>
+            <Field.Text name="beneficiary" label="Beneficiary" disabled/>
+            <Field.Text name="gender" label="Gender" disabled/>
+            <Field.Text name="birthday" label="Birthday" disabled/>
+            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
+            <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
+            <Field.Text name="health_status" label="Health Status" disabled/>
+            <Field.Text name="created" label="Recieved" disabled/>
           </Box>
         </DialogContent>
 
@@ -153,7 +151,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
           <Button variant="outlined" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="contained" loading={isSubmitting}>
+          <Button type="submit" variant="contained" loading={isSubmitting} disabled>
             Update
           </Button>
         </DialogActions>

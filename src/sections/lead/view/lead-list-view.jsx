@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react';
 import { varAlpha } from 'minimal-shared/utils';
+import { useEffect, useState, useCallback } from 'react';
 import { useBoolean, useSetState } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
@@ -15,8 +15,9 @@ import IconButton from '@mui/material/IconButton';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { getLeads } from 'src/actions/leads'
 import { DashboardContent } from 'src/layouts/dashboard';
-import { _roles, _stateNames, _leadList, USER_STATUS_OPTIONS, LEAD_STATUS_OPTIONS } from 'src/_mock';
+import { _stateNames, _leadList, LEAD_STATUS_OPTIONS } from 'src/_mock';
 
 import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
@@ -36,21 +37,24 @@ import {
   TablePaginationCustom,
 } from 'src/components/table';
 
+import { useAuthContext } from 'src/auth/hooks';
+
 import { UserTableRow } from '../lead-table-row';
 import { UserTableToolbar } from '../lead-table-toolbar';
 import { UserTableFiltersResult } from '../lead-table-filters-result';
+// import { id } from 'zod/dist/types/v4/locales';
 
 // ----------------------------------------------------------------------
 
 const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Name' },
-  { id: 'phoneNumber', label: 'Phone number', width: 180 },
-  { id: 'state', label: 'State', width: 220 },
-  { id: 'beneficiary', label: 'Beneficiary', width: 180 },
-  { id: 'timeStamp', label: 'Recieved', width: 180 },
-  { id: 'status', label: 'Status', width: 100 },
+  { id: 'contact', label: 'Contact' },
+  { id: 'phone_number', label: 'Phone Number', width: 180 },
+  { id: 'state', label: 'State', width: 120 },
+  { id: 'LeadType', label: 'Lead Type', width: 100 },
+  { id: 'created', label: 'Recieved', width: 100 },
+  { id: 'status', label: 'Status', width: 30 },
   { id: '', width: 88 },
 ];
 
@@ -58,12 +62,35 @@ const TABLE_HEAD = [
 
 export function UserListView() {
   const table = useTable();
+  const { user } = useAuthContext();
 
   const confirmDialog = useBoolean();
 
-  const [tableData, setTableData] = useState(_leadList);
+  const user_id = user?.id
+  console.log(user_id)
 
-  const filters = useSetState({ name: '', role: [], status: 'all' });
+  const [data, setData] = useState([]);
+  const [tableData, setTableData] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+      const promise = getLeads(user_id); // returns a Promise that resolves to an array
+      const result = await promise; // result is the array
+      setTableData(result[0]);
+    }
+
+    fetchData();
+  }, []);
+
+  tableData.map((item, index) => (
+        <div key={index}>{item}</div>
+      ))
+
+  console.log(tableData)
+      
+
+
+  const filters = useSetState({ Name: '', role: [], Status: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
 
   const dataFiltered = applyFilter({
@@ -75,13 +102,13 @@ export function UserListView() {
   const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
 
   const canReset =
-    !!currentFilters.name || currentFilters.role.length > 0 || currentFilters.status !== 'all';
+    !!currentFilters.Name || currentFilters.role.length > 0 || currentFilters.Status !== 'all';
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   const handleDeleteRow = useCallback(
-    (id) => {
-      const deleteRow = tableData.filter((row) => row.id !== id);
+    (ContactID) => {
+      const deleteRow = tableData.filter((row) => row.ContactID !== ContactID);
 
       toast.success('Delete success!');
 
@@ -93,7 +120,7 @@ export function UserListView() {
   );
 
   const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !table.selected.includes(row.id));
+    const deleteRows = tableData.filter((row) => !table.selected.includes(row.ContactID));
 
     toast.success('Delete success!');
 
@@ -105,7 +132,7 @@ export function UserListView() {
   const handleFilterStatus = useCallback(
     (event, newValue) => {
       table.onResetPage();
-      updateFilters({ status: newValue });
+      updateFilters({ Status: newValue });
     },
     [updateFilters, table]
   );
@@ -140,7 +167,7 @@ export function UserListView() {
       <DashboardContent>
         <Card>
           <Tabs
-            value={currentFilters.status}
+            value={currentFilters.Status}
             onChange={handleFilterStatus}
             sx={[
               (theme) => ({
@@ -162,14 +189,14 @@ export function UserListView() {
                       'soft'
                     }
                     color={
-                      (tab.value === 'Active' && 'success') ||
+                      (tab.value === 'Sold' && 'success') ||
                       (tab.value === 'No Contact' && 'warning') ||
                       (tab.value === 'Contacted' && 'error') ||
-                      'Sold'
+                      'Unsold'
                     }
                   >
-                    {['Active', 'No Contact', 'Contacted', 'Sold'].includes(tab.value)
-                      ? tableData.filter((user) => user.status === tab.value).length
+                    {['Unsold', 'No Contact', 'Contacted', 'Sold'].includes(tab.value)
+                      ? tableData.filter((leadUser) => leadUser.Status === tab.value).length
                       : tableData.length}
                   </Label>
                 }
@@ -177,11 +204,11 @@ export function UserListView() {
             ))}
           </Tabs>
 
-          <UserTableToolbar
+          {/* <UserTableToolbar
             filters={filters}
             onResetPage={table.onResetPage}
             options={{ roles: _stateNames }}
-          />
+          /> */}
 
           {canReset && (
             <UserTableFiltersResult
@@ -200,7 +227,7 @@ export function UserListView() {
               onSelectAllRows={(checked) =>
                 table.onSelectAllRows(
                   checked,
-                  dataFiltered.map((row) => row.id)
+                  dataFiltered.map((row) => row.ContactID)
                 )
               }
               action={
@@ -224,7 +251,7 @@ export function UserListView() {
                   onSelectAllRows={(checked) =>
                     table.onSelectAllRows(
                       checked,
-                      dataFiltered.map((row) => row.id)
+                      dataFiltered.map((row) => row.ContactID)
                     )
                   }
                 />
@@ -237,12 +264,12 @@ export function UserListView() {
                     )
                     .map((row) => (
                       <UserTableRow
-                        key={row.id}
+                        key={row.ContactID}
                         row={row}
-                        selected={table.selected.includes(row.id)}
-                        onSelectRow={() => table.onSelectRow(row.id)}
-                        onDeleteRow={() => handleDeleteRow(row.id)}
-                        editHref={paths.dashboard.user.edit(row.id)}
+                        selected={table.selected.includes(row.ContactID)}
+                        onSelectRow={() => table.onSelectRow(row.ContactID)}
+                        onDeleteRow={() => handleDeleteRow(row.ContactID)}
+                        editHref={paths.dashboard.user.edit(row.ContactID)}
                       />
                     ))}
 
@@ -263,7 +290,7 @@ export function UserListView() {
             count={dataFiltered.length}
             rowsPerPage={table.rowsPerPage}
             onPageChange={table.onChangePage}
-            onChangeDense={table.onChangeDense}
+            // onChangeDense={table.onChangeDense}
             onRowsPerPageChange={table.onChangeRowsPerPage}
           />
         </Card>
@@ -277,7 +304,7 @@ export function UserListView() {
 // ----------------------------------------------------------------------
 
 function applyFilter({ inputData, comparator, filters }) {
-  const { name, status, role } = filters;
+  const { Name, Status, role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
@@ -289,12 +316,12 @@ function applyFilter({ inputData, comparator, filters }) {
 
   inputData = stabilizedThis.map((el) => el[0]);
 
-  if (name) {
-    inputData = inputData.filter((user) => user.name.toLowerCase().includes(name.toLowerCase()));
+  if (Name) {
+    inputData = inputData.filter((user) => user.Name.toLowerCase().includes(Name.toLowerCase()));
   }
 
-  if (status !== 'all') {
-    inputData = inputData.filter((user) => user.status === status);
+  if (Status !== 'all') {
+    inputData = inputData.filter((user) => user.Status === Status);
   }
 
   if (role.length) {

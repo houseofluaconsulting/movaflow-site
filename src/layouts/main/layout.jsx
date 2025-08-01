@@ -66,7 +66,7 @@ export function MainLayout({ sx, cssVars, children, slotProps, layoutQuery = 'md
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 1.5 } }}>
             {/** @slot Settings button */}
-            <SettingsButton />
+            {/* <SettingsButton /> */}
 
             {/** @slot Sign in button */}
             <SignInButton />

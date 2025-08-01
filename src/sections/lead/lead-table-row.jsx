@@ -107,7 +107,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
                 color="inherit"
                 sx={{ cursor: 'pointer' }}
               >
-                {row.name}
+                {row.full_name}
               </Link>
               <Box component="span" sx={{ color: 'text.disabled' }}>
                 {row.email}
@@ -116,21 +116,23 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
           </Box>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phoneNumber}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phone_number}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.state}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell>
+        {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell> */}
 
-        {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.timeStamp}</TableCell> */}
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
+
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.created}</TableCell>
 
         <TableCell>
           <Label
             variant="soft"
             color={
-              (row.status === 'Active' && 'success') ||
+              (row.status === 'Sold' && 'success') ||
               (row.status === 'No Contact' && 'warning') ||
-              (row.status === 'Contacted' && 'error') ||
+              (row.status === 'Unsold' && 'default') ||
               'default'
             }
           >
@@ -140,21 +142,23 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         <TableCell>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Tooltip title="Quick edit" placement="top" arrow>
+            <Tooltip title="More Details" placement="top" arrow>
               <IconButton
                 color={quickEditForm.value ? 'inherit' : 'default'}
                 onClick={quickEditForm.onTrue}
               >
-                <Iconify icon="solar:pen-bold" />
+                <Iconify icon="eva:more-vertical-fill" />
+                {/* <Iconify icon="eva:more-vertical-fill" /> */}
+
               </IconButton>
             </Tooltip>
 
-            <IconButton
+            {/* <IconButton
               color={menuActions.open ? 'inherit' : 'default'}
               onClick={menuActions.onOpen}
             >
               <Iconify icon="eva:more-vertical-fill" />
-            </IconButton>
+            </IconButton> */}
           </Box>
         </TableCell>
       </TableRow>

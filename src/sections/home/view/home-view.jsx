@@ -32,27 +32,6 @@ export function HomeView() {
 
       <HomeHero />
 
-      <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
-        <HomeMinimal />
-
-        <HomeHugePackElements />
-
-        <HomeForDesigner />
-
-        <HomeHighlightFeatures />
-
-        <HomeIntegrations />
-
-        <HomePricing />
-
-        <HomeTestimonials />
-
-        <HomeFAQs />
-
-        <HomeZoneUI />
-
-        <HomeAdvertisement />
-      </Stack>
     </>
   );
 }

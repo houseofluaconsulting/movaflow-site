@@ -9,6 +9,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Typography from '@mui/material/Typography';
 
 import { CONFIG } from 'src/global-config';
+// import { getCustomer } from 'src/actions/customer'
 import { createCheckoutSession } from 'src/actions/checkout';
 import { PlanFreeIcon, PlanStarterIcon, PlanPremiumIcon } from 'src/assets/icons';
 
@@ -45,9 +46,9 @@ export function PricingCard({ card, sx, ...other }) {
     </SvgIcon>
   );
 
-  const isBasic = subscription === '20 Mortgage Leads';
-  const isDiscount10 = subscription === '30 Mortgage Leads';
-  const isDiscount15 = subscription === '40 Mortgage leads';
+  const isBasic = subscription === '20 Final Expense Leads';
+  const isDiscount10 = subscription === '30 Final Expense Leads';
+  const isDiscount15 = subscription === '40 Final Expense leads';
 
   const renderIcon = () => (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -111,7 +112,7 @@ export function PricingCard({ card, sx, ...other }) {
 
       <Typography variant="h2">{price}</Typography>
 
-      <Typography
+      {/* <Typography
         component="span"
         sx={{
           ml: 1,
@@ -121,7 +122,7 @@ export function PricingCard({ card, sx, ...other }) {
         }}
       >
         / mo
-      </Typography>
+      </Typography> */}
     </Box>
   );
 
@@ -132,7 +133,7 @@ export function PricingCard({ card, sx, ...other }) {
           Features
         </Box>
       </Box>
-      {user?.id}
+      {/* {user?.id} */}
 
       {lists.map((item) => (
         <Box key={item} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
@@ -183,7 +184,7 @@ export function PricingCard({ card, sx, ...other }) {
       {renderList()}
 
       <Button
-        onClick={() => createCheckoutSession(priceId, 'cus_SbocbtMIUO5M22', 1)}
+        onClick={() => createCheckoutSession(priceId, user?.id, 1)}
         // type="submit"
         fullWidth
         size="medium"
