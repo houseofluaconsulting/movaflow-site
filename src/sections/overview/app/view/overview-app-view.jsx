@@ -49,11 +49,8 @@ export function OverviewAppView() {
 
 
   console.log(data)
-
-  
-
-
-
+  console.log('Final Expense: ' + data['FinalExpense'])
+  console.log('Final Expense Number Verified: ' + data['FXNumVerified'])
 
   const theme = useTheme();
 
@@ -75,9 +72,21 @@ export function OverviewAppView() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
-            title="Lead Credit"
+            title="Final Expense Lead Credit"
             percent={17.4}
-            total={data}
+            total={data['FinalExpense']}
+            chart={{
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+              series: [102, 47, 68, 39, 71, 63, 78, 106],
+            }}
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 4 }}>
+          <AppWidgetSummary
+            title="Final Expense Number Verified Lead Credit"
+            percent={17.4}
+            total={data['FXNumVerified']}
             chart={{
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
               series: [102, 47, 68, 39, 71, 63, 78, 106],

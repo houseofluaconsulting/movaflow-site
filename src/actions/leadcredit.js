@@ -7,9 +7,9 @@ const LEADS_ENDPOINT = endpoints.leads;
 export async function getLeadCredit(id) {
     const data = { id };
     const response = await axios.post(LEADS_ENDPOINT, data, { params: { endpoint: 'get-lead-credit' } })
-    const leads_credit = await response.data
+    const lead_credit = await response.data
 
-    console.log(leads_credit)
+    // console.log(lead_credit)
 
-    return leads_credit
+    return lead_credit
 }
