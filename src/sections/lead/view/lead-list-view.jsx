@@ -309,7 +309,7 @@ export function UserListView() {
             count={dataFiltered.length}
             rowsPerPage={table.rowsPerPage}
             onPageChange={table.onChangePage}
-            onChangeDense={table.onChangeDense}
+            // onChangeDense={table.onChangeDense}
             onRowsPerPageChange={table.onChangeRowsPerPage}
           />
         </Card>
