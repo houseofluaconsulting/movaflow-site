@@ -89,7 +89,7 @@ export function HomeHero({ sx, ...other }) {
             }),
           ]}
         >
-          mova leads
+          lifejacket leads
         </Box>
       </Box>
     </m.div>
