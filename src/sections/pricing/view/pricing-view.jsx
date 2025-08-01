@@ -36,11 +36,11 @@ export function PricingView() {
   return (
     <Container sx={{ pt: { xs: 3, md: 5 }, pb: 10 }}>
       <Typography variant="h3" align="center" sx={{ mb: 2 }}>
-        Purchase Leads
+        LifeJacket Leads
       </Typography>
 
       <Typography align="center" sx={{ color: 'text.secondary' }}>
-        Choose your plan...
+        Purchase Leads..
       </Typography>
 
       <Box
