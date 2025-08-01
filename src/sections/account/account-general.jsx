@@ -7,6 +7,7 @@ import { isValidPhoneNumber } from 'react-phone-number-input/input';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
+import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -113,6 +114,9 @@ export function AccountGeneral() {
     <Form methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 12 }}>
+          <Alert variant="outlined" severity="info" sx={{ mb: 1 }}>
+                    Account Settings currently cannot be edited.
+                  </Alert>
           <Card sx={{ p: 3 }}>
             <Box
               sx={{
