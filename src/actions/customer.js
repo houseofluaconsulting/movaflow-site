@@ -9,5 +9,7 @@ export async function getCustomer(id) {
     const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'get-customer' } })
     const customer = await response.data
 
+    console.log(customer)
+
     return customer
 }

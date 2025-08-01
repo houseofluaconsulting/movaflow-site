@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -31,9 +31,7 @@ export function OverviewAppView() {
   const { user } = useAuthContext();
 
   const user_id = user?.id
-  // const leadCredit = getLeadCredit(user_id)
 
-  const leadCredit = useState([])
   const [data, setData] = useState([]);
   
   useEffect(() => {
@@ -50,7 +48,7 @@ export function OverviewAppView() {
 
   console.log(data)
   console.log('Final Expense: ' + data['FinalExpense'])
-  console.log('Final Expense Number Verified: ' + data['FXNumVerified'])
+  console.log('Final Expense Number Verified: ' + data['FEXNumVerified'])
 
   const theme = useTheme();
 
@@ -86,7 +84,7 @@ export function OverviewAppView() {
           <AppWidgetSummary
             title="Final Expense Number Verified Lead Credit"
             percent={17.4}
-            total={data['FXNumVerified']}
+            total={data['FEXNumVerified']}
             chart={{
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
               series: [102, 47, 68, 39, 71, 63, 78, 106],

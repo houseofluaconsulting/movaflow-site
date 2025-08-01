@@ -1,5 +1,6 @@
 import { z as zod } from 'zod';
 import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { isValidPhoneNumber } from 'react-phone-number-input/input';
 
@@ -13,6 +14,8 @@ import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
 
 import { fData } from 'src/utils/format-number';
+
+import { getCustomer } from 'src/actions/customer'
 
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
@@ -41,11 +44,33 @@ export const UpdateUserSchema = zod.object({
 export function AccountGeneral() {
   const { user } = useAuthContext();
 
+  const [userData, setData] = useState([]);
+  
+
+  useEffect(() => {
+    async function fetchData() {
+      const promise = getCustomer(user?.id); // returns a Promise that resolves to an array
+      const result = await promise; // result is the array
+      console.log(result)      
+      setData(result);
+    }
+
+    fetchData();
+  }, []);
+
+  console.log('Customer: ' + userData)
+  
+
   const currentUser = {
     id: user?.id,
     displayName: user?.displayName,
     email: user?.email,
-    phoneNumber: '+12152050650',
+    phoneNumber: userData['Phone'],
+    stateLicenses: userData['StateLicenses'],
+    // ringySIDFEXNumVerified: userData['LeadType']['FEXNumVerified']['Fresh']['CRMIntegration']['Ringy']['SID'] ?? "",
+    // ringyAuthTokenFEXNumVerified: userData['LeadType']['FEXNumVerified']['Fresh']['CRMIntegration']['Ringy']['AuthToken'] ?? "",
+    // ringySIDFinalExpense: userData['LeadType']['FinalExpense']['Fresh']['CRMIntegration']['Ringy']['SID'] ?? "",
+    // ringyAuthTokenFinalExpense: userData['LeadType']['FinalExpense']['Fresh']['CRMIntegration']['Ringy']['AuthToken'] ?? "",
   };
 
   const defaultValues = {
@@ -53,9 +78,10 @@ export function AccountGeneral() {
     email: '',
     phoneNumber: '',
     states: [],
-    sidRingy: '',
-    authTokenRingy: '',
-
+    ringySIDFEXNumVerified: '',
+    ringyAuthTokenFEXNumVerified: '',
+    ringySIDFinalExpense: '',
+    ringyAuthTokenFinalExpense: '',
   };
 
   const methods = useForm({
@@ -101,8 +127,9 @@ export function AccountGeneral() {
             </Box>
             <Stack spacing={3} sx={{ mt: 3 }}>
               <Typography variant="subtitle2">State Licenses</Typography>
+              {/* <Field.Text name="stateLicenses" label="Email address" disabled /> */}
               <Field.Autocomplete
-                name="states"
+                name="stateLicenses"
                 placeholder="+ States"
                 multiple
                 disableCloseOnSelect
@@ -116,9 +143,12 @@ export function AccountGeneral() {
             </Stack>
             <Stack spacing={3} sx={{ mt: 6 }}>
               <Typography variant="subtitle6">Ringy Integration</Typography>
-                <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
-              <Field.Text name="sidRingy" label="sid" />
-              <Field.Text name="authTokenRingy" label="authToken" />
+              <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
+              <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/>
+              <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
+              <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/>
             </Stack>
 
 
