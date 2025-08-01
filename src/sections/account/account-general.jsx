@@ -59,6 +59,7 @@ export function AccountGeneral() {
   }, []);
 
   console.log('Customer: ' + userData)
+  // console.log('Lead Type: ' + userData['LeadType']['FinalExpense']['Fresh']['CRMIntegration']['Ringy']['SID'])
   
 
   const currentUser = {
