@@ -49,14 +49,12 @@ import { UserTableFiltersResult } from '../lead-table-filters-result';
 const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
 
 const TABLE_HEAD = [
-  { id: 'Name', label: 'Name' },
-  { id: 'Phone', label: 'Phone Number', width: 180 },
-  { id: 'State', label: 'State', width: 120 },
-  { id: 'Email', label: 'Email', width: 120 },
-  // { id: 'beneficiary', label: 'Beneficiary', width: 180 },
+  { id: 'contact', label: 'Contact' },
+  { id: 'phone_number', label: 'Phone Number', width: 180 },
+  { id: 'state', label: 'State', width: 120 },
   { id: 'LeadType', label: 'Lead Type', width: 100 },
-  { id: 'Created', label: 'Recieved', width: 100 },
-  { id: 'Status', label: 'Status', width: 30 },
+  { id: 'created', label: 'Recieved', width: 100 },
+  { id: 'status', label: 'Status', width: 30 },
   { id: '', width: 88 },
 ];
 
@@ -68,25 +66,8 @@ export function UserListView() {
 
   const confirmDialog = useBoolean();
 
-  // const leadTableData = useState(getLeads(user?.id));
-
-  // const leadTableData = useState(getLeads(user?.id));
-
-  // const tableData = useState(leadTableData);
-  // const setTableData = useState(getLeads(leadTableData));
-
   const user_id = user?.id
   console.log(user_id)
-
-
-  // const leadTableData = useState(getLeads(user_id))
-  
-  // const [promise] = useState(getLeads(user_id))
-
-  // const tableData = promise;
-
-  // console.log(typeof leadTableData);
-  // console.log(Array.isArray(leadTableData));
 
   const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([])

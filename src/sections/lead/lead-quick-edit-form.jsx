@@ -44,14 +44,19 @@ export const UserQuickEditSchema = zod.object({
 
 export function UserQuickEditForm({ currentUser, open, onClose }) {
   const defaultValues = {
-    Name: '',
-    Email: '',
-    Phone: '',
-    State: '',
-    Status: '',
+    full_name: '',
+    email: '',
+    phone_number: '',
+    state: '',
+    status: '',
     LeadType: '',
-    Beneficiary: '',
-    Created: '',
+    beneficiary: '',
+    created: '',
+    birthday: '',
+    desired_coverage_amount: '',
+    gender: '',
+    health_status: '',
+    tobacco_use: ''
   };
 
   const methods = useForm({
@@ -116,24 +121,29 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
               gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
             }}
           >
-            <Field.Select name="Status" label="Status">
+            <Field.Select name="status" label="Status">
               {LEAD_STATUS_OPTIONS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
                 </MenuItem >
               ))}
             </Field.Select>
-
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
-
-            <Field.Text name="Name" label="Full name" disabled />
-            <Field.Text name="Email" label="Email address" disabled />
-            <Field.Phone name="Phone" label="Phone number" disabled/>
-
-            <Field.Text name="State" label="State" disabled/>
             <Field.Text name="LeadType" label="Lead Type" disabled/>
-            <Field.Text name="Beneficiary" label="Beneficiary" disabled/>
-            <Field.Text name="Created" label="Recieved" disabled/>
+
+            {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }} /> */}
+
+            <Field.Text name="full_name" label="Full name" disabled />
+            <Field.Text name="email" label="Email address" disabled />
+            <Field.Phone name="phone_number" label="Phone number" disabled/>
+
+            <Field.Text name="state" label="State" disabled/>
+            <Field.Text name="beneficiary" label="Beneficiary" disabled/>
+            <Field.Text name="gender" label="Gender" disabled/>
+            <Field.Text name="birthday" label="Birthday" disabled/>
+            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
+            <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
+            <Field.Text name="health_status" label="Health Status" disabled/>
+            <Field.Text name="created" label="Recieved" disabled/>
           </Box>
         </DialogContent>
 

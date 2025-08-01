@@ -107,7 +107,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
                 color="inherit"
                 sx={{ cursor: 'pointer' }}
               >
-                {row.Name}
+                {row.full_name}
               </Link>
               <Box component="span" sx={{ color: 'text.disabled' }}>
                 {row.email}
@@ -116,17 +116,15 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
           </Box>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Phone}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phone_number}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.State}</TableCell>
-
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Email}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.state}</TableCell>
 
         {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell> */}
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Created}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.created}</TableCell>
 
         <TableCell>
           <Label
@@ -138,7 +136,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               'default'
             }
           >
-            {row.Status}
+            {row.status}
           </Label>
         </TableCell>
 
