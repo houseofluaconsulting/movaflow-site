@@ -135,29 +135,12 @@ export const _socials = [
 
 export const _pricingPlans = [
   {
-    subscription: '20 Final Expense Leads',
-    price: 750.00,
-    caption: '$37 per lead',
-    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
-    labelAction: 'Purchase',
-    priceId: 'price_1Rdg56QEFFyZAREYkQiqRdJP',
-
-  },
-  {
-    subscription: '30 Final Expense Leads',
+    subscription: '30 Veteran Website Leads',
     price: 1000.00,
     caption: '$33 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
-    priceId: 'price_1Rdg5UQEFFyZAREYO1SFvEDk',
-  },
-  {
-    subscription: '40 Final Expense Leads',
-    price: 1250.00,
-    caption: '$31 per lead',
-    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
-    labelAction: 'Purchase',
-    priceId: 'price_1RdgBPQEFFyZAREYcuRujqMk',
+    priceId: 'price_1RsUGVGHAeFkU5hvJYY4ZWVe',
   },
 ];
 

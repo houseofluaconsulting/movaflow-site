@@ -42,13 +42,11 @@ export function OverviewAppView() {
       setData(result);
     }
 
+    // window.addEventListener('load', fetchData());
+    // return () => window.removeEventListener('load', fetchData());
+
     fetchData();
   }, []);
-
-
-  console.log(data)
-  console.log('Final Expense: ' + data['FinalExpense'])
-  console.log('Final Expense Number Verified: ' + data['FEXNumVerified'])
 
   const theme = useTheme();
 
