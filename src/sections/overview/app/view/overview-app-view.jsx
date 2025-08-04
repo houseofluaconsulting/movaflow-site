@@ -42,9 +42,6 @@ export function OverviewAppView() {
       setData(result);
     }
 
-    // window.addEventListener('load', fetchData());
-    // return () => window.removeEventListener('load', fetchData());
-
     fetchData();
   }, []);
 
@@ -66,7 +63,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 4 }}>
+        {/* <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
             title="Final Expense Lead Credit"
             percent={17.4}
@@ -83,6 +80,18 @@ export function OverviewAppView() {
             title="Final Expense Number Verified Lead Credit"
             percent={17.4}
             total={data['FEXNumVerified']}
+            chart={{
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+              series: [102, 47, 68, 39, 71, 63, 78, 106],
+            }}
+          />
+        </Grid> */}
+
+        <Grid size={{ xs: 12, md: 4 }}>
+          <AppWidgetSummary
+            title="Veteran Website Lead Credit"
+            percent={17.4}
+            total={data['VeteranWebsite']}
             chart={{
               categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
               series: [102, 47, 68, 39, 71, 63, 78, 106],
