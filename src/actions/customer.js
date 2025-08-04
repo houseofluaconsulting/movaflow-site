@@ -8,6 +8,8 @@ export async function getCustomer(id) {
     const data = { id };
     const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'get-customer' } })
     const customer = await response.data
+
+    console.log(customer)
     
     const user_data = {
         ID: customer.ID,
@@ -19,7 +21,10 @@ export async function getCustomer(id) {
         RingySIDFEXNumVerified: customer.LeadType.FEXNumVerified.Fresh.CRMIntegration.Ringy.SID,
         RingyAuthTokenFEXNumVerified: customer.LeadType.FEXNumVerified.Fresh.CRMIntegration.Ringy.AuthToken,
         RingySIDFinalExpense: customer.LeadType.FinalExpense.Fresh.CRMIntegration.Ringy.SID,
-        RingyAuthTokenFinalExpense: customer.LeadType.FinalExpense.Fresh.CRMIntegration.Ringy.AuthToken
+        RingyAuthTokenFinalExpense: customer.LeadType.FinalExpense.Fresh.CRMIntegration.Ringy.AuthToken,
+        RingySIDVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.SID,
+        RingyAuthTokenVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
+
     }
     
     console.log(user_data)

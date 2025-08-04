@@ -72,6 +72,8 @@ export function AccountGeneral() {
     ringyAuthTokenFEXNumVerified: userData['RingyAuthTokenFEXNumVerified'] ?? "",
     ringySIDFinalExpense: userData['RingySIDFinalExpense'] ?? "",
     ringyAuthTokenFinalExpense: userData['RingyAuthTokenFinalExpense'] ?? "",
+    ringySIDVeteranWebsite: userData['RingySIDVeteranWebsite'] ?? "",
+    ringyAuthTokenVeteranWebsite: userData['RingyAuthTokenVeteranWebsite'] ?? "",
   };
 
   const defaultValues = {
@@ -83,6 +85,8 @@ export function AccountGeneral() {
     ringyAuthTokenFEXNumVerified: '',
     ringySIDFinalExpense: '',
     ringyAuthTokenFinalExpense: '',
+    ringySIDVeteranWebsite: '',
+    ringyAuthTokenVeteranWebsite: '',
   };
 
   console.log("State Licenses:" + currentUser.stateLicenses)
@@ -149,12 +153,15 @@ export function AccountGeneral() {
             <Stack spacing={3} sx={{ mt: 6 }}>
               
               <Typography variant="subtitle6">Ringy Integration</Typography>
-              <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
+              {/* <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
               <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/>
-              <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
+              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/> */}
+              {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
               <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/>
+              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
+              <Typography variant="subtitle2">Veteran Website Lead Vendor</Typography>
+              <Field.Text name="ringySIDVeteranWebsite" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken" disabled/>
             </Stack>
 
 
