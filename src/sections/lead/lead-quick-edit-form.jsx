@@ -56,7 +56,10 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
     desired_coverage_amount: '',
     gender: '',
     health_status: '',
-    tobacco_use: ''
+    tobacco_use: '',
+    current_coverage: '',
+    military_status: '',
+    health: '',
   };
 
   const methods = useForm({
@@ -140,10 +143,13 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             <Field.Text name="beneficiary" label="Beneficiary" disabled/>
             <Field.Text name="gender" label="Gender" disabled/>
             <Field.Text name="birthday" label="Birthday" disabled/>
-            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
-            <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
-            <Field.Text name="health_status" label="Health Status" disabled/>
             <Field.Text name="created" label="Recieved" disabled/>
+            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
+            <Field.Text name="current_coverage" label="Current Coverage" disabled/>
+            <Field.Text name="military_status" label="Military Status" disabled/>
+            <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
+            <Field.Text name="health" label="Health Status" disabled/>
+            
           </Box>
         </DialogContent>
 
