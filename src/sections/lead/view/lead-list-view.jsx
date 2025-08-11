@@ -166,7 +166,7 @@ export function UserListView() {
     <>
       <DashboardContent>
         <Card>
-          <Tabs
+          {/* <Tabs
             value={currentFilters.Status}
             onChange={handleFilterStatus}
             sx={[
@@ -185,7 +185,7 @@ export function UserListView() {
                 icon={
                   <Label
                     variant={
-                      ((tab.value === 'all' || tab.value === currentFilters.status) && 'filled') ||
+                      ((tab.value === 'all' || tab.value === currentFilters.Status) && 'filled') ||
                       'soft'
                     }
                     color={
@@ -202,7 +202,7 @@ export function UserListView() {
                 }
               />
             ))}
-          </Tabs>
+          </Tabs> */}
 
           {/* <UserTableToolbar
             filters={filters}
@@ -269,7 +269,6 @@ export function UserListView() {
                         selected={table.selected.includes(row.ContactID)}
                         onSelectRow={() => table.onSelectRow(row.ContactID)}
                         onDeleteRow={() => handleDeleteRow(row.ContactID)}
-                        editHref={paths.dashboard.user.edit(row.ContactID)}
                       />
                     ))}
 
