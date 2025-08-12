@@ -117,7 +117,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
               gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
             }}
           >
-            <Field.Select name="status" label="Status">
+            <Field.Select name="status" label="Status" disabled>
               {LEAD_STATUS_OPTIONS.map((status) => (
                 <MenuItem key={status.value} value={status.value}>
                   {status.label}
@@ -126,20 +126,20 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             </Field.Select>
             {/* <Field.Text name="LeadType" label="Lead Type"/> */}
 
-            <Field.Text name="full_name" label="Full name" />
-            <Field.Text name="email" label="Email address" />
-            <Field.Phone name="phone_number" label="Phone number"/>
+            <Field.Text name="full_name" label="Full name" disabled/>
+            <Field.Text name="email" label="Email address" disabled/>
+            <Field.Phone name="phone_number" label="Phone number"disabled/>
 
-            <Field.Text name="state" label="State"/>
-            <Field.Text name="beneficiary" label="Beneficiary"/>
-            <Field.Text name="gender" label="Gender"/>
-            <Field.Text name="birthday" label="Birthday"/>
+            <Field.Text name="state" label="State" disabled/>
+            <Field.Text name="beneficiary" label="Beneficiary" disabled/>
+            <Field.Text name="gender" label="Gender" disabled/>
+            <Field.Text name="birthday" label="Birthday" disabled/>
             <Field.Text name="created" label="Recieved" disabled/>
-            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount"/>
-            <Field.Text name="current_coverage" label="Current Coverage"/>
-            <Field.Text name="military_status" label="Military Status"/>
-            <Field.Text name="tobacco_use" label="Tobacco Use"/>
-            <Field.Text name="health" label="Health Status"/>
+            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
+            <Field.Text name="current_coverage" label="Current Coverage" disabled/>
+            <Field.Text name="military_status" label="Military Status" disabled/>
+            <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
+            <Field.Text name="health" label="Health Status" disabled/>
             
           </Box>
         </DialogContent>
@@ -148,7 +148,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
           <Button variant="outlined" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="contained" loading={isSubmitting}>
+          <Button type="submit" variant="contained" loading={isSubmitting} disabled>
             Update
           </Button>
         </DialogActions>
