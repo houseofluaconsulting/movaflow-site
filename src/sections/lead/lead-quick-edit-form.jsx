@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 
+import { updateLead } from 'src/actions/leads'
 import { LEAD_STATUS_OPTIONS } from 'src/_mock';
 
 import { toast } from 'src/components/snackbar';
@@ -20,7 +21,7 @@ import { Form, Field, schemaHelper } from 'src/components/hook-form';
 // ----------------------------------------------------------------------
 
 export const UserQuickEditSchema = zod.object({
-  name: zod.string().min(1, { message: 'Name is required!' }),
+  full_name: zod.string().min(1, { message: 'Name is required!' }),
   email: zod
     .string()
     .min(1, { message: 'Email is required!' })
@@ -29,12 +30,14 @@ export const UserQuickEditSchema = zod.object({
   state: zod.string().min(1, { message: 'State is required!' }),
   // Not required
   status: zod.string(),
+  contact_id: zod.string(),
 });
 
 // ----------------------------------------------------------------------
 
 export function UserQuickEditForm({ currentUser, open, onClose }) {
   const defaultValues = {
+    contact_id: '',
     full_name: '',
     email: '',
     phone_number: '',
@@ -67,11 +70,12 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log('Hello')
-    const promise = new Promise((resolve) => setTimeout(resolve, 1000));
+    // const promise = new Promise((resolve) => setTimeout(resolve, 1000));
+    // const promise = updateLead(contact_id, status); // returns a Promise that resolves to an array
+
+    const promise = updateLead(data.contact_id, data.status, data.email);
 
     try {
-      console.log('Hello')
       reset();
       onClose();
 
@@ -84,6 +88,12 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
       await promise;
 
       console.info('DATA', data);
+      const reloadAfterDelay = () => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      };
+      reloadAfterDelay();
     } catch (error) {
       console.error(error);
     }
@@ -124,12 +134,12 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
                 </MenuItem >
               ))}
             </Field.Select>
-            {/* <Field.Text name="LeadType" label="Lead Type"/> */}
 
-            <Field.Text name="full_name" label="Full name" disabled/>
-            <Field.Text name="email" label="Email address" disabled/>
-            <Field.Phone name="phone_number" label="Phone number"disabled/>
+            <Field.Text name="LeadType" label="Lead Type" disabled/>
 
+            <Field.Text name="full_name" label="Full Name" disabled/>
+            <Field.Text name="email" label="Email Address" disabled/>
+            <Field.Phone name="phone_number" label="Phone Number"disabled/>
             <Field.Text name="state" label="State" disabled/>
             <Field.Text name="beneficiary" label="Beneficiary" disabled/>
             <Field.Text name="gender" label="Gender" disabled/>
@@ -140,7 +150,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             <Field.Text name="military_status" label="Military Status" disabled/>
             <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
             <Field.Text name="health" label="Health Status" disabled/>
-            
+
           </Box>
         </DialogContent>
 
@@ -148,7 +158,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
           <Button variant="outlined" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="contained" loading={isSubmitting} disabled>
+          <Button type="submit" variant="contained" loading={isSubmitting}>
             Update
           </Button>
         </DialogActions>
