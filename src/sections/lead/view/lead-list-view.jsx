@@ -90,7 +90,7 @@ export function UserListView() {
       
 
 
-  const filters = useSetState({ Name: '', role: [], Status: 'all' });
+  const filters = useSetState({ Name: '', role: [], status: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
 
   const dataFiltered = applyFilter({
@@ -102,13 +102,13 @@ export function UserListView() {
   const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
 
   const canReset =
-    !!currentFilters.Name || currentFilters.role.length > 0 || currentFilters.Status !== 'all';
+    !!currentFilters.Name || currentFilters.role.length > 0 || currentFilters.status !== 'all';
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   const handleDeleteRow = useCallback(
-    (ContactID) => {
-      const deleteRow = tableData.filter((row) => row.ContactID !== ContactID);
+    (contact_id) => {
+      const deleteRow = tableData.filter((row) => row.contact_id !== contact_id);
 
       toast.success('Delete success!');
 
@@ -120,7 +120,7 @@ export function UserListView() {
   );
 
   const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !table.selected.includes(row.ContactID));
+    const deleteRows = tableData.filter((row) => !table.selected.includes(row.contact_id));
 
     toast.success('Delete success!');
 
@@ -132,7 +132,7 @@ export function UserListView() {
   const handleFilterStatus = useCallback(
     (event, newValue) => {
       table.onResetPage();
-      updateFilters({ Status: newValue });
+      updateFilters({ status: newValue });
     },
     [updateFilters, table]
   );
@@ -166,8 +166,8 @@ export function UserListView() {
     <>
       <DashboardContent>
         <Card>
-          {/* <Tabs
-            value={currentFilters.Status}
+          <Tabs
+            value={currentFilters.status}
             onChange={handleFilterStatus}
             sx={[
               (theme) => ({
@@ -185,7 +185,7 @@ export function UserListView() {
                 icon={
                   <Label
                     variant={
-                      ((tab.value === 'all' || tab.value === currentFilters.Status) && 'filled') ||
+                      ((tab.value === 'all' || tab.value === currentFilters.status) && 'filled') ||
                       'soft'
                     }
                     color={
@@ -196,13 +196,13 @@ export function UserListView() {
                     }
                   >
                     {['Unsold', 'No Contact', 'Contacted', 'Sold'].includes(tab.value)
-                      ? tableData.filter((leadUser) => leadUser.Status === tab.value).length
+                      ? tableData.filter((leadUser) => leadUser.status === tab.value).length
                       : tableData.length}
                   </Label>
                 }
               />
             ))}
-          </Tabs> */}
+          </Tabs>
 
           {/* <UserTableToolbar
             filters={filters}
@@ -227,7 +227,7 @@ export function UserListView() {
               onSelectAllRows={(checked) =>
                 table.onSelectAllRows(
                   checked,
-                  dataFiltered.map((row) => row.ContactID)
+                  dataFiltered.map((row) => row.contact_id)
                 )
               }
               action={
@@ -251,7 +251,7 @@ export function UserListView() {
                   onSelectAllRows={(checked) =>
                     table.onSelectAllRows(
                       checked,
-                      dataFiltered.map((row) => row.ContactID)
+                      dataFiltered.map((row) => row.contact_id)
                     )
                   }
                 />
@@ -264,11 +264,11 @@ export function UserListView() {
                     )
                     .map((row) => (
                       <UserTableRow
-                        key={row.ContactID}
+                        key={row.contact_id}
                         row={row}
-                        selected={table.selected.includes(row.ContactID)}
-                        onSelectRow={() => table.onSelectRow(row.ContactID)}
-                        onDeleteRow={() => handleDeleteRow(row.ContactID)}
+                        selected={table.selected.includes(row.contact_id)}
+                        onSelectRow={() => table.onSelectRow(row.contact_id)}
+                        onDeleteRow={() => handleDeleteRow(row.contact_id)}
                       />
                     ))}
 
@@ -303,7 +303,7 @@ export function UserListView() {
 // ----------------------------------------------------------------------
 
 function applyFilter({ inputData, comparator, filters }) {
-  const { Name, Status, role } = filters;
+  const { Name, status, role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
@@ -319,8 +319,8 @@ function applyFilter({ inputData, comparator, filters }) {
     inputData = inputData.filter((user) => user.Name.toLowerCase().includes(Name.toLowerCase()));
   }
 
-  if (Status !== 'all') {
-    inputData = inputData.filter((user) => user.Status === Status);
+  if (status !== 'all') {
+    inputData = inputData.filter((user) => user.status === status);
   }
 
   if (role.length) {

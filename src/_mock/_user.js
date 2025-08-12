@@ -12,7 +12,6 @@ export const USER_STATUS_OPTIONS = [
 export const LEAD_STATUS_OPTIONS = [
   { value: 'Unsold', label: 'Unsold' },
   { value: 'Sold', label: 'Sold' },
-  
 ];
 
 export const _userAbout = {

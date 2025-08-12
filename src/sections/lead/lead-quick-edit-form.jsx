@@ -25,17 +25,8 @@ export const UserQuickEditSchema = zod.object({
     .string()
     .min(1, { message: 'Email is required!' })
     .email({ message: 'Email must be a valid email address!' }),
-  phoneNumber: schemaHelper.phoneNumber({ isValid: isValidPhoneNumber }),
-  country: schemaHelper.nullableInput(zod.string().min(1, { message: 'Country is required!' }), {
-    // message for null value
-    message: 'Country is required!',
-  }),
+  phone_number: schemaHelper.phoneNumber({ isValid: isValidPhoneNumber }),
   state: zod.string().min(1, { message: 'State is required!' }),
-  city: zod.string().min(1, { message: 'City is required!' }),
-  address: zod.string().min(1, { message: 'Address is required!' }),
-  zipCode: zod.string().min(1, { message: 'Zip code is required!' }),
-  company: zod.string().min(1, { message: 'Company is required!' }),
-  role: zod.string().min(1, { message: 'Role is required!' }),
   // Not required
   status: zod.string(),
 });
@@ -76,9 +67,11 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log('Hello')
     const promise = new Promise((resolve) => setTimeout(resolve, 1000));
 
     try {
+      console.log('Hello')
       reset();
       onClose();
 
@@ -131,24 +124,22 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
                 </MenuItem >
               ))}
             </Field.Select>
-            <Field.Text name="LeadType" label="Lead Type" disabled/>
+            {/* <Field.Text name="LeadType" label="Lead Type"/> */}
 
-            {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }} /> */}
+            <Field.Text name="full_name" label="Full name" />
+            <Field.Text name="email" label="Email address" />
+            <Field.Phone name="phone_number" label="Phone number"/>
 
-            <Field.Text name="full_name" label="Full name" disabled />
-            <Field.Text name="email" label="Email address" disabled />
-            <Field.Phone name="phone_number" label="Phone number" disabled/>
-
-            <Field.Text name="state" label="State" disabled/>
-            <Field.Text name="beneficiary" label="Beneficiary" disabled/>
-            <Field.Text name="gender" label="Gender" disabled/>
-            <Field.Text name="birthday" label="Birthday" disabled/>
+            <Field.Text name="state" label="State"/>
+            <Field.Text name="beneficiary" label="Beneficiary"/>
+            <Field.Text name="gender" label="Gender"/>
+            <Field.Text name="birthday" label="Birthday"/>
             <Field.Text name="created" label="Recieved" disabled/>
-            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
-            <Field.Text name="current_coverage" label="Current Coverage" disabled/>
-            <Field.Text name="military_status" label="Military Status" disabled/>
-            <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
-            <Field.Text name="health" label="Health Status" disabled/>
+            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount"/>
+            <Field.Text name="current_coverage" label="Current Coverage"/>
+            <Field.Text name="military_status" label="Military Status"/>
+            <Field.Text name="tobacco_use" label="Tobacco Use"/>
+            <Field.Text name="health" label="Health Status"/>
             
           </Box>
         </DialogContent>
@@ -157,7 +148,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
           <Button variant="outlined" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="contained" loading={isSubmitting} disabled>
+          <Button type="submit" variant="contained" loading={isSubmitting}>
             Update
           </Button>
         </DialogActions>
