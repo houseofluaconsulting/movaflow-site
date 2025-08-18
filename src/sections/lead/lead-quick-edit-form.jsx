@@ -47,6 +47,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
     beneficiary: '',
     created: '',
     birthday: '',
+    age: '',
     desired_coverage_amount: '',
     gender: '',
     health_status: '',
@@ -116,7 +117,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
       <Form methods={methods} onSubmit={onSubmit}>
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Lead currently cannot be edited.
+            Lead details currently cannot be edited - only marked as Sold/Unsold.
           </Alert>
 
           <Box
@@ -135,7 +136,10 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
               ))}
             </Field.Select>
 
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
+
             <Field.Text name="LeadType" label="Lead Type" disabled/>
+            <Field.Text name="created" label="Recieved" disabled/>
 
             <Field.Text name="full_name" label="Full Name" disabled/>
             <Field.Text name="email" label="Email Address" disabled/>
@@ -144,7 +148,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             <Field.Text name="beneficiary" label="Beneficiary" disabled/>
             <Field.Text name="gender" label="Gender" disabled/>
             <Field.Text name="birthday" label="Birthday" disabled/>
-            <Field.Text name="created" label="Recieved" disabled/>
+            <Field.Text name="age" label="Age" disabled/>
             <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
             <Field.Text name="current_coverage" label="Current Coverage" disabled/>
             <Field.Text name="military_status" label="Military Status" disabled/>
