@@ -17,8 +17,8 @@ export async function getLeads(id) {
     return [leads, leads]
 }
 
-export async function updateLead(contact_id, status, email) {
-    const data = { contact_id, status, email};
+export async function updateLead(contact_id, status, email, note) {
+    const data = { contact_id, status, email, note};
     const response = await axios.post(LEADS_ENDPOINT, data, { params: { endpoint: 'update-lead' } })
     const response_data = await response.data
     

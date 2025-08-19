@@ -31,6 +31,7 @@ export const UserQuickEditSchema = zod.object({
   // Not required
   status: zod.string(),
   contact_id: zod.string(),
+  note: zod.string(),
 });
 
 // ----------------------------------------------------------------------
@@ -55,6 +56,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
     current_coverage: '',
     military_status: '',
     health: '',
+    note: ''
   };
 
   const methods = useForm({
@@ -74,7 +76,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
     // const promise = new Promise((resolve) => setTimeout(resolve, 1000));
     // const promise = updateLead(contact_id, status); // returns a Promise that resolves to an array
 
-    const promise = updateLead(data.contact_id, data.status, data.email);
+    const promise = updateLead(data.contact_id, data.status, data.email, data.note);
 
     try {
       reset();
@@ -117,7 +119,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
       <Form methods={methods} onSubmit={onSubmit}>
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Lead details currently cannot be edited - only marked as Sold/Unsold.
+            Leads may be updated either through adding a <b>note</b> or by marking them as <b>Sold/Unsold</b>.
           </Alert>
 
           <Box
@@ -138,22 +140,26 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
 
             <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
 
-            <Field.Text name="LeadType" label="Lead Type" disabled/>
-            <Field.Text name="created" label="Recieved" disabled/>
+            <Field.Text name="LeadType" label="Lead Type" disabled />
+            <Field.Text name="created" label="Recieved" disabled />
 
-            <Field.Text name="full_name" label="Full Name" disabled/>
-            <Field.Text name="email" label="Email Address" disabled/>
-            <Field.Phone name="phone_number" label="Phone Number"disabled/>
-            <Field.Text name="state" label="State" disabled/>
-            <Field.Text name="beneficiary" label="Beneficiary" disabled/>
-            <Field.Text name="gender" label="Gender" disabled/>
-            <Field.Text name="birthday" label="Birthday" disabled/>
-            <Field.Text name="age" label="Age" disabled/>
-            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled/>
-            <Field.Text name="current_coverage" label="Current Coverage" disabled/>
-            <Field.Text name="military_status" label="Military Status" disabled/>
-            <Field.Text name="tobacco_use" label="Tobacco Use" disabled/>
-            <Field.Text name="health" label="Health Status" disabled/>
+            <Field.Text name="full_name" label="Full Name" disabled />
+            <Field.Text name="email" label="Email Address" disabled />
+            <Field.Phone name="phone_number" label="Phone Number" disabled />
+            <Field.Text name="state" label="State" disabled />
+            <Field.Text name="beneficiary" label="Beneficiary" disabled />
+            <Field.Text name="gender" label="Gender" disabled />
+            <Field.Text name="birthday" label="Birthday" disabled />
+            <Field.Text name="age" label="Age" disabled />
+            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled />
+            <Field.Text name="current_coverage" label="Current Coverage" disabled />
+            <Field.Text name="military_status" label="Military Status" disabled />
+            <Field.Text name="tobacco_use" label="Tobacco Use" disabled />
+            <Field.Text name="health" label="Health Status" disabled />
+
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
+
+            <Field.Text name="note" label="Note" multiline rows={4} />
 
           </Box>
         </DialogContent>
