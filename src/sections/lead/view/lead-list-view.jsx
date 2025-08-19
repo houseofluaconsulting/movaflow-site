@@ -53,7 +53,7 @@ const TABLE_HEAD = [
   { id: 'phone_number', label: 'Phone Number', width: 180 },
   { id: 'state', label: 'State', width: 120 },
   { id: 'LeadType', label: 'Lead Type', width: 100 },
-  { id: 'created', label: 'Recieved', width: 100 },
+  { id: 'created', label: 'Recieved (UTC)', width: 100 },
   { id: 'status', label: 'Status', width: 30 },
   { id: '', width: 88 },
 ];
