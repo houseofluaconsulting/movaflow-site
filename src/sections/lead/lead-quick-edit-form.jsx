@@ -73,9 +73,6 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    // const promise = new Promise((resolve) => setTimeout(resolve, 1000));
-    // const promise = updateLead(contact_id, status); // returns a Promise that resolves to an array
-
     const promise = updateLead(data.contact_id, data.status, data.email, data.note);
 
     try {

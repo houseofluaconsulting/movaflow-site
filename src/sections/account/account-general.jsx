@@ -17,6 +17,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import { fData } from 'src/utils/format-number';
 
 import { getCustomer } from 'src/actions/customer'
+import { updateCustomer } from 'src/actions/customer'
 
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
@@ -34,9 +35,9 @@ export const UpdateUserSchema = zod.object({
     .min(1, { message: 'Email is required!' })
     .email({ message: 'Email must be a valid email address!' }),
   phoneNumber: schemaHelper.phoneNumber({ isValid: isValidPhoneNumber }),
-  states: zod.string().array().min(5, { message: 'Choose at 5 states!' }),
-  sidRingy: zod.string(),
-  authTokenRingy: zod.string(),
+  stateLicenses: zod.string().array().min(5, { message: 'Choose at 5 states!' }),
+  ringySIDVeteranWebsite: zod.string(),
+  ringyAuthTokenVeteranWebsite: zod.string(),
 
 });
 
@@ -58,9 +59,6 @@ export function AccountGeneral() {
     fetchData();
   }, []);
 
-  // console.log('Customer Phone: ' + userData['Phone'])
-  // console.log('Lead Type: ' + userData['LeadType']['FinalExpense']['Fresh']['CRMIntegration']['Ringy']['SID'])
-  
 
   const currentUser = {
     id: user?.id,
@@ -104,8 +102,11 @@ export function AccountGeneral() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+
+    const promise = updateCustomer(user?.id, data.stateLicenses);
+  
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // await new Promise((resolve) => setTimeout(resolve, 500));
       toast.success('Update success!');
       data.id = currentUser.id
       console.info('DATA', data);
@@ -119,7 +120,7 @@ export function AccountGeneral() {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 12 }}>
           <Alert variant="outlined" severity="info" sx={{ mb: 1 }}>
-                    Account Settings currently cannot be edited.
+                    Only <b>State Licenses</b> can be edited.
                   </Alert>
           <Card sx={{ p: 3 }}>
             <Box
@@ -146,7 +147,7 @@ export function AccountGeneral() {
                 slotProps={{
                   chip: { color: 'info' },
                 }}
-                disabled
+              
                 
               />
             </Stack>
@@ -181,7 +182,7 @@ export function AccountGeneral() {
                 }}
               /> */}
 
-              <Button type="submit" variant="contained" loading={isSubmitting} disabled>
+              <Button type="submit" variant="contained" loading={isSubmitting}>
                 Save changes
               </Button>
             </Stack>

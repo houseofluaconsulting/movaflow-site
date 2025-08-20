@@ -31,3 +31,19 @@ export async function getCustomer(id) {
 
     return user_data
 }
+
+export async function updateCustomer(id, stateLicenses) {
+    const data = { id , stateLicenses};
+
+    console.log('id: ' + id)
+    console.log('stateLicenses: ' + stateLicenses)
+    // console.log('ringyAuthTokenVeteranWebsite: ' + ringyAuthTokenVeteranWebsite)
+    // console.log('ringySIDVeteranWebsite: ' + ringySIDVeteranWebsite)
+
+    const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'update-customer' } })
+    const response_data = await response.data
+    
+    console.log(response_data)
+
+    return response_data
+}
