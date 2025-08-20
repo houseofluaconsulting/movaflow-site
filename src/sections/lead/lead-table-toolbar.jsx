@@ -25,7 +25,7 @@ export function UserTableToolbar({ filters, options, onResetPage }) {
   const handleFilterName = useCallback(
     (event) => {
       onResetPage();
-      updateFilters({ name: event.target.value });
+      updateFilters({ full_name: event.target.value });
     },
     [onResetPage, updateFilters]
   );
@@ -79,7 +79,7 @@ export function UserTableToolbar({ filters, options, onResetPage }) {
           alignItems: { xs: 'flex-end', md: 'center' },
         }}
       >
-        <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
+        {/* <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
           <InputLabel htmlFor="filter-state-select">State</InputLabel>
           <Select
             multiple
@@ -102,7 +102,7 @@ export function UserTableToolbar({ filters, options, onResetPage }) {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </FormControl> */}
 
         <Box
           sx={{
@@ -115,7 +115,7 @@ export function UserTableToolbar({ filters, options, onResetPage }) {
         >
           <TextField
             fullWidth
-            value={currentFilters.name}
+            value={currentFilters.full_name}
             onChange={handleFilterName}
             placeholder="Search..."
             slotProps={{
@@ -129,9 +129,9 @@ export function UserTableToolbar({ filters, options, onResetPage }) {
             }}
           />
 
-          <IconButton onClick={menuActions.onOpen}>
+          {/* <IconButton onClick={menuActions.onOpen}>
             <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
 

@@ -69,7 +69,7 @@ export function UserListView() {
   const user_id = user?.id
   console.log(user_id)
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([])
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export function UserListView() {
       
 
 
-  const filters = useSetState({ Name: '', role: [], status: 'all' });
+  const filters = useSetState({ full_name: '', role: [], status: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
 
   const dataFiltered = applyFilter({
@@ -102,7 +102,7 @@ export function UserListView() {
   const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
 
   const canReset =
-    !!currentFilters.Name || currentFilters.role.length > 0 || currentFilters.status !== 'all';
+    !!currentFilters.full_name || currentFilters.role.length > 0 || currentFilters.status !== 'all';
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
@@ -204,11 +204,11 @@ export function UserListView() {
             ))}
           </Tabs>
 
-          {/* <UserTableToolbar
+          <UserTableToolbar
             filters={filters}
             onResetPage={table.onResetPage}
             options={{ roles: _stateNames }}
-          /> */}
+          />
 
           {canReset && (
             <UserTableFiltersResult
@@ -303,7 +303,7 @@ export function UserListView() {
 // ----------------------------------------------------------------------
 
 function applyFilter({ inputData, comparator, filters }) {
-  const { Name, status, role } = filters;
+  const { full_name, status, role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
@@ -315,8 +315,8 @@ function applyFilter({ inputData, comparator, filters }) {
 
   inputData = stabilizedThis.map((el) => el[0]);
 
-  if (Name) {
-    inputData = inputData.filter((user) => user.Name.toLowerCase().includes(Name.toLowerCase()));
+  if (full_name) {
+    inputData = inputData.filter((user) => user.full_name.toLowerCase().includes(full_name.toLowerCase()));
   }
 
   if (status !== 'all') {
