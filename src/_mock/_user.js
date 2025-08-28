@@ -9,6 +9,11 @@ export const USER_STATUS_OPTIONS = [
   { value: 'rejected', label: 'Rejected' },
 ];
 
+export const LEAD_STATUS_OPTIONS = [
+  { value: 'Unsold', label: 'Unsold' },
+  { value: 'Sold', label: 'Sold' },
+];
+
 export const _userAbout = {
   id: _mock.id(1),
   role: _mock.role(1),
@@ -127,8 +132,8 @@ export const _userPlans = [
 export const _userList = Array.from({ length: 20 }, (_, index) => ({
   id: _mock.id(index),
   zipCode: '85807',
-  state: 'Virginia',
-  city: 'Rancho Cordova',
+  state: _mock.state(index),
+  city: _mock.city(index),
   role: _mock.role(index),
   email: _mock.email(index),
   address: '908 Jack Locks',
@@ -141,3 +146,52 @@ export const _userList = Array.from({ length: 20 }, (_, index) => ({
   status:
     (index % 2 && 'pending') || (index % 3 && 'banned') || (index % 4 && 'rejected') || 'active',
 }));
+
+export const _leadList1 = Array.from({ length: 20 }, (_, index) => ({
+  id: _mock.id(index),
+  state: _mock.state(index),
+  city: _mock.city(index),
+  role: _mock.role(index),
+  zipcode: _mock.zipcode(index),
+  email: _mock.email(index),
+  address: '908 Jack Locks',
+  name: _mock.fullName(index),
+  isVerified: _mock.boolean(index),
+  company: _mock.companyNames(index),
+  country: _mock.countryNames(index),
+  // avatarUrl: _mock.image.avatar(index),
+  phoneNumber: _mock.phoneNumber(index),
+  timeStamp : _mock.timeStamp(index),
+  status:
+    (index % 2 && 'No Contact') || (index % 3 && 'Contacted') || (index % 4 && 'Sold') || 'Active',
+  beneficiary:
+    (index % 2 && 'Spouse') || (index % 3 && 'Children') || (index % 4 && 'Other') || 'N/A',
+}));
+
+export const _leadList = [
+	{
+		"Phone": "+18439578647",
+		"ContactID": "yL1gZNzRb8oMDACXNGOC",
+		"LeadType": "FinalExpense",
+		"Beneficiary": "",
+		"Status": "Unsold",
+		"State": "Colorado",
+		"CustomerID": "84f83428-30e1-7038-8012-2c0a7f11d2ac",
+		"Email": "jtaylor3030@gmail.com",
+		"Created": "07/30/2025, 03:54:42",
+		"Name": "James Taylor"
+	},
+	{
+		"Phone": "+12942924045",
+		"ContactID": "34dwZNzRb8oMDACXNGOC",
+		"LeadType": "FinalExpense",
+		"Beneficiary": "",
+		"Status": "Unsold",
+		"State": "Pennsylvania",
+		"CustomerID": "84f83428-30e1-7038-8012-2c0a7f11d2ac",
+		"Email": "larryman2343@gmail.com",
+		"Created": "07/30/2025, 03:53:24",
+		"Name": "Larry Morrison"
+	}
+]
+

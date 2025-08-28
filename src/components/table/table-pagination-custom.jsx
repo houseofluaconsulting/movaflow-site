@@ -23,7 +23,7 @@ export function TablePaginationCustom({
 
       {onChangeDense && (
         <FormControlLabel
-          label="Dense"
+          label=""
           control={
             <Switch
               checked={dense}

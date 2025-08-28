@@ -5,7 +5,7 @@ import packageJson from '../package.json';
 // ----------------------------------------------------------------------
 
 export const CONFIG = {
-  appName: 'Minimal UI',
+  appName: 'LifeJacket Leads',
   appVersion: packageJson.version,
   serverUrl: import.meta.env.VITE_SERVER_URL ?? '',
   assetsDir: import.meta.env.VITE_ASSETS_DIR ?? '',
@@ -14,7 +14,7 @@ export const CONFIG = {
    * @method jwt | amplify | firebase | supabase | auth0
    */
   auth: {
-    method: 'jwt',
+    method: 'amplify',
     skip: false,
     redirectPath: paths.dashboard.root,
   },
@@ -56,5 +56,9 @@ export const CONFIG = {
   supabase: {
     url: import.meta.env.VITE_SUPABASE_URL ?? '',
     key: import.meta.env.VITE_SUPABASE_ANON_KEY ?? '',
+  },
+  stripe: {
+    publishable_key: import.meta.env.STRIPE_PUBLISHABLE_KEY ?? '',
+    secret_key: import.meta.env.STRIPE_SECRET_KEY ?? '',
   },
 };

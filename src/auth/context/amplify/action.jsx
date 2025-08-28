@@ -7,7 +7,6 @@ import {
   resendSignUpCode as _resendSignUpCode,
   confirmResetPassword as _confirmResetPassword,
 } from 'aws-amplify/auth';
-
 // ----------------------------------------------------------------------
 
 /** **************************************
@@ -20,11 +19,11 @@ export const signInWithPassword = async ({ username, password }) => {
 /** **************************************
  * Sign up
  *************************************** */
-export const signUp = async ({ username, password, firstName, lastName }) => {
+export const signUp = async ({ username, password, firstName, lastName, phoneNumber }) => {
   await _signUp({
     username,
     password,
-    options: { userAttributes: { email: username, given_name: firstName, family_name: lastName } },
+    options: { userAttributes: { email: username, given_name: firstName, family_name: lastName, phone_number: phoneNumber, } },
   });
 };
 

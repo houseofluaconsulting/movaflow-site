@@ -53,8 +53,12 @@ export const fetcher = async (args) => {
 // ----------------------------------------------------------------------
 
 export const endpoints = {
+  // checkout: '/api/checkout',
   chat: '/api/chat',
   kanban: '/api/kanban',
+  checkout: '/api/checkout',
+  customer: 'api/customer',
+  leads: 'api/leads',
   calendar: '/api/calendar',
   auth: {
     me: '/api/auth/me',

@@ -15,12 +15,12 @@ export function EmptyContent({
   filled,
   slotProps,
   description,
-  title = 'No data',
+  title = '',
   ...other
 }) {
   return (
     <ContentRoot filled={filled} sx={sx} {...other}>
-      <Box
+      {/* <Box
         component="img"
         alt="Empty content"
         src={imgUrl ?? `${CONFIG.assetsDir}/assets/icons/empty/ic-content.svg`}
@@ -32,7 +32,7 @@ export function EmptyContent({
           },
           ...(Array.isArray(slotProps?.img?.sx) ? slotProps.img.sx : [slotProps?.img?.sx]),
         ]}
-      />
+      /> */}
 
       {title && (
         <Typography

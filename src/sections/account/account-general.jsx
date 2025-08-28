@@ -1,21 +1,30 @@
 import { z as zod } from 'zod';
 import { useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { isValidPhoneNumber } from 'react-phone-number-input/input';
 
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
+import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Autocomplete from '@mui/material/Autocomplete';
 
 import { fData } from 'src/utils/format-number';
+
+import { getCustomer } from 'src/actions/customer'
+import { updateCustomer } from 'src/actions/customer'
 
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
 import { useMockedUser } from 'src/auth/hooks';
+import { useAuthContext } from 'src/auth/hooks';
+
 
 // ----------------------------------------------------------------------
 
@@ -25,53 +34,60 @@ export const UpdateUserSchema = zod.object({
     .string()
     .min(1, { message: 'Email is required!' })
     .email({ message: 'Email must be a valid email address!' }),
-  photoURL: schemaHelper.file({ message: 'Avatar is required!' }),
   phoneNumber: schemaHelper.phoneNumber({ isValid: isValidPhoneNumber }),
-  country: schemaHelper.nullableInput(zod.string().min(1, { message: 'Country is required!' }), {
-    // message for null value
-    message: 'Country is required!',
-  }),
-  address: zod.string().min(1, { message: 'Address is required!' }),
-  state: zod.string().min(1, { message: 'State is required!' }),
-  city: zod.string().min(1, { message: 'City is required!' }),
-  zipCode: zod.string().min(1, { message: 'Zip code is required!' }),
-  about: zod.string().min(1, { message: 'About is required!' }),
-  // Not required
-  isPublic: zod.boolean(),
+  stateLicenses: zod.string().array().min(5, { message: 'Choose at 5 states!' }),
+  ringySIDVeteranWebsite: zod.string(),
+  ringyAuthTokenVeteranWebsite: zod.string(),
+
 });
 
 // ----------------------------------------------------------------------
 
 export function AccountGeneral() {
-  const { user } = useMockedUser();
+  const { user } = useAuthContext();
+
+  const [userData, setData] = useState([]);
+  
+
+  useEffect(() => {
+    async function fetchData() {
+      const promise = getCustomer(user?.id); // returns a Promise that resolves to an array
+      const result = await promise; // result is the array
+      setData(result);
+      
+    }
+    fetchData();
+  }, []);
+
 
   const currentUser = {
+    id: user?.id,
     displayName: user?.displayName,
     email: user?.email,
-    photoURL: user?.photoURL,
-    phoneNumber: user?.phoneNumber,
-    country: user?.country,
-    address: user?.address,
-    state: user?.state,
-    city: user?.city,
-    zipCode: user?.zipCode,
-    about: user?.about,
-    isPublic: user?.isPublic,
+    phoneNumber: userData['Phone'],
+    stateLicenses: userData['StateLicenses'],
+    ringySIDFEXNumVerified: userData['RingySIDFEXNumVerified'] ?? "",
+    ringyAuthTokenFEXNumVerified: userData['RingyAuthTokenFEXNumVerified'] ?? "",
+    ringySIDFinalExpense: userData['RingySIDFinalExpense'] ?? "",
+    ringyAuthTokenFinalExpense: userData['RingyAuthTokenFinalExpense'] ?? "",
+    ringySIDVeteranWebsite: userData['RingySIDVeteranWebsite'] ?? "",
+    ringyAuthTokenVeteranWebsite: userData['RingyAuthTokenVeteranWebsite'] ?? "",
   };
 
   const defaultValues = {
     displayName: '',
     email: '',
-    photoURL: null,
     phoneNumber: '',
-    country: null,
-    address: '',
-    state: '',
-    city: '',
-    zipCode: '',
-    about: '',
-    isPublic: false,
+    stateLicenses: [],
+    ringySIDFEXNumVerified: '',
+    ringyAuthTokenFEXNumVerified: '',
+    ringySIDFinalExpense: '',
+    ringyAuthTokenFinalExpense: '',
+    ringySIDVeteranWebsite: '',
+    ringyAuthTokenVeteranWebsite: '',
   };
+
+  console.log("State Licenses:" + currentUser.stateLicenses)
 
   const methods = useForm({
     mode: 'all',
@@ -86,9 +102,13 @@ export function AccountGeneral() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+
+    const promise = updateCustomer(user?.id, data.stateLicenses);
+  
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      // await new Promise((resolve) => setTimeout(resolve, 500));
       toast.success('Update success!');
+      data.id = currentUser.id
       console.info('DATA', data);
     } catch (error) {
       console.error(error);
@@ -98,49 +118,10 @@ export function AccountGeneral() {
   return (
     <Form methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Card
-            sx={{
-              pt: 10,
-              pb: 5,
-              px: 3,
-              textAlign: 'center',
-            }}
-          >
-            <Field.UploadAvatar
-              name="photoURL"
-              maxSize={3145728}
-              helperText={
-                <Typography
-                  variant="caption"
-                  sx={{
-                    mt: 3,
-                    mx: 'auto',
-                    display: 'block',
-                    textAlign: 'center',
-                    color: 'text.disabled',
-                  }}
-                >
-                  Allowed *.jpeg, *.jpg, *.png, *.gif
-                  <br /> max size of {fData(3145728)}
-                </Typography>
-              }
-            />
-
-            <Field.Switch
-              name="isPublic"
-              labelPlacement="start"
-              label="Public profile"
-              sx={{ mt: 5 }}
-            />
-
-            <Button variant="soft" color="error" sx={{ mt: 3 }}>
-              Delete user
-            </Button>
-          </Card>
-        </Grid>
-
-        <Grid size={{ xs: 12, md: 8 }}>
+        <Grid size={{ xs: 12, md: 12 }}>
+          <Alert variant="outlined" severity="info" sx={{ mb: 1 }}>
+                    Only <b>State Licenses</b> can be edited.
+                  </Alert>
           <Card sx={{ p: 3 }}>
             <Box
               sx={{
@@ -150,20 +131,56 @@ export function AccountGeneral() {
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >
-              <Field.Text name="displayName" label="Name" />
-              <Field.Text name="email" label="Email address" />
-              <Field.Phone name="phoneNumber" label="Phone number" />
-              <Field.Text name="address" label="Address" />
+              <Field.Text name="displayName" label="Name" disabled />
+              <Field.Text name="email" label="Email address" disabled />
+              <Field.Phone name="phoneNumber" label="Phone Number" disabled />
 
-              <Field.CountrySelect name="country" label="Country" placeholder="Choose a country" />
-
-              <Field.Text name="state" label="State/region" />
-              <Field.Text name="city" label="City" />
-              <Field.Text name="zipCode" label="Zip/code" />
             </Box>
+            <Stack spacing={3} sx={{ mt: 3 }}>
+              <Typography variant="subtitle2">State Licenses</Typography>
+              <Field.Autocomplete
+                name="stateLicenses"
+                multiple
+                disableCloseOnSelect
+                options={US_STATE_OPTIONS.map((option) => option)}
+                getOptionLabel={(option) => option}
+                slotProps={{
+                  chip: { color: 'info' },
+                }}
+              
+                
+              />
+            </Stack>
+            <Stack spacing={3} sx={{ mt: 6 }}>
+              
+              <Typography variant="subtitle6">Ringy Integration</Typography>
+              {/* <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
+              <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/> */}
+              {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
+              <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
+              <Typography variant="subtitle2">Veteran Website Lead Vendor</Typography>
+              <Field.Text name="ringySIDVeteranWebsite" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken" disabled/>
+            </Stack>
+
 
             <Stack spacing={3} sx={{ mt: 3, alignItems: 'flex-end' }}>
-              <Field.Text name="about" multiline rows={4} label="About" />
+              {/* <Autocomplete
+
+                fullWidth
+                multiple
+                limitTags={20}
+                options={usStates}
+                getOptionLabel={(option) => option.state}
+                renderInput={(params) => (
+                  <TextField {...params} name="stateList" label="State Licenses" />
+                )}
+                slotProps={{
+                  chip: { size: 'small', variant: 'soft' },
+                }}
+              /> */}
 
               <Button type="submit" variant="contained" loading={isSubmitting}>
                 Save changes
@@ -175,3 +192,111 @@ export function AccountGeneral() {
     </Form>
   );
 }
+
+// ----------------------------------------------------------------------
+
+const usStates = [
+  { state: 'Alabama', stateCode: 'AL' },
+  { state: 'Alaska', stateCode: 'AK' },
+  { state: 'Arizona', stateCode: 'AZ' },
+  { state: 'Arkansas', stateCode: 'AR' },
+  { state: 'California', stateCode: 'CA' },
+  { state: 'Colorado', stateCode: 'CO' },
+  { state: 'Connecticut', stateCode: 'CT' },
+  { state: 'Delaware', stateCode: 'DE' },
+  { state: 'Florida', stateCode: 'FL' },
+  { state: 'Georgia', stateCode: 'GA' },
+  { state: 'Hawaii', stateCode: 'HI' },
+  { state: 'Idaho', stateCode: 'ID' },
+  { state: 'Illinois', stateCode: 'IL' },
+  { state: 'Indiana', stateCode: 'IN' },
+  { state: 'Iowa', stateCode: 'IA' },
+  { state: 'Kansas', stateCode: 'KS' },
+  { state: 'Kentucky', stateCode: 'KY' },
+  { state: 'Louisiana', stateCode: 'LA' },
+  { state: 'Maine', stateCode: 'ME' },
+  { state: 'Maryland', stateCode: 'MD' },
+  { state: 'Massachusetts', stateCode: 'MA' },
+  { state: 'Michigan', stateCode: 'MI' },
+  { state: 'Minnesota', stateCode: 'MN' },
+  { state: 'Mississippi', stateCode: 'MS' },
+  { state: 'Missouri', stateCode: 'MO' },
+  { state: 'Montana', stateCode: 'MT' },
+  { state: 'Nebraska', stateCode: 'NE' },
+  { state: 'Nevada', stateCode: 'NV' },
+  { state: 'New Hampshire', stateCode: 'NH' },
+  { state: 'New Jersey', stateCode: 'NJ' },
+  { state: 'New Mexico', stateCode: 'NM' },
+  { state: 'New York', stateCode: 'NY' },
+  { state: 'North Carolina', stateCode: 'NC' },
+  { state: 'North Dakota', stateCode: 'ND' },
+  { state: 'Ohio', stateCode: 'OH' },
+  { state: 'Oklahoma', stateCode: 'OK' },
+  { state: 'Oregon', stateCode: 'OR' },
+  { state: 'Pennsylvania', stateCode: 'PA' },
+  { state: 'Rhode Island', stateCode: 'RI' },
+  { state: 'South Carolina', stateCode: 'SC' },
+  { state: 'South Dakota', stateCode: 'SD' },
+  { state: 'Tennessee', stateCode: 'TN' },
+  { state: 'Texas', stateCode: 'TX' },
+  { state: 'Utah', stateCode: 'UT' },
+  { state: 'Vermont', stateCode: 'VT' },
+  { state: 'Virginia', stateCode: 'VA' },
+  { state: 'Washington', stateCode: 'WA' },
+  { state: 'West Virginia', stateCode: 'WV' },
+  { state: 'Wisconsin', stateCode: 'WI' },
+  { state: 'Wyoming', stateCode: 'WY' }
+];
+
+export const US_STATE_OPTIONS = [
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Pennsylvania',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming',
+];
