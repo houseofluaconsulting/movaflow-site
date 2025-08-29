@@ -140,7 +140,7 @@ export const _pricingPlans = [
     caption: '$33 per lead',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
-    priceId: 'price_1RsUGVGHAeFkU5hvJYY4ZWVe',
+    priceId: 'price_1Rdg5UQEFFyZAREYO1SFvEDk',
   },
 ];
 
