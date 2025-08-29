@@ -116,7 +116,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
       <Form methods={methods} onSubmit={onSubmit}>
         <DialogContent>
           <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Leads may be updated either through adding a <b>note</b> or by marking them as <b>Sold/Unsold</b>.
+            Leads may be updated either through adding a <b>Note</b> or by marking them as <b>Sold/Unsold</b>.
           </Alert>
 
           <Box
