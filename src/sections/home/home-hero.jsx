@@ -60,16 +60,20 @@ export function HomeHero({ sx, ...other }) {
             justifyContent: 'center',
             fontFamily: theme.typography.fontSecondaryFamily,
             [theme.breakpoints.up(lgKey)]: {
-              fontSize: theme.typography.pxToRem(72),
-              lineHeight: '90px',
+              fontSize: theme.typography.pxToRem(60),
+              lineHeight: '70px',
             },
           }),
         ]}
       >
-        <Box component="span" sx={{ width: 1, opacity: 0.24 }}>
-          Get Started
+        <Box component="span" sx={{ width: 1, opacity: 1 }}>
+          LifeJacket Leads
         </Box>
-        with
+
+        <div className="container" style={{ opacity: 0.24}}>
+          powered by
+        </div>
+
         <Box
           component={m.span}
           animate={{ backgroundPosition: '200% center' }}
@@ -89,7 +93,7 @@ export function HomeHero({ sx, ...other }) {
             }),
           ]}
         >
-          lifejacket leads
+          mova
         </Box>
       </Box>
     </m.div>
