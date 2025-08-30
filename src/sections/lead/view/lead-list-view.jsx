@@ -53,8 +53,8 @@ const TABLE_HEAD = [
   { id: 'phone_number', label: 'Phone Number', width: 180 },
   { id: 'state', label: 'State', width: 120 },
   { id: 'LeadType', label: 'Lead Type', width: 100 },
-  { id: 'created', label: 'Recieved (UTC)', width: 100 },
-  { id: 'status', label: 'Status', width: 30 },
+  { id: 'Created', label: 'Recieved (UTC)', width: 100 },
+  { id: 'Status', label: 'Status', width: 30 },
   { id: '', width: 88 },
 ];
 
@@ -90,7 +90,7 @@ export function UserListView() {
       
 
 
-  const filters = useSetState({ full_name: '', role: [], status: 'all' });
+  const filters = useSetState({ full_name: '', role: [], Status: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
 
   const dataFiltered = applyFilter({
@@ -102,7 +102,7 @@ export function UserListView() {
   const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
 
   const canReset =
-    !!currentFilters.full_name || currentFilters.role.length > 0 || currentFilters.status !== 'all';
+    !!currentFilters.full_name || currentFilters.role.length > 0 || currentFilters.Status !== 'all';
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
@@ -132,7 +132,7 @@ export function UserListView() {
   const handleFilterStatus = useCallback(
     (event, newValue) => {
       table.onResetPage();
-      updateFilters({ status: newValue });
+      updateFilters({ Status: newValue });
     },
     [updateFilters, table]
   );
@@ -167,7 +167,7 @@ export function UserListView() {
       <DashboardContent>
         <Card>
           <Tabs
-            value={currentFilters.status}
+            value={currentFilters.Status}
             onChange={handleFilterStatus}
             sx={[
               (theme) => ({
@@ -185,7 +185,7 @@ export function UserListView() {
                 icon={
                   <Label
                     variant={
-                      ((tab.value === 'all' || tab.value === currentFilters.status) && 'filled') ||
+                      ((tab.value === 'all' || tab.value === currentFilters.Status) && 'filled') ||
                       'soft'
                     }
                     color={
@@ -196,7 +196,7 @@ export function UserListView() {
                     }
                   >
                     {['Unsold', 'No Contact', 'Contacted', 'Sold'].includes(tab.value)
-                      ? tableData.filter((leadUser) => leadUser.status === tab.value).length
+                      ? tableData.filter((leadUser) => leadUser.Status === tab.value).length
                       : tableData.length}
                   </Label>
                 }
@@ -303,7 +303,7 @@ export function UserListView() {
 // ----------------------------------------------------------------------
 
 function applyFilter({ inputData, comparator, filters }) {
-  const { full_name, status, role } = filters;
+  const { full_name, Status, role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
@@ -319,8 +319,8 @@ function applyFilter({ inputData, comparator, filters }) {
     inputData = inputData.filter((user) => user.full_name.toLowerCase().includes(full_name.toLowerCase()));
   }
 
-  if (status !== 'all') {
-    inputData = inputData.filter((user) => user.status === status);
+  if (Status !== 'all') {
+    inputData = inputData.filter((user) => user.Status === Status);
   }
 
   if (role.length) {

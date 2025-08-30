@@ -124,19 +124,19 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.created}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Created}</TableCell>
 
         <TableCell>
           <Label
             variant="soft"
             color={
-              (row.status === 'Sold' && 'success') ||
-              (row.status === 'No Contact' && 'warning') ||
-              (row.status === 'Unsold' && 'default') ||
+              (row.Status === 'Sold' && 'success') ||
+              (row.Status === 'No Contact' && 'warning') ||
+              (row.Status === 'Unsold' && 'default') ||
               'default'
             }
           >
-            {row.status}
+            {row.Status}
           </Label>
         </TableCell>
 

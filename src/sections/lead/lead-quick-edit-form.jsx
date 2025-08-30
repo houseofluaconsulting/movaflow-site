@@ -29,9 +29,9 @@ export const UserQuickEditSchema = zod.object({
   phone_number: schemaHelper.phoneNumber({ isValid: isValidPhoneNumber }),
   state: zod.string().min(1, { message: 'State is required!' }),
   // Not required
-  status: zod.string(),
+  Status: zod.string(),
   contact_id: zod.string(),
-  note: zod.string(),
+  Note: zod.string(),
 });
 
 // ----------------------------------------------------------------------
@@ -43,10 +43,10 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
     email: '',
     phone_number: '',
     state: '',
-    status: '',
+    Status: '',
     LeadType: '',
     beneficiary: '',
-    created: '',
+    Created: '',
     birthday: '',
     age: '',
     desired_coverage_amount: '',
@@ -56,7 +56,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
     current_coverage: '',
     military_status: '',
     health: '',
-    note: ''
+    Note: ''
   };
 
   const methods = useForm({
@@ -73,7 +73,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    const promise = updateLead(data.contact_id, data.status, data.email, data.note);
+    const promise = updateLead(data.contact_id, data.Status, data.email, data.Note);
 
     try {
       reset();
@@ -127,10 +127,10 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
               gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
             }}
           >
-            <Field.Select name="status" label="Status">
-              {LEAD_STATUS_OPTIONS.map((status) => (
-                <MenuItem key={status.value} value={status.value}>
-                  {status.label}
+            <Field.Select name="Status" label="Status">
+              {LEAD_STATUS_OPTIONS.map((Status) => (
+                <MenuItem key={Status.value} value={Status.value}>
+                  {Status.label}
                 </MenuItem >
               ))}
             </Field.Select>
@@ -138,7 +138,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
 
             <Field.Text name="LeadType" label="Lead Type" disabled />
-            <Field.Text name="created" label="Recieved" disabled />
+            <Field.Text name="Created" label="Recieved" disabled />
 
             <Field.Text name="full_name" label="Full Name" disabled />
             <Field.Text name="email" label="Email Address" disabled />
@@ -156,7 +156,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
 
             <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
 
-            <Field.Text name="note" label="Note" multiline rows={4} />
+            <Field.Text name="Note" label="Note" multiline rows={4} />
 
           </Box>
         </DialogContent>

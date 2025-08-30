@@ -30,8 +30,6 @@ export async function updateCustomer(id, stateLicenses) {
 
     console.log('id: ' + id)
     console.log('stateLicenses: ' + stateLicenses)
-    // console.log('ringyAuthTokenVeteranWebsite: ' + ringyAuthTokenVeteranWebsite)
-    // console.log('ringySIDVeteranWebsite: ' + ringySIDVeteranWebsite)
 
     const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'update-customer' } })
     const response_data = await response.data
