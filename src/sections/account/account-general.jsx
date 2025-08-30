@@ -161,8 +161,8 @@ export function AccountGeneral() {
               <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
               <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
               <Typography variant="subtitle2">Veteran Website Lead Vendor</Typography>
-              <Field.Text name="ringySIDVeteranWebsite" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken" disabled/>
+              <Field.Text name="ringySIDVeteranWebsite" label="SID" disabled/>
+              <Field.Text name="ringyAuthTokenVeteranWebsite" label="Auth token" disabled/>
             </Stack>
 
 
