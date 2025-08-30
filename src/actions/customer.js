@@ -22,8 +22,6 @@ export async function getCustomer(id) {
         RingyAuthTokenVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
     }
     
-    console.log(user_data)
-
     return user_data
 }
 
