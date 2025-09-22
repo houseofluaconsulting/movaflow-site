@@ -70,6 +70,8 @@ export function AccountGeneral() {
     ringyAuthTokenVeteranWebsite: userData['RingyAuthTokenVeteranWebsite'] ?? "",
     ringySIDLegacyWebsite: userData['RingySIDLegacyWebsite'] ?? "",
     ringyAuthTokenLegacyWebsite: userData['RingyAuthTokenLegacyWebsite'] ?? "",
+    ghlAccessToken: userData['GHLAccessToken'] ?? "",
+    ghlLocationID: userData['GHLocationID'] ?? "",
   };
 
   const defaultValues = {
@@ -81,6 +83,8 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsite: '',
     ringySIDVeteranWebsite: '',
     ringyAuthTokenVeteranWebsite: '',
+    ghlAccessToken: '',
+    ghlLocationID: '',
   };
 
   console.log("State Licenses:" + currentUser.stateLicenses)
@@ -163,6 +167,19 @@ export function AccountGeneral() {
               <Typography variant="subtitle2">Legacy Website Lead Vendor</Typography>
               <Field.Text name="ringySIDLegacyWebsite" label="sid" disabled/>
               <Field.Text name="ringyAuthTokenLegacyWebsite" label="authToken" disabled/>
+            </Stack>
+
+            <Stack spacing={3} sx={{ mt: 6 }}>
+              
+              <Typography variant="subtitle6">GoHighLevel Integration</Typography>
+              {/* <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
+              <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/> */}
+              {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
+              <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
+              <Field.Text name="ghlAccessToken" label="Access Token" disabled/>
+              <Field.Text name="ghlLocationID" label="Location ID" disabled/>
             </Stack>
 
 

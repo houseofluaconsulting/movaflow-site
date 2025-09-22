@@ -21,7 +21,9 @@ export async function getCustomer(id) {
         RingySIDVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.SID,
         RingyAuthTokenVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
         RingySIDLegacyWebsite: customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.SID,
-        RingyAuthTokenLegacyWebsite:customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.AuthToken
+        RingyAuthTokenLegacyWebsite: customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
+        GHLAccessToken: customer.CRMIntegration.GoHighLevel.AccessToken,
+        GHLocationID: customer.CRMIntegration.GoHighLevel.LocationID
     }
     
     return user_data
