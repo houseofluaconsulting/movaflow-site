@@ -20,6 +20,8 @@ export async function getCustomer(id) {
         StateLicenses: customer.StateLicenses,
         RingySIDVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.SID,
         RingyAuthTokenVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
+        RingySIDLegacyWebsite: customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.SID,
+        RingyAuthTokenLegacyWebsite:customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.AuthToken
     }
     
     return user_data
