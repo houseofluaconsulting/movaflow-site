@@ -99,6 +99,18 @@ export function OverviewAppView() {
           />
         </Grid>
 
+         <Grid size={{ xs: 12, md: 4 }}>
+          <AppWidgetSummary
+            title="Legacy Website"
+            percent={17.4}
+            total={data['LegacyWebsiteFresh']}
+            chart={{
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+              series: [102, 47, 68, 39, 71, 63, 78, 106],
+            }}
+          />
+        </Grid>
+
         {/* <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
             title="Leads Sold"
