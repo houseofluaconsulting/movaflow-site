@@ -16,19 +16,16 @@ export async function getCustomer(id) {
         Phone: customer.Phone,
         Email: customer.Email,
         Name: customer.Name,
-        StripeID: customer.StripeID,
+        StripeId: customer.StripeId,
         StateLicenses: customer.StateLicenses,
-        RingySIDFEXNumVerified: customer.LeadType.FEXNumVerified.Fresh.CRMIntegration.Ringy.SID,
-        RingyAuthTokenFEXNumVerified: customer.LeadType.FEXNumVerified.Fresh.CRMIntegration.Ringy.AuthToken,
-        RingySIDFinalExpense: customer.LeadType.FinalExpense.Fresh.CRMIntegration.Ringy.SID,
-        RingyAuthTokenFinalExpense: customer.LeadType.FinalExpense.Fresh.CRMIntegration.Ringy.AuthToken,
         RingySIDVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.SID,
         RingyAuthTokenVeteranWebsite: customer.LeadType.VeteranWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
-
+        RingySIDLegacyWebsite: customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.SID,
+        RingyAuthTokenLegacyWebsite: customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
+        GHLAccessToken: customer.CRMIntegration.GoHighLevel.AccessToken,
+        GHLocationID: customer.CRMIntegration.GoHighLevel.LocationID
     }
     
-    console.log(user_data)
-
     return user_data
 }
 
@@ -37,8 +34,6 @@ export async function updateCustomer(id, stateLicenses) {
 
     console.log('id: ' + id)
     console.log('stateLicenses: ' + stateLicenses)
-    // console.log('ringyAuthTokenVeteranWebsite: ' + ringyAuthTokenVeteranWebsite)
-    // console.log('ringySIDVeteranWebsite: ' + ringySIDVeteranWebsite)
 
     const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'update-customer' } })
     const response_data = await response.data

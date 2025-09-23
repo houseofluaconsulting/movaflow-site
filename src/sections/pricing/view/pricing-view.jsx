@@ -1,10 +1,13 @@
+import { varAlpha } from 'minimal-shared/utils';
+
 import Box from '@mui/material/Box';
 import Switch from '@mui/material/Switch';
 import SvgIcon from '@mui/material/SvgIcon';
+import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { _pricingPlans } from 'src/_mock';
+import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans } from 'src/_mock';
 
 import { PricingCard } from '../pricing-card';
 
@@ -35,12 +38,12 @@ export function PricingView() {
 
   return (
     <Container sx={{ pt: { xs: 3, md: 5 }, pb: 10 }}>
-      <Typography variant="h3" align="center" sx={{ mb: 2 }}>
+      <Typography variant="h3" align="center" sx={{ mb: 5 }}>
         Purchase Leads
       </Typography>
 
-      <Typography align="center" sx={{ color: 'text.secondary' }}>
-        Choose your plan...
+      <Typography variant="h4" align="center" sx={{ color: 'text.secondary'}}>
+        Veteran Wesbite Leads
       </Typography>
 
       <Box
@@ -48,10 +51,28 @@ export function PricingView() {
           display: 'grid',
           gap: { xs: 3, md: 0 },
           alignItems: { md: 'center' },
-          gridTemplateColumns: { md: 'repeat(3, 1fr)' },
+          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+          mb: 10
         }}
       >
-        {_pricingPlans.map((card, index) => (
+        {_veteranWebsitePricingPlans.map((card, index) => (
+          <PricingCard key={card.subscription} card={card} index={index} />
+        ))}
+      </Box>
+
+      <Typography variant="h4" align="center" sx={{ color: 'text.secondary' }}>
+        Legacy Leads
+      </Typography>
+
+      <Box
+        sx={{
+          display: 'grid',
+          gap: { xs: 3, md: 0 },
+          alignItems: { md: 'center' },
+          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+        }}
+      >
+        {_legacyWebsitePricingPlans.map((card, index) => (
           <PricingCard key={card.subscription} card={card} index={index} />
         ))}
       </Box>

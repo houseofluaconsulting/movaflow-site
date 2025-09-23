@@ -133,14 +133,81 @@ export const _socials = [
 
 // ----------------------------------------------------------------------
 
-export const _pricingPlans = [
+export const _veteranWebsitePricingPlans = [
   {
-    subscription: '30 Veteran Website Leads',
-    price: 1000.00,
-    caption: '$33 per lead',
+    amount: '20',
+    subscription: 'Veteran Website Leads',
+    price: 39,
+    caption: '$780.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
-    priceId: 'price_1RsUGVGHAeFkU5hvJYY4ZWVe',
+    priceId: 'price_1SAKvPGHAeFkU5hvZqqr8lAW',
+  },
+  {
+    amount: '30',
+    subscription: 'Veteran Website Leads',
+    price: 36,
+    caption: '$1080.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SAKueGHAeFkU5hvHtNHynmN',
+  },
+  {
+    amount: '40',
+    subscription: 'Veteran Website Leads',
+    price: 35,
+    caption: '$1400.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SAKvyGHAeFkU5hv5ebupPEz',
+  },
+  {
+    amount: '50',
+    subscription: 'Veteran Website Leads',
+    price: 33,
+    caption: '$1650.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SAKxWGHAeFkU5hvFYhvJHv2',
+  },
+];
+
+export const _legacyWebsitePricingPlans = [
+  {
+    amount: '30',
+    subscription: 'Legacy Website Leads',
+    price: 29,
+    caption: '$870.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SAKyLGHAeFkU5hvuX35AZhR',
+  },
+  {
+    amount: '40',
+    subscription: 'Legacy Website Leads',
+    price: 27,
+    caption: '$1080.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SAKyyGHAeFkU5hvOjKhQ6U8',
+  },
+  {
+    amount: '50',
+    subscription: 'Legacy Website Leads',
+    price: 26,
+    caption: '$1300.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SAKzVGHAeFkU5hvQ7JJtmWr',
+  },
+  {
+    amount: '60',
+    subscription: 'Legacy Website Leads',
+    price: 24,
+    caption: '$1440.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SAKzrGHAeFkU5hv1M8VAgWW',
   },
 ];
 

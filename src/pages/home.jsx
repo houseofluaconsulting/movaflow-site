@@ -3,7 +3,7 @@ import { HomeView } from 'src/sections/home/view';
 // ----------------------------------------------------------------------
 
 const metadata = {
-  title: 'LifeJacket Leads',
+  title: 'LifeJacket Leads by Mova',
   description:
     'Make more money from less leads.',
 };

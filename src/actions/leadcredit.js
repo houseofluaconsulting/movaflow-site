@@ -13,3 +13,4 @@ export async function getLeadCredit(id) {
 
     return lead_credit
 }
+

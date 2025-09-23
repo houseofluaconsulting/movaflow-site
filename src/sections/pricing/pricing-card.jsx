@@ -22,7 +22,7 @@ import { useAuthContext } from 'src/auth/hooks';
 
 export function PricingCard({ card, sx, ...other }) {
   const { user } = useAuthContext();
-  const { subscription, price, caption, lists, labelAction, priceId } = card;
+  const { amount, subscription, price, caption, lists, labelAction, priceId } = card;
 
   const arrowIcon = () => (
     <SvgIcon
@@ -46,9 +46,9 @@ export function PricingCard({ card, sx, ...other }) {
     </SvgIcon>
   );
 
-  const isBasic = subscription === '20 Final Expense Leads';
-  const isDiscount10 = subscription === '30 Final Expense Leads';
-  const isDiscount15 = subscription === '40 Final Expense leads';
+  const isBasic = subscription === '20 Final Expense Leads test';
+  const isDiscount10 = subscription === '30 Veteran Website Leads test';
+  const isDiscount15 = subscription === '40 Final Expense leads test';
 
   const renderIcon = () => (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -97,22 +97,25 @@ export function PricingCard({ card, sx, ...other }) {
   );
 
   const renderSubscription = () => (
-    <Stack spacing={0}>
-      <Typography variant="h4" sx={{ textTransform: 'capitalize' }}>
+    <Stack spacing={0}>      
+      <Typography variant="h3" sx={{ textTransform: 'capitalize' }}>
+        {amount}
+      </Typography>
+      <Typography variant="h7" sx={{ textTransform: 'capitalize',  }}>
         {subscription}
       </Typography>
-      <Typography variant="subtitle2">{caption}</Typography>
+      <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', color: 'text.disabled' }}>{caption}</Typography>
     </Stack>
   );
 
   const renderPrice = () =>
   (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', }}>
       <Typography variant="h4">$</Typography>
 
       <Typography variant="h2">{price}</Typography>
 
-      {/* <Typography
+      <Typography
         component="span"
         sx={{
           ml: 1,
@@ -121,8 +124,8 @@ export function PricingCard({ card, sx, ...other }) {
           color: 'text.disabled',
         }}
       >
-        / mo
-      </Typography> */}
+        / lead
+      </Typography>
     </Box>
   );
 
@@ -133,7 +136,6 @@ export function PricingCard({ card, sx, ...other }) {
           Features
         </Box>
       </Box>
-      {/* {user?.id} */}
 
       {lists.map((item) => (
         <Box key={item} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
@@ -179,9 +181,9 @@ export function PricingCard({ card, sx, ...other }) {
       {renderSubscription()}
       {renderPrice()}
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      {/* <Divider sx={{ borderStyle: 'dashed' }} /> */}
 
-      {renderList()}
+      {/* {renderList()} */}
 
       <Button
         onClick={() => createCheckoutSession(priceId, user?.id, 1)}

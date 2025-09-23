@@ -16,7 +16,7 @@ export function AuthSplitSection({
   method,
   methods,
   layoutQuery = 'md',
-  title = 'Manage the job',
+  title = 'Sign Up with Us!',
   imgUrl = `${CONFIG.assetsDir}/assets/illustrations/illustration-dashboard.webp`,
   subtitle = 'Make more money from less leads.',
   ...other

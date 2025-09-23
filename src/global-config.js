@@ -5,7 +5,7 @@ import packageJson from '../package.json';
 // ----------------------------------------------------------------------
 
 export const CONFIG = {
-  appName: 'LifeJacket Leads',
+  appName: 'LifeJacket Leads by Mova',
   appVersion: packageJson.version,
   serverUrl: import.meta.env.VITE_SERVER_URL ?? '',
   assetsDir: import.meta.env.VITE_ASSETS_DIR ?? '',

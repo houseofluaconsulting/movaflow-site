@@ -47,9 +47,9 @@ export function AppWidgetSummary({ title, percent, total, chart, sx, ...other })
         {fPercent(percent)}
       </Box> */}
 
-      {/* <Box component="span" sx={{ typography: 'body2', color: 'text.secondary' }}>
-        last 7 days
-      </Box> */}
+      <Box component="span" sx={{ typography: 'body2', color: 'text.secondary' }}>
+        Lead Credit
+      </Box>
     </Box>
   );
 
