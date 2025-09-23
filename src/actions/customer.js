@@ -29,8 +29,8 @@ export async function getCustomer(id) {
     return user_data
 }
 
-export async function updateCustomer(id, stateLicenses) {
-    const data = { id , stateLicenses};
+export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID) {
+    const data = { id , stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID};
 
     console.log('id: ' + id)
     console.log('stateLicenses: ' + stateLicenses)
