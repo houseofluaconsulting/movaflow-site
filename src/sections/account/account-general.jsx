@@ -38,6 +38,10 @@ export const UpdateUserSchema = zod.object({
   stateLicenses: zod.string().array().min(5, { message: 'Choose at 5 states!' }),
   ringySIDVeteranWebsite: zod.string(),
   ringyAuthTokenVeteranWebsite: zod.string(),
+  ringySIDLegacyWebsite: zod.string(),
+  ringyAuthTokenLegacyWebsite: zod.string(),
+  ghlAccessToken: zod.string(),
+  ghlLocationID: zod.string(),
 
 });
 
@@ -79,10 +83,10 @@ export function AccountGeneral() {
     email: '',
     phoneNumber: '',
     stateLicenses: [],
-    ringySIDLegacyWebsite: '',
-    ringyAuthTokenLegacyWebsite: '',
     ringySIDVeteranWebsite: '',
     ringyAuthTokenVeteranWebsite: '',
+    ringySIDLegacyWebsite: '',
+    ringyAuthTokenLegacyWebsite: '',
     ghlAccessToken: '',
     ghlLocationID: '',
   };
@@ -102,8 +106,9 @@ export function AccountGeneral() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses);
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID);
   
     try {
       // await new Promise((resolve) => setTimeout(resolve, 500));
@@ -119,9 +124,9 @@ export function AccountGeneral() {
     <Form methods={methods} onSubmit={onSubmit}>
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 12 }}>
-          <Alert variant="outlined" severity="info" sx={{ mb: 1 }}>
+          {/* <Alert variant="outlined" severity="info" sx={{ mb: 1 }}>
                     Only <b>State Licenses</b> can be edited.
-                  </Alert>
+                  </Alert> */}
           <Card sx={{ p: 3 }}>
             <Box
               sx={{
@@ -161,12 +166,12 @@ export function AccountGeneral() {
               <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
               <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
               <Typography variant="subtitle2">Veteran Website Lead Vendor</Typography>
-              <Field.Text name="ringySIDVeteranWebsite" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken" disabled/>
+              <Field.Text name="ringySIDVeteranWebsite" label="sid"/>
+              <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken"/>
 
               <Typography variant="subtitle2">Legacy Website Lead Vendor</Typography>
-              <Field.Text name="ringySIDLegacyWebsite" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenLegacyWebsite" label="authToken" disabled/>
+              <Field.Text name="ringySIDLegacyWebsite" label="sid"/>
+              <Field.Text name="ringyAuthTokenLegacyWebsite" label="authToken"/>
             </Stack>
 
             <Stack spacing={3} sx={{ mt: 6 }}>
@@ -178,8 +183,8 @@ export function AccountGeneral() {
               {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
               <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
               <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
-              <Field.Text name="ghlAccessToken" label="Access Token" disabled/>
-              <Field.Text name="ghlLocationID" label="Location ID" disabled/>
+              <Field.Text name="ghlAccessToken" label="Access Token"/>
+              <Field.Text name="ghlLocationID" label="Location ID"/>
             </Stack>
 
 
