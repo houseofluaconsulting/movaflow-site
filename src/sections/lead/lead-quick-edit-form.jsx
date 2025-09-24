@@ -50,6 +50,7 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
     birthday: '',
     age: '',
     desired_coverage_amount: '',
+    desired_coverage_type: '',
     gender: '',
     health_status: '',
     tobacco_use: '',
@@ -149,12 +150,11 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             <Field.Text name="birthday" label="Birthday" disabled />
             <Field.Text name="age" label="Age" disabled />
             <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled />
+            <Field.Text name="desired_coverage_type" label="Desired Coverage Type" disabled />
             <Field.Text name="current_coverage" label="Current Coverage" disabled />
             <Field.Text name="military_status" label="Military Status" disabled />
             <Field.Text name="tobacco_use" label="Tobacco Use" disabled />
             <Field.Text name="health" label="Health Status" disabled />
-
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
 
             <Field.Text name="Note" label="Note" multiline rows={4} />
 
