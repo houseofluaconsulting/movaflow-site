@@ -149,7 +149,7 @@ export function AmplifySignUpView() {
   return (
     <>
       <FormHead
-        title="Get started absolutely free"
+        title="Create an account"
         description={
           <>
             {`Already have an account? `}
