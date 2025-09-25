@@ -132,6 +132,7 @@ export function AmplifySignInView() {
         This version of the application is no longer supported. Please access the updated platform at:
         <Link component={RouterLink} href="https://lifejacketleads.movaflow.io" variant="subtitle2"> lifejacketleads.movaflow.io </Link>
         <div><i>You will need to <b>create a new account</b> if you have not already.</i></div>
+        
           
       </Alert>
       <FormHead
