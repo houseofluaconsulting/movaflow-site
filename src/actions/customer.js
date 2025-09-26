@@ -42,3 +42,13 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
 
     return response_data
 }
+
+export async function getCustomerOrders(id) {
+    const data = { id };
+    const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'get-customer-orders' } })
+    const customerOrders = await response.data
+
+    console.log(customerOrders)
+  
+    return customerOrders
+}
