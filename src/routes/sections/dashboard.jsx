@@ -17,6 +17,7 @@ import { usePathname } from '../hooks';
 // Overview
 const IndexPage = lazy(() => import('src/pages/dashboard'));
 const LeadsPage = lazy(() => import('src/pages/dashboard/leads'));
+const OrdersPage = lazy(() => import('src/pages/dashboard/orders'));
 const PurchasePage = lazy(() => import('src/pages/dashboard/purchase'));
 const OverviewEcommercePage = lazy(() => import('src/pages/dashboard/ecommerce'));
 const OverviewAnalyticsPage = lazy(() => import('src/pages/dashboard/analytics'));
@@ -112,6 +113,7 @@ export const dashboardRoutes = [
     children: [
       { index: true, element: <IndexPage /> },
       { path: 'leads', element: <LeadsPage /> },
+      { path: 'orders', element: <OrdersPage /> },
       { path: 'purchase', element: <PurchasePage /> },
       { path: 'ecommerce', element: <OverviewEcommercePage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
