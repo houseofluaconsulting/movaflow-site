@@ -58,6 +58,7 @@ const TABLE_HEAD = [
   // { id: 'Status', label: 'Status', width: 30 },
   // { id: '', width: 88 },
   { id: 'Type', label: 'Order Type', width: 120 },
+  { id: 'Amount', label: 'Amount', width: 120 },
   { id: 'LeadType', label: 'Lead Type', width: 180 },
   { id: 'CreditFresh', label: 'Credit', width: 120 },
   { id: 'Created', label: 'Date (UTC)', width: 180 },

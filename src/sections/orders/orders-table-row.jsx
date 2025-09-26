@@ -118,6 +118,8 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Type}</TableCell>
 
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Amount}</TableCell>
+
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.CreditFresh}</TableCell>
