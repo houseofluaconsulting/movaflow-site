@@ -96,7 +96,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
           />
         </TableCell>
 
-        <TableCell>
+        {/* <TableCell>
           <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
             <Avatar alt={row.name} src={row.avatarUrl} />
 
@@ -114,15 +114,15 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               </Box>
             </Stack>
           </Box>
-        </TableCell>
+        </TableCell> */}
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phone_number}</TableCell>
-
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.state}</TableCell>
-
-        {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell> */}
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Type}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
+
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.CreditFresh}</TableCell>
+
+        {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell> */}
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Created}</TableCell>
 
@@ -140,30 +140,8 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
           </Label>
         </TableCell>
 
-        <TableCell>
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Tooltip title="More Details" placement="top" arrow>
-              <IconButton
-                color={quickEditForm.value ? 'inherit' : 'default'}
-                onClick={quickEditForm.onTrue}
-              >
-                <Iconify icon="eva:more-vertical-fill" />
-                {/* <Iconify icon="eva:more-vertical-fill" /> */}
-
-              </IconButton>
-            </Tooltip>
-
-            {/* <IconButton
-              color={menuActions.open ? 'inherit' : 'default'}
-              onClick={menuActions.onOpen}
-            >
-              <Iconify icon="eva:more-vertical-fill" />
-            </IconButton> */}
-          </Box>
-        </TableCell>
       </TableRow>
 
-      {renderQuickEditForm()}
       {renderMenuActions()}
       {renderConfirmDialog()}
     </>
