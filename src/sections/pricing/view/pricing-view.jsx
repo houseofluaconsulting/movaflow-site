@@ -37,12 +37,12 @@ export function PricingView() {
   );
 
   return (
-    <Container sx={{ pt: { xs: 3, md: 5 }, pb: 10 }}>
-      <Typography variant="h3" align="center" sx={{ mb: 5 }}>
+    <Container sx={{ pt: { xs: 3}, pb: 10 }}>
+      <Typography variant="h4" align="center" sx={{ mb: 5 }}>
         Purchase Leads
       </Typography>
 
-      <Typography variant="h4" align="center" sx={{ color: 'text.secondary'}}>
+      <Typography variant="h5" align="center" sx={{ color: 'text.secondary'}}>
         Veteran Wesbite Leads
       </Typography>
 
@@ -60,7 +60,7 @@ export function PricingView() {
         ))}
       </Box>
 
-      <Typography variant="h4" align="center" sx={{ color: 'text.secondary' }}>
+      <Typography variant="h5" align="center" sx={{ color: 'text.secondary' }}>
         Legacy Leads
       </Typography>
 

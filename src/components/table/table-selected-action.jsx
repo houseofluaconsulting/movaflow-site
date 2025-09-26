@@ -62,7 +62,7 @@ export function TableSelectedAction({
         {numSelected} selected
       </Typography>
 
-      {action && action}
+      {/* {action && action} */}
     </Box>
   );
 }

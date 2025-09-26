@@ -99,6 +99,7 @@ export const paths = {
     fileManager: `${ROOTS.DASHBOARD}/file-manager`,
     permission: `${ROOTS.DASHBOARD}/permission`,
     leads: `${ROOTS.DASHBOARD}/leads`,
+    orders: `${ROOTS.DASHBOARD}/orders`,
     purchase: `${ROOTS.DASHBOARD}/purchase`,
     general: {
       app: `${ROOTS.DASHBOARD}/app`,

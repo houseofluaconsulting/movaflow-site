@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { getLeads } from 'src/actions/leads'
+import { getCustomerOrders } from 'src/actions/customer'
 import { DashboardContent } from 'src/layouts/dashboard';
 import { _stateNames, _leadList, LEAD_STATUS_OPTIONS } from 'src/_mock';
 
@@ -40,9 +40,9 @@ import {
 
 import { useAuthContext } from 'src/auth/hooks';
 
-import { UserTableRow } from '../lead-table-row';
-import { UserTableToolbar } from '../lead-table-toolbar';
-import { UserTableFiltersResult } from '../lead-table-filters-result';
+import { UserTableRow } from '../orders-table-row';
+import { UserTableToolbar } from '../orders-table-toolbar';
+import { UserTableFiltersResult } from '../orders-table-filters-result';
 // import { id } from 'zod/dist/types/v4/locales';
 
 // ----------------------------------------------------------------------
@@ -50,18 +50,24 @@ import { UserTableFiltersResult } from '../lead-table-filters-result';
 const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
 
 const TABLE_HEAD = [
-  { id: 'contact', label: 'Contact' },
-  { id: 'phone_number', label: 'Phone Number', width: 180 },
-  { id: 'state', label: 'State', width: 120 },
-  { id: 'LeadType', label: 'Lead Type', width: 100 },
-  { id: 'Created', label: 'Recieved (UTC)', width: 100 },
-  { id: 'Status', label: 'Status', width: 30 },
-  { id: '', width: 88 },
+  // { id: 'contact', label: 'Contact' },
+  // { id: 'phone_number', label: 'Phone Number', width: 180 },
+  // { id: 'state', label: 'State', width: 120 },
+  // { id: 'LeadType', label: 'Lead Type', width: 100 },
+  // { id: 'Created', label: 'Recieved (UTC)', width: 100 },
+  // { id: 'Status', label: 'Status', width: 30 },
+  // { id: '', width: 88 },
+  { id: 'Type', label: 'Order Type', width: 120 },
+  { id: 'Amount', label: 'Amount', width: 120 },
+  { id: 'LeadType', label: 'Lead Type', width: 180 },
+  { id: 'CreditFresh', label: 'Credit', width: 120 },
+  { id: 'Created', label: 'Date (UTC)', width: 180 },
+  { id: 'Status', label: 'Status', width: 120 },
 ];
 
 // ----------------------------------------------------------------------
 
-export function UserListView() {
+export function OrderListView() {
   const table = useTable();
   const { user } = useAuthContext();
 
@@ -75,20 +81,20 @@ export function UserListView() {
 
   useEffect(() => {
     async function fetchData() {
-      const promise = getLeads(user_id); // returns a Promise that resolves to an array
+      const promise = getCustomerOrders(user_id); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
-      setTableData(result[0]);
+      setTableData(result);
     }
 
     fetchData();
   }, []);
 
   tableData.map((item, index) => (
-    <div key={index}>{item}</div>
-  ))
+        <div key={index}>{item}</div>
+      ))
 
   console.log(tableData)
-
+      
 
 
   const filters = useSetState({ full_name: '', role: [], Status: 'all' });
@@ -108,8 +114,8 @@ export function UserListView() {
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   const handleDeleteRow = useCallback(
-    (contact_id) => {
-      const deleteRow = tableData.filter((row) => row.contact_id !== contact_id);
+    (OrderId) => {
+      const deleteRow = tableData.filter((row) => row.OrderId !== OrderId);
 
       toast.success('Delete success!');
 
@@ -121,7 +127,7 @@ export function UserListView() {
   );
 
   const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !table.selected.includes(row.contact_id));
+    const deleteRows = tableData.filter((row) => !table.selected.includes(row.OrderId));
 
     toast.success('Delete success!');
 
@@ -166,54 +172,10 @@ export function UserListView() {
   return (
     <>
       <DashboardContent>
-        <Typography variant="h4" align="center" sx={{ mb: 5 }}>
-          Leads
-        </Typography>
+      <Typography variant="h4" align="center" sx={{ mb: 5 }}>
+        Orders
+      </Typography>
         <Card>
-          <Tabs
-            value={currentFilters.Status}
-            onChange={handleFilterStatus}
-            sx={[
-              (theme) => ({
-                px: { md: 2.5 },
-                boxShadow: `inset 0 -2px 0 0 ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)}`,
-              }),
-            ]}
-          >
-            {STATUS_OPTIONS.map((tab) => (
-              <Tab
-                key={tab.value}
-                iconPosition="end"
-                value={tab.value}
-                label={tab.label}
-                icon={
-                  <Label
-                    variant={
-                      ((tab.value === 'all' || tab.value === currentFilters.Status) && 'filled') ||
-                      'soft'
-                    }
-                    color={
-                      (tab.value === 'Sold' && 'success') ||
-                      (tab.value === 'No Contact' && 'warning') ||
-                      (tab.value === 'Contacted' && 'error') ||
-                      'Unsold'
-                    }
-                  >
-                    {['Unsold', 'No Contact', 'Contacted', 'Sold'].includes(tab.value)
-                      ? tableData.filter((leadUser) => leadUser.Status === tab.value).length
-                      : tableData.length}
-                  </Label>
-                }
-              />
-            ))}
-          </Tabs>
-
-          <UserTableToolbar
-            filters={filters}
-            onResetPage={table.onResetPage}
-            options={{ roles: _stateNames }}
-          />
-
           {canReset && (
             <UserTableFiltersResult
               filters={filters}
@@ -231,7 +193,7 @@ export function UserListView() {
               onSelectAllRows={(checked) =>
                 table.onSelectAllRows(
                   checked,
-                  dataFiltered.map((row) => row.contact_id)
+                  dataFiltered.map((row) => row.OrderId)
                 )
               }
               action={
@@ -255,7 +217,7 @@ export function UserListView() {
                   onSelectAllRows={(checked) =>
                     table.onSelectAllRows(
                       checked,
-                      dataFiltered.map((row) => row.contact_id)
+                      dataFiltered.map((row) => row.OrderId)
                     )
                   }
                 />
@@ -268,11 +230,11 @@ export function UserListView() {
                     )
                     .map((row) => (
                       <UserTableRow
-                        key={row.contact_id}
+                        key={row.OrderId}
                         row={row}
-                        selected={table.selected.includes(row.contact_id)}
-                        onSelectRow={() => table.onSelectRow(row.contact_id)}
-                        onDeleteRow={() => handleDeleteRow(row.contact_id)}
+                        selected={table.selected.includes(row.OrderId)}
+                        onSelectRow={() => table.onSelectRow(row.OrderId)}
+                        onDeleteRow={() => handleDeleteRow(row.OrderId)}
                       />
                     ))}
 
