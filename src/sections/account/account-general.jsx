@@ -42,7 +42,7 @@ export const UpdateUserSchema = zod.object({
   ringyAuthTokenLegacyWebsite: zod.string(),
   ghlAccessToken: zod.string(),
   ghlLocationID: zod.string(),
-
+  closeCRMAPIKey: zod.string(),
 });
 
 // ----------------------------------------------------------------------
@@ -76,6 +76,7 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsite: userData['RingyAuthTokenLegacyWebsite'] ?? "",
     ghlAccessToken: userData['GHLAccessToken'] ?? "",
     ghlLocationID: userData['GHLocationID'] ?? "",
+    closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
   };
 
   const defaultValues = {
@@ -89,6 +90,7 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsite: '',
     ghlAccessToken: '',
     ghlLocationID: '',
+    closeCRMAPIKey: '',
   };
 
   console.log("State Licenses:" + currentUser.stateLicenses)
@@ -108,7 +110,7 @@ export function AccountGeneral() {
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID);
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey);
   
     try {
       // await new Promise((resolve) => setTimeout(resolve, 500));
@@ -185,6 +187,18 @@ export function AccountGeneral() {
               <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
               <Field.Text name="ghlAccessToken" label="Access Token"/>
               <Field.Text name="ghlLocationID" label="Location ID"/>
+            </Stack>
+
+            <Stack spacing={3} sx={{ mt: 6 }}>
+              
+              <Typography variant="subtitle6">Close CRM Integration</Typography>
+              {/* <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
+              <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/> */}
+              {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
+              <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
+              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
+              <Field.Text name="closeCRMAPIKey" label="API Key"/>
             </Stack>
 
 
