@@ -161,12 +161,6 @@ export function AccountGeneral() {
             <Stack spacing={3} sx={{ mt: 6 }}>
               
               <Typography variant="subtitle6">Ringy Integration</Typography>
-              {/* <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
-              <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/> */}
-              {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
-              <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
               <Typography variant="subtitle2">Veteran Website Lead Vendor</Typography>
               <Field.Text name="ringySIDVeteranWebsite" label="sid"/>
               <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken"/>
@@ -179,12 +173,6 @@ export function AccountGeneral() {
             <Stack spacing={3} sx={{ mt: 6 }}>
               
               <Typography variant="subtitle6">GoHighLevel Integration</Typography>
-              {/* <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
-              <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/> */}
-              {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
-              <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
               <Field.Text name="ghlAccessToken" label="Access Token"/>
               <Field.Text name="ghlLocationID" label="Location ID"/>
             </Stack>
@@ -192,13 +180,10 @@ export function AccountGeneral() {
             <Stack spacing={3} sx={{ mt: 6 }}>
               
               <Typography variant="subtitle6">Close CRM Integration</Typography>
-              {/* <Typography variant="subtitle2">Final Expense Lead Vendor</Typography>
-              <Field.Text name="ringySIDFinalExpense" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" disabled/> */}
-              {/* <Typography variant="subtitle2">Final Expense Number Verified Lead Vendor</Typography>
-              <Field.Text name="ringySIDFEXNumVerified" label="sid" disabled/>
-              <Field.Text name="ringyAuthTokenFEXNumVerified" label="authToken" disabled/> */}
+              <Typography variant="caption">Settings → Developer → API Keys, then click + New API Key</Typography>
               <Field.Text name="closeCRMAPIKey" label="API Key"/>
+              {/* Settings → Developer → API Keys, then click + New API Key */}
+              
             </Stack>
 
 
