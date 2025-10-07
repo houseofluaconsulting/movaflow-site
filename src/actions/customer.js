@@ -10,6 +10,7 @@ export async function getCustomer(id) {
     const customer = await response.data
 
     console.log(customer)
+    console.log("Hello")
     
     const user_data = {
         ID: customer.ID,
@@ -25,13 +26,16 @@ export async function getCustomer(id) {
         GHLAccessToken: customer.CRMIntegration.GoHighLevel.AccessToken,
         GHLocationID: customer.CRMIntegration.GoHighLevel.LocationID,
         CloseCRMAPIKey: customer.CRMIntegration.CloseCRM.APIKey,
+        CloseCRMLeadSourceCustomField: customer.CRMIntegration.CloseCRM.LeadSourceCustomField,
     }
+
+    console.log(user_data)
     
     return user_data
 }
 
-export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey) {
-    const data = { id , stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey};
+export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField) {
+    const data = { id , stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField};
 
     const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'update-customer' } })
     const response_data = await response.data

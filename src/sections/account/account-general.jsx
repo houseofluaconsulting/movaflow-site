@@ -43,6 +43,7 @@ export const UpdateUserSchema = zod.object({
   ghlAccessToken: zod.string(),
   ghlLocationID: zod.string(),
   closeCRMAPIKey: zod.string(),
+  closeCRMLeadSourceCustomField: zod.string(),
 });
 
 // ----------------------------------------------------------------------
@@ -77,6 +78,7 @@ export function AccountGeneral() {
     ghlAccessToken: userData['GHLAccessToken'] ?? "",
     ghlLocationID: userData['GHLocationID'] ?? "",
     closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
+    closeCRMLeadSourceCustomField: userData['CloseCRMLeadSourceCustomField'] ?? "",
   };
 
   const defaultValues = {
@@ -91,9 +93,8 @@ export function AccountGeneral() {
     ghlAccessToken: '',
     ghlLocationID: '',
     closeCRMAPIKey: '',
+    closeCRMLeadSourceCustomField: '',
   };
-
-  console.log("State Licenses:" + currentUser.stateLicenses)
 
   const methods = useForm({
     mode: 'all',
@@ -108,9 +109,10 @@ export function AccountGeneral() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data)
+    console.log('Hello 1')
+    // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey);
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField);
   
     try {
       // await new Promise((resolve) => setTimeout(resolve, 500));
@@ -183,6 +185,8 @@ export function AccountGeneral() {
               <Typography variant="caption">Settings → Developer → API Keys, then click + New API Key. Enter a name (something like ‘LifeJacket Leads’) and click Save. Copy & Enter API Key below.</Typography>
               <Field.Text name="closeCRMAPIKey" label="API Key"/>
               {/* Settings → Developer → API Keys, then click + New API Key */}
+              <Typography variant="caption">Settings → Custom Fields, Create/Select Lead Source Custom Field → More → Copy ID (API).</Typography>
+              <Field.Text name="closeCRMLeadSourceCustomField" label="Lead Source Custom Field ID"/>
               
             </Stack>
 
