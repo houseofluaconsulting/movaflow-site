@@ -182,7 +182,7 @@ export function AccountGeneral() {
             <Stack spacing={3} sx={{ mt: 6 }}>
               
               <Typography variant="subtitle6">Close CRM Integration</Typography>
-              <Typography variant="caption">Settings → Developer → API Keys, then click + New API Key. Enter a name (something like ‘LifeJacket Leads’) and click Save. Copy & Enter API Key below.</Typography>
+              <Typography variant="caption">Settings → Developer → API Keys, then click + New API Key. Enter a name (something like ‘LifeJacket Leads’) and Create API Key. Copy & Enter API Key below.</Typography>
               <Field.Text name="closeCRMAPIKey" label="API Key"/>
               {/* Settings → Developer → API Keys, then click + New API Key */}
               <Typography variant="caption">Settings → Custom Fields, Create/Select Lead Source Custom Field → More → Copy ID (API).</Typography>
