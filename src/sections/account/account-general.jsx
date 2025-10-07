@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Switch from '@mui/material/Switch';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -44,6 +45,8 @@ export const UpdateUserSchema = zod.object({
   ghlLocationID: zod.string(),
   closeCRMAPIKey: zod.string(),
   closeCRMLeadSourceCustomField: zod.string(),
+  emailNotifications: zod.boolean(),
+  
 });
 
 // ----------------------------------------------------------------------
@@ -79,6 +82,7 @@ export function AccountGeneral() {
     ghlLocationID: userData['GHLocationID'] ?? "",
     closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
     closeCRMLeadSourceCustomField: userData['CloseCRMLeadSourceCustomField'] ?? "",
+    emailNotifications: userData['EmailNotifications'] ?? "",
   };
 
   const defaultValues = {
@@ -94,6 +98,7 @@ export function AccountGeneral() {
     ghlLocationID: '',
     closeCRMAPIKey: '',
     closeCRMLeadSourceCustomField: '',
+    emailNotifications: false
   };
 
   const methods = useForm({
@@ -109,10 +114,9 @@ export function AccountGeneral() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log('Hello 1')
     // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField);
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications);
   
     try {
       // await new Promise((resolve) => setTimeout(resolve, 500));
@@ -160,6 +164,27 @@ export function AccountGeneral() {
                 
               />
             </Stack>
+
+            <Stack spacing={3} sx={{ mt: 6, mb: 5 }}>
+              <Typography variant="h5">CRM Integration</Typography>
+               <Field.Switch
+              name="emailNotifications"
+              labelPlacement="start"
+              label={
+                <>
+                  <Typography variant="subtitle3" sx={{ mb: 0.5 }}>
+                    Email Notifications
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                    Send Email Notification for new leads recieved.
+                  </Typography>
+                </>
+              }
+              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+            />
+            </Stack>
+
+           
             <Stack spacing={3} sx={{ mt: 6 }}>
               
               <Typography variant="subtitle6">Ringy Integration</Typography>
@@ -187,11 +212,13 @@ export function AccountGeneral() {
               {/* Settings → Developer → API Keys, then click + New API Key */}
               <Typography variant="caption">Settings → Custom Fields, Create/Select Lead Source Custom Field → More → Copy ID (API).</Typography>
               <Field.Text name="closeCRMLeadSourceCustomField" label="Lead Source Custom Field ID"/>
-              
+
             </Stack>
 
 
             <Stack spacing={3} sx={{ mt: 3, alignItems: 'flex-end' }}>
+
+            
               {/* <Autocomplete
 
                 fullWidth
