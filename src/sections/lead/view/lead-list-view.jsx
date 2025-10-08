@@ -17,6 +17,7 @@ import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { getLeads } from 'src/actions/leads'
+import { exportLeads } from 'src/actions/leads'
 import { DashboardContent } from 'src/layouts/dashboard';
 import { _stateNames, _leadList, LEAD_STATUS_OPTIONS } from 'src/_mock';
 
@@ -112,6 +113,7 @@ export function UserListView() {
       const deleteRow = tableData.filter((row) => row.contact_id !== contact_id);
 
       toast.success('Delete success!');
+      console.log('Hello')
 
       setTableData(deleteRow);
 
@@ -120,14 +122,15 @@ export function UserListView() {
     [dataInPage.length, table, tableData]
   );
 
-  const handleDeleteRows = useCallback(() => {
-    const deleteRows = tableData.filter((row) => !table.selected.includes(row.contact_id));
+  const handleExportRows = useCallback(() => {
+    // const exportRows = tableData.filter((row) => !table.selected.includes(row.contact_id));
+    const exportRows = tableData.filter((row) => table.selected.includes(row.contact_id));
 
-    toast.success('Delete success!');
+    // setTableData(exportRows);
+    const promise = exportLeads(exportRows)
+    toast.success('Export sent to Email!');
 
-    setTableData(deleteRows);
-
-    table.onUpdatePageDeleteRows(dataInPage.length, dataFiltered.length);
+    // table.onUpdatePageDeleteRows(dataInPage.length, dataFiltered.length);
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
   const handleFilterStatus = useCallback(
@@ -142,22 +145,22 @@ export function UserListView() {
     <ConfirmDialog
       open={confirmDialog.value}
       onClose={confirmDialog.onFalse}
-      title="Delete"
+      title="Export"
       content={
         <>
-          Are you sure want to delete <strong> {table.selected.length} </strong> items?
+          Send export of <strong> {table.selected.length} </strong> items to Email
         </>
       }
       action={
         <Button
           variant="contained"
-          color="error"
+          color="primary"
           onClick={() => {
-            handleDeleteRows();
+            handleExportRows();
             confirmDialog.onFalse();
           }}
         >
-          Delete
+          Export
         </Button>
       }
     />
@@ -235,9 +238,9 @@ export function UserListView() {
                 )
               }
               action={
-                <Tooltip title="Delete">
+                <Tooltip title="Export">
                   <IconButton color="primary" onClick={confirmDialog.onTrue}>
-                    <Iconify icon="solar:trash-bin-trash-bold" />
+                    <Iconify icon="solar:export-bold" />
                   </IconButton>
                 </Tooltip>
               }

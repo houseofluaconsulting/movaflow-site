@@ -26,3 +26,14 @@ export async function updateLead(contact_id, status, email, note) {
 
     return response_data
 }
+
+export async function exportLeads(exportRows) {
+    const data = exportRows;
+    console.log(data)
+    const response = await axios.post(LEADS_ENDPOINT, data, { params: { endpoint: 'export-leads' } })
+    const response_data = await response.data
+    
+    console.log(response_data)
+
+    return response_data
+}
