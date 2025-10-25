@@ -148,10 +148,10 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
           {row.LeadType === 'VeteranWebsite'
             ? 'Veteran'
             : row.LeadType === 'LegacyWebsite'
-            ? 'Legacy'
-            : row.LeadType === 'FinalExpense'
-            ? 'Final Expense'
-            : row.LeadType}
+              ? 'Legacy'
+              : row.LeadType === 'FinalExpense'
+                ? 'Final Expense'
+                : row.LeadType}
         </TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap', }}>
