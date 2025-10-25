@@ -55,7 +55,7 @@ const TABLE_HEAD = [
   { id: 'state', label: 'State', width: 80 },
   { id: 'LeadType', label: 'Type', width: 80 },
   { id: 'Opportunity', label: '', width: 80 },
-  { id: 'Date/Time', label: 'Date/Time', width: 120 },
+  { id: 'Delivered', label: 'Delivered', width: 120 },
   { id: 'Note', label: 'Note', width: 180 },
   { id: 'Status', label: 'Status', width: 80 },
   { id: 'actions', label: '', width: 80 },
