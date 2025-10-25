@@ -55,7 +55,7 @@ const TABLE_HEAD = [
   { id: 'phone_number', label: 'Phone Number', width: 180 },
   { id: 'state', label: 'State', width: 120 },
   { id: 'LeadType', label: 'Lead Type', width: 100 },
-  { id: 'Created', label: 'Recieved (UTC)', width: 100 },
+  { id: 'Created', label: 'Recieved', width: 100 },
   { id: 'Status', label: 'Status', width: 30 },
   { id: '', width: 88 },
 ];
@@ -169,7 +169,7 @@ export function UserListView() {
   return (
     <>
       <DashboardContent>
-        <Typography variant="h4" align="center" sx={{ mb: 5 }}>
+        <Typography variant="h3" align="center" sx={{ mb: 5 }}>
           Leads
         </Typography>
         <Card>

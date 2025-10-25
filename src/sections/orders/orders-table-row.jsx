@@ -24,6 +24,28 @@ import { UserQuickEditForm } from './orders-quick-edit-form';
 
 // ----------------------------------------------------------------------
 
+function formatToLocalTime(utcTimestamp) {
+  if (!utcTimestamp) return '';
+
+  // Parse "MM/DD/YYYY, HH:mm:ss" format
+  const [datePart, timePart] = utcTimestamp.split(', ');
+  const [month, day, year] = datePart.split('/');
+  const [hour, minute, second] = timePart.split(':');
+
+  // Treat as UTC and convert to local
+  const utcDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second));
+
+  // Format for local browser time
+  return utcDate.toLocaleString(undefined, {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+}
+
 export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow }) {
   const menuActions = usePopover();
   const confirmDialog = useBoolean();
@@ -122,11 +144,36 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.CreditFresh}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>
+          <Stack>
+            {Number(row?.CreditFresh) > 0 && (
+              <Label
+                variant="soft"
+                color="primary"
+                sx={{ ml: -6, mt: 1, alignSelf: 'center', typography: 'text', fontWeight: 700 }}
+              >
+                {row.CreditFresh} Fresh
+              </Label>
+            )}
+
+            {Number(row?.CreditAged) > 0 && (
+              <Label
+                variant="soft"
+                color="secondary"
+                sx={{ ml: -6, mt: 1, alignSelf: 'center', typography: 'text', fontWeight: 700 }}
+              >
+                {row.CreditAged} Aged
+              </Label>
+            )}
+          </Stack>
+
+        </TableCell>
 
         {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell> */}
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Created}</TableCell>
+       <TableCell sx={{ whiteSpace: 'nowrap' }}>
+          {formatToLocalTime(row.Created)}
+        </TableCell>
 
         <TableCell>
           <Label

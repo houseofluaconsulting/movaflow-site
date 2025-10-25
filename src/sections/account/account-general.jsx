@@ -20,6 +20,7 @@ import { fData } from 'src/utils/format-number';
 import { getCustomer } from 'src/actions/customer'
 import { updateCustomer } from 'src/actions/customer'
 
+import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
@@ -39,6 +40,8 @@ export const UpdateUserSchema = zod.object({
   stateLicenses: zod.string().array().min(5, { message: 'Choose at 5 states!' }),
   ringySIDVeteranWebsite: zod.string(),
   ringyAuthTokenVeteranWebsite: zod.string(),
+  ringySIDVeteranWebsiteAged: zod.string(),
+  ringyAuthTokenVeteranWebsiteAged: zod.string(),
   ringySIDLegacyWebsite: zod.string(),
   ringyAuthTokenLegacyWebsite: zod.string(),
   ghlAccessToken: zod.string(),
@@ -46,7 +49,7 @@ export const UpdateUserSchema = zod.object({
   closeCRMAPIKey: zod.string(),
   closeCRMLeadSourceCustomField: zod.string(),
   emailNotifications: zod.boolean(),
-  
+
 });
 
 // ----------------------------------------------------------------------
@@ -55,14 +58,13 @@ export function AccountGeneral() {
   const { user } = useAuthContext();
 
   const [userData, setData] = useState([]);
-  
+
 
   useEffect(() => {
     async function fetchData() {
       const promise = getCustomer(user?.id); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       setData(result);
-      
     }
     fetchData();
   }, []);
@@ -76,6 +78,8 @@ export function AccountGeneral() {
     stateLicenses: userData['StateLicenses'],
     ringySIDVeteranWebsite: userData['RingySIDVeteranWebsite'] ?? "",
     ringyAuthTokenVeteranWebsite: userData['RingyAuthTokenVeteranWebsite'] ?? "",
+    ringySIDVeteranWebsiteAged: userData['RingySIDVeteranWebsiteAged'] ?? "",
+    ringyAuthTokenVeteranWebsiteAged: userData['RingyAuthTokenVeteranWebsiteAged'] ?? "",
     ringySIDLegacyWebsite: userData['RingySIDLegacyWebsite'] ?? "",
     ringyAuthTokenLegacyWebsite: userData['RingyAuthTokenLegacyWebsite'] ?? "",
     ghlAccessToken: userData['GHLAccessToken'] ?? "",
@@ -92,6 +96,8 @@ export function AccountGeneral() {
     stateLicenses: [],
     ringySIDVeteranWebsite: '',
     ringyAuthTokenVeteranWebsite: '',
+    ringySIDVeteranWebsiteAged: '',
+    ringyAuthTokenVeteranWebsiteAged: '',
     ringySIDLegacyWebsite: '',
     ringyAuthTokenLegacyWebsite: '',
     ghlAccessToken: '',
@@ -116,8 +122,8 @@ export function AccountGeneral() {
   const onSubmit = handleSubmit(async (data) => {
     // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications);
-  
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications);
+
     try {
       // await new Promise((resolve) => setTimeout(resolve, 500));
       toast.success('Update success!');
@@ -150,7 +156,15 @@ export function AccountGeneral() {
 
             </Box>
             <Stack spacing={3} sx={{ mt: 3 }}>
-              <Typography variant="subtitle2">State Licenses</Typography>
+              <Typography
+                component="span"
+                sx={{
+                  mb: -1,
+                  fontWeight: 700
+                }}
+              >
+                State Licenses
+              </Typography>
               <Field.Autocomplete
                 name="stateLicenses"
                 multiple
@@ -160,79 +174,216 @@ export function AccountGeneral() {
                 slotProps={{
                   chip: { color: 'info' },
                 }}
-              
-                
+
+
+              />
+            </Stack>
+            <Stack spacing={3} sx={{ mt: 6 }}>
+              <Field.Switch
+                name="emailNotifications"
+                labelPlacement="start"
+                label={
+                  <>
+                    <Typography
+                      component="span"
+                      sx={{
+                        fontWeight: 700
+                      }}
+                    >
+                      Email Notifications
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                      Send Email Notification when new leads are recieved.
+                    </Typography>
+                  </>
+                }
+                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
               />
             </Stack>
 
-            <Stack spacing={3} sx={{ mt: 6, mb: 5 }}>
-              <Typography variant="h5">CRM Integration</Typography>
-               <Field.Switch
-              name="emailNotifications"
-              labelPlacement="start"
-              label={
-                <>
-                  <Typography variant="subtitle3" sx={{ mb: 0.5 }}>
-                    Email Notifications
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    Send Email Notification for new leads recieved.
-                  </Typography>
-                </>
-              }
-              sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
-            />
+            <Stack spacing={3} sx={{ mt: 6, mb: 2 }}>
+              <Typography
+                component="span"
+                sx={{
+                  typography: 'h6',
+                  fontWeight: 700
+                }}
+              >
+                CRM Integration
+              </Typography>
+
             </Stack>
 
-           
-            <Stack spacing={3} sx={{ mt: 6 }}>
-              
-              <Typography variant="subtitle6">Ringy Integration</Typography>
-              <Typography variant="subtitle2">Veteran Website Lead Vendor</Typography>
-              <Field.Text name="ringySIDVeteranWebsite" label="sid"/>
-              <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken"/>
 
-              <Typography variant="subtitle2">Legacy Website Lead Vendor</Typography>
-              <Field.Text name="ringySIDLegacyWebsite" label="sid"/>
-              <Field.Text name="ringyAuthTokenLegacyWebsite" label="authToken"/>
+            <Stack spacing={3} sx={{ mt: 3 }}>
+              <Typography
+                component="span"
+                sx={{
+                  fontWeight: 600
+                }}
+              >
+                Ringy Integration
+              </Typography>
+              <Box
+                sx={{
+                  rowGap: 3,
+                  columnGap: 20,
+                  display: 'grid',
+                  mt: -1,
+                  gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+              >
+                <Stack spacing={2} sx={{ mt: 0 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    columnGap: 1,
+                  }}>
+
+                    <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
+                      Veteran Website Lead Vendor
+                    </Typography>
+
+                    <Label
+                      variant="soft"
+                      color='primary'
+                      sx={{
+                        // ml: 10,
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700
+                      }}
+                    >
+                      Fresh
+                    </Label>
+                  </Box>
+
+                  <Field.Text name="ringySIDVeteranWebsite" label="sid" />
+                  <Field.Text name="ringyAuthTokenVeteranWebsite" label="authToken" />
+
+                </Stack>
+
+                <Stack spacing={2} sx={{ mt: 0 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    columnGap: 1,
+                  }}>
+
+                    <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
+                      Veteran Website Lead Vendor
+                    </Typography>
+
+                    <Label
+                      variant="soft"
+                      color='secondary'
+                      sx={{
+                        // ml: 10,
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700
+                      }}
+                    >
+                      Aged
+                    </Label>
+                  </Box>
+
+                  <Field.Text name="ringySIDVeteranWebsiteAged" label="sid" />
+                  <Field.Text name="ringyAuthTokenVeteranWebsiteAged" label="authToken" />
+                </Stack>
+
+
+              </Box>
+
+              <Box
+                sx={{
+                  rowGap: 3,
+                  columnGap: 20,
+                  display: 'grid',
+                  mt: -1,
+                  gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+              >
+                <Stack spacing={2} sx={{ mt: 0 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    columnGap: 1,
+                  }}>
+
+                    <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
+                      Legacy Website Lead Vendor
+                    </Typography>
+
+                    <Label
+                      variant="soft"
+                      color='primary'
+                      sx={{
+                        // ml: 10,
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700
+                      }}
+                    >
+                      Fresh
+                    </Label>
+                  </Box>
+
+                  <Field.Text name="ringySIDLegacyWebsite" label="sid" />
+                  <Field.Text name="ringyAuthTokenLegacyWebsite" label="authToken" />
+
+                </Stack>
+              </Box>
             </Stack>
 
             <Stack spacing={3} sx={{ mt: 6 }}>
-              
-              <Typography variant="subtitle6">GoHighLevel Integration</Typography>
-              <Field.Text name="ghlAccessToken" label="Access Token"/>
-              <Field.Text name="ghlLocationID" label="Location ID"/>
+
+              <Typography
+                component="span"
+                sx={{
+                  fontWeight: 600
+                }}
+              >
+                GoHighLevel Integration
+              </Typography>
+              <Box
+                sx={{
+                  rowGap: 3,
+                  columnGap: 2,
+                  display: 'grid',
+                  gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+              >
+                <Stack spacing={1} sx={{ mt: -1 }}>
+                  <Typography variant="caption">You can get your API Key by going to Settings (bottom left menu) ➡️ Business Profile. Under your basic info you’ll see an API Key and a clipboard 📋 icon to copy & paste.</Typography>
+                  <Field.Text name="ghlAccessToken" label="API Key" />
+                </Stack>
+                <Stack spacing={1} sx={{ mt: -1 }}>
+                  <Typography variant="caption">Your URL should look like: app.gohighlevel.com/v2/location/abc123XYZ/dashboard - abc123XYZ would be the Location ID.</Typography>
+                  <Field.Text name="ghlLocationID" label="Location ID" />
+                </Stack>
+
+              </Box>
+
+
             </Stack>
 
-            <Stack spacing={3} sx={{ mt: 6 }}>
-              
-              <Typography variant="subtitle6">Close CRM Integration</Typography>
-              <Typography variant="caption">Settings → Developer → API Keys, then click + New API Key. Enter a name (something like ‘LifeJacket Leads’) and click Create API Key. Copy & Enter API Key below.</Typography>
-              <Field.Text name="closeCRMAPIKey" label="API Key"/>
+            <Stack spacing={2} sx={{ mt: 6 }}>
+
+              <Typography
+                component="span"
+                sx={{
+                  fontWeight: 600
+                }}
+              >
+                Close CRM Integration
+              </Typography>
+              <Typography variant="caption">Settings ➡️ Developer ➡️ API Keys, then click + New API Key. Enter a name (something like ‘LifeJacket Leads’) & click Create API Key. Copy 📋 API Key & paste below.</Typography>
+              <Field.Text name="closeCRMAPIKey" label="API Key" />
               {/* Settings → Developer → API Keys, then click + New API Key */}
-              <Typography variant="caption">Settings → Custom Fields, Create/Select Lead Source Custom Field → More → Copy ID (API).</Typography>
-              <Field.Text name="closeCRMLeadSourceCustomField" label="Lead Source Custom Field ID"/>
-
+              <Typography variant="caption">Settings ➡️ Custom Fields, Create Select or Lead Custom Field ➡️ press ⋯ button to the left of Custom Field ➡️ 📋 Copy ID (API) & paste below.</Typography>
+              <Field.Text name="closeCRMLeadSourceCustomField" label="Lead Source Custom Field ID" />
             </Stack>
 
 
             <Stack spacing={3} sx={{ mt: 3, alignItems: 'flex-end' }}>
-
-            
-              {/* <Autocomplete
-
-                fullWidth
-                multiple
-                limitTags={20}
-                options={usStates}
-                getOptionLabel={(option) => option.state}
-                renderInput={(params) => (
-                  <TextField {...params} name="stateList" label="State Licenses" />
-                )}
-                slotProps={{
-                  chip: { size: 'small', variant: 'soft' },
-                }}
-              /> */}
 
               <Button type="submit" variant="contained" loading={isSubmitting}>
                 Save changes

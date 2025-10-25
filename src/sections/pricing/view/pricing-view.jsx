@@ -7,9 +7,9 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans } from 'src/_mock';
+import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans, _veteranWebsiteAgedPricingPlans } from 'src/_mock';
 
-import { PricingCard } from '../pricing-card';
+import { PricingCard, MixedPricingCard } from '../pricing-card';
 
 // ----------------------------------------------------------------------
 
@@ -38,12 +38,12 @@ export function PricingView() {
 
   return (
     <Container sx={{ pt: { xs: 3}, pb: 10 }}>
-      <Typography variant="h4" align="center" sx={{ mb: 5 }}>
+      <Typography variant="h3" align="center" sx={{ mb: 5 }}>
         Purchase Leads
       </Typography>
 
-      <Typography variant="h5" align="center" sx={{ color: 'text.secondary'}}>
-        Veteran Wesbite Leads
+      <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
+      Veteran Website Leads
       </Typography>
 
       <Box
@@ -52,7 +52,7 @@ export function PricingView() {
           gap: { xs: 3, md: 0 },
           alignItems: { md: 'center' },
           gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-          mb: 10
+          mb: 2
         }}
       >
         {_veteranWebsitePricingPlans.map((card, index) => (
@@ -60,8 +60,22 @@ export function PricingView() {
         ))}
       </Box>
 
-      <Typography variant="h5" align="center" sx={{ color: 'text.secondary' }}>
-        Legacy Leads
+      <Box
+        sx={{
+          display: 'grid',
+          gap: { xs: 3, md: 0 },
+          alignItems: { md: 'center' },
+          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+          mb: 3
+        }}
+      >
+        {_veteranWebsiteAgedPricingPlans.map((card, index) => (
+          <MixedPricingCard key={card.subscription} card={card} index={index} />
+        ))}
+      </Box>
+
+      <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
+      Legacy Website Leads
       </Typography>
 
       <Box

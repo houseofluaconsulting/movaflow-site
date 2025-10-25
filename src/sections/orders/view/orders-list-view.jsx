@@ -50,18 +50,11 @@ import { UserTableFiltersResult } from '../orders-table-filters-result';
 const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
 
 const TABLE_HEAD = [
-  // { id: 'contact', label: 'Contact' },
-  // { id: 'phone_number', label: 'Phone Number', width: 180 },
-  // { id: 'state', label: 'State', width: 120 },
-  // { id: 'LeadType', label: 'Lead Type', width: 100 },
-  // { id: 'Created', label: 'Recieved (UTC)', width: 100 },
-  // { id: 'Status', label: 'Status', width: 30 },
-  // { id: '', width: 88 },
   { id: 'Type', label: 'Order Type', width: 120 },
   { id: 'Amount', label: 'Amount', width: 120 },
   { id: 'LeadType', label: 'Lead Type', width: 180 },
   { id: 'CreditFresh', label: 'Credit', width: 120 },
-  { id: 'Created', label: 'Date (UTC)', width: 180 },
+  { id: 'Created', label: 'Date', width: 180 },
   { id: 'Status', label: 'Status', width: 120 },
 ];
 
@@ -172,7 +165,7 @@ export function OrderListView() {
   return (
     <>
       <DashboardContent>
-      <Typography variant="h4" align="center" sx={{ mb: 5 }}>
+      <Typography variant="h3" align="center" sx={{ mb: 5 }}>
         Orders
       </Typography>
         <Card>
@@ -186,7 +179,7 @@ export function OrderListView() {
           )}
 
           <Box sx={{ position: 'relative' }}>
-            <TableSelectedAction
+            {/* <TableSelectedAction
               dense={table.dense}
               numSelected={table.selected.length}
               rowCount={dataFiltered.length}
@@ -203,7 +196,7 @@ export function OrderListView() {
                   </IconButton>
                 </Tooltip>
               }
-            />
+            /> */}
 
             <Scrollbar>
               <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
