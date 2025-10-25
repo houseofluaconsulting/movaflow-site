@@ -30,19 +30,19 @@ function formatToLocalTime(utcTimestamp) {
   // Parse "MM/DD/YYYY, HH:mm:ss" format
   const [datePart, timePart] = utcTimestamp.split(', ');
   const [month, day, year] = datePart.split('/');
-  const [hour, minute, second] = timePart.split(':');
+  const [hour, minute] = timePart.split(':'); // ignore seconds
 
   // Treat as UTC and convert to local
-  const utcDate = new Date(Date.UTC(year, month - 1, day, hour, minute, second));
+  const utcDate = new Date(Date.UTC(year, month - 1, day, hour, minute));
 
-  // Format for local browser time
+  // Format for local browser time (no seconds, no leading zero)
   return utcDate.toLocaleString(undefined, {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-    hour: '2-digit',
+    hour: 'numeric',   // ✅ removes leading zero
     minute: '2-digit',
-    second: '2-digit',
+    hour12: true,      // ✅ ensures AM/PM format
   });
 }
 
@@ -56,6 +56,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
       currentUser={row}
       open={quickEditForm.value}
       onClose={quickEditForm.onFalse}
+      created={formatToLocalTime(row.Created)}
     />
   );
 
@@ -134,19 +135,55 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               <Box component="span" sx={{ color: 'text.disabled' }}>
                 {row.email}
               </Box>
+              <Box component="span" sx={{ color: 'text.disabled' }}>
+                {row.phone_number}
+              </Box>
             </Stack>
           </Box>
         </TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.phone_number}</TableCell>
-
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.state}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>
+          {row.LeadType === 'VeteranWebsite'
+            ? 'Veteran'
+            : row.LeadType === 'LegacyWebsite'
+            ? 'Legacy'
+            : row.LeadType === 'FinalExpense'
+            ? 'Final Expense'
+            : row.LeadType}
+        </TableCell>
+
+        <TableCell sx={{ whiteSpace: 'nowrap', }}>
+          <Stack>
+            {row?.Opportunity === 'Fresh' && (
+              <Label
+                variant="soft"
+                color="primary"
+                sx={{ alignSelf: 'center', typography: 'text', fontWeight: 700 }}
+              >
+                {row.Opportunity}
+              </Label>
+            )}
+
+            {row?.Opportunity === 'Aged' && (
+              <Label
+                variant="soft"
+                color="secondary"
+                sx={{ alignSelf: 'center', typography: 'text', fontWeight: 700 }}
+              >
+                {row?.Opportunity}
+              </Label>
+            )}
+          </Stack>
+
+        </TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
-          {formatToLocalTime(row.Created)}
+          {formatToLocalTime(row.Delivered)}
         </TableCell>
+
+        <TableCell>{row.Note}</TableCell>
 
         <TableCell>
           <Label

@@ -36,7 +36,7 @@ export const UserQuickEditSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-export function UserQuickEditForm({ currentUser, open, onClose }) {
+export function UserQuickEditForm({ currentUser, open, onClose, created }) {
   const defaultValues = {
     contact_id: '',
     full_name: '',
@@ -139,7 +139,12 @@ export function UserQuickEditForm({ currentUser, open, onClose }) {
             <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
 
             <Field.Text name="LeadType" label="Lead Type" disabled />
-            <Field.Text name="Created" label="Recieved" disabled />
+            <Field.Text
+              name="Created"
+              label="Received"
+              value={created}     // ✅ set value directly
+              disabled
+            />
 
             <Field.Text name="full_name" label="Full Name" disabled />
             <Field.Text name="email" label="Email Address" disabled />

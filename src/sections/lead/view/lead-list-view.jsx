@@ -51,13 +51,14 @@ import { UserTableFiltersResult } from '../lead-table-filters-result';
 const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
 
 const TABLE_HEAD = [
-  { id: 'contact', label: 'Contact' },
-  { id: 'phone_number', label: 'Phone Number', width: 180 },
-  { id: 'state', label: 'State', width: 120 },
-  { id: 'LeadType', label: 'Lead Type', width: 100 },
-  { id: 'Created', label: 'Recieved', width: 100 },
-  { id: 'Status', label: 'Status', width: 30 },
-  { id: '', width: 88 },
+  { id: 'contact', label: 'Contact', width: 150 },
+  { id: 'state', label: 'State', width: 80 },
+  { id: 'LeadType', label: 'Type', width: 80 },
+  { id: 'Opportunity', label: '', width: 80 },
+  { id: 'Date/Time', label: 'Date/Time', width: 120 },
+  { id: 'Note', label: 'Note', width: 180 },
+  { id: 'Status', label: 'Status', width: 80 },
+  { id: 'actions', label: '', width: 80 },
 ];
 
 // ----------------------------------------------------------------------
