@@ -378,7 +378,7 @@ export function AccountGeneral() {
               <Typography variant="caption">Settings ➡️ Developer ➡️ API Keys, then click + New API Key. Enter a name (something like ‘LifeJacket Leads’) & click Create API Key. Copy 📋 API Key & paste below.</Typography>
               <Field.Text name="closeCRMAPIKey" label="API Key" />
               {/* Settings → Developer → API Keys, then click + New API Key */}
-              <Typography variant="caption">Settings ➡️ Custom Fields, Create Select or Lead Custom Field ➡️ press ⋯ button to the left of Custom Field ➡️ 📋 Copy ID (API) & paste below.</Typography>
+              <Typography variant="caption">Settings ➡️ Custom Fields, Create Select or Lead Custom Field ➡️ press ⋯ button to the right of Custom Field ➡️ 📋 Copy ID (API) & paste below.</Typography>
               <Field.Text name="closeCRMLeadSourceCustomField" label="Lead Source Custom Field ID" />
             </Stack>
 
