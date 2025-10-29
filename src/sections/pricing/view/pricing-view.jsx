@@ -60,7 +60,7 @@ export function PricingView() {
         ))}
       </Box>
 
-      {/* <Box
+      <Box
         sx={{
           display: 'grid',
           gap: { xs: 3, md: 0 },
@@ -72,7 +72,7 @@ export function PricingView() {
         {_veteranWebsiteAgedPricingPlans.map((card, index) => (
           <MixedPricingCard key={card.subscription} card={card} index={index} />
         ))}
-      </Box> */}
+      </Box>
 
       <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
       Legacy Website Leads
