@@ -142,7 +142,7 @@ export const _veteranWebsitePricingPlans = [
     amount: '$780.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
-    priceId: 'price_1SNhjLGHAeFkU5hvtjUZhD4M',
+    priceId: 'price_1SAKvPGHAeFkU5hvZqqr8lAW',
   },
   {
     credit: '30',
