@@ -1,6 +1,7 @@
 import { varAlpha } from 'minimal-shared/utils';
 
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import Switch from '@mui/material/Switch';
 import SvgIcon from '@mui/material/SvgIcon';
 import Divider from '@mui/material/Divider';
@@ -46,7 +47,17 @@ export function PricingView() {
       Veteran Website Leads
       </Typography>
 
-      <Box
+      <Box align="center">
+            <Alert
+              variant="outlined"
+              severity="info"
+              sx={{ mb: 2, display: 'flex', alignItems: 'center'}}
+            >
+              Purchasing of Veteran Leads has been suspended to fill current orders.
+            </Alert>
+          </Box>
+
+      {/* <Box
         sx={{
           display: 'grid',
           gap: { xs: 3, md: 0 },
@@ -70,9 +81,9 @@ export function PricingView() {
         }}
       >
         {_veteranWebsiteAgedPricingPlans.map((card, index) => (
-          <MixedPricingCard key={card.subscription} card={card} index={index} />
+          <MixedPricingCard key={card.subscription} card={card} index={index}/>
         ))}
-      </Box>
+      </Box> */}
 
       <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
       Legacy Website Leads
