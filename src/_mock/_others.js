@@ -176,7 +176,7 @@ export const _veteranWebsitePricingPlans = [
   },
 ];
 
-export const _veteranWebsiteAgedPricingPlans = [
+export const _veteranWebsiteMixedPricingPlans = [
   {
     credit: '20/25',
     opportunity: 'Mixed',
@@ -224,6 +224,39 @@ export const _veteranWebsiteAgedPricingPlans = [
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
     priceId: 'price_1SPYaBGHAeFkU5hvLNu3kbgu',
+  },
+];
+
+export const _veteranWebsiteAgedPricingPlans = [
+  {
+    credit: '30',
+    opportunity: 'Aged',
+    type: 'Veteran Website Leads',
+    price: 8,
+    amount: '$240.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SQZLLGHAeFkU5hv8hzAEzUa',
+  },
+  {
+    credit: '40',
+    opportunity: 'Aged',
+    type: 'Veteran Website Leads',
+    price: 7.50,
+    amount: '$300.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SQZfpGHAeFkU5hvPqLlpWNl',
+  },
+  {
+    credit: '50',
+    opportunity: 'Aged',
+    type: 'Veteran Website Leads',
+    price: 7,
+    amount: '$350.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SQZgIGHAeFkU5hvQUghhm1p',
   },
 ];
 
