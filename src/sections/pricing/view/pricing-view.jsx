@@ -53,7 +53,7 @@ export function PricingView() {
               severity="info"
               sx={{ mb: 2, display: 'flex', alignItems: 'center'}}
             >
-              Purchasing of Veteran Leads has been suspended to fill current orders.
+              Purchasing of <b>Fresh Veteran Leads</b> has been suspended to fill current orders.
             </Alert>
           </Box>
 
