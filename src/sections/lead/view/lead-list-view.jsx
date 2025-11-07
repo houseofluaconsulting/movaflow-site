@@ -19,7 +19,7 @@ import { RouterLink } from 'src/routes/components';
 import { getLeads } from 'src/actions/leads'
 import { exportLeads } from 'src/actions/leads'
 import { DashboardContent } from 'src/layouts/dashboard';
-import { _stateNames, _leadList, LEAD_STATUS_OPTIONS } from 'src/_mock';
+import { _stateNames, _leadList, LEAD_STATUS_OPTIONS, LEAD_OPPORTUNITY_OPTIONS } from 'src/_mock';
 
 import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
@@ -48,14 +48,14 @@ import { UserTableFiltersResult } from '../lead-table-filters-result';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
+const OPPORTUNITY_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_OPPORTUNITY_OPTIONS];
 
 const TABLE_HEAD = [
   { id: 'contact', label: 'Contact', width: 150 },
   { id: 'state', label: 'State', width: 80 },
   { id: 'LeadType', label: 'Type', width: 80 },
-  { id: 'Opportunity', label: '', width: 80 },
-  { id: 'Delivered', label: 'Delivered', width: 120 },
+  { id: 'Opportunity', label: 'Opportunity', width: 80 },
+  { id: 'Delivered', label: '', width: 120 },
   { id: 'Note', label: 'Note', width: 180 },
   { id: 'Status', label: 'Status', width: 80 },
   { id: 'actions', label: '', width: 80 },
@@ -93,7 +93,7 @@ export function UserListView() {
 
 
 
-  const filters = useSetState({ full_name: '', role: [], Status: 'all' });
+  const filters = useSetState({ full_name: '', role: [], Opportunity: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
 
   const dataFiltered = applyFilter({
@@ -105,7 +105,7 @@ export function UserListView() {
   const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
 
   const canReset =
-    !!currentFilters.full_name || currentFilters.role.length > 0 || currentFilters.Status !== 'all';
+    !!currentFilters.full_name || currentFilters.role.length > 0 || currentFilters.Opportunity !== 'all';
 
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
@@ -134,13 +134,15 @@ export function UserListView() {
     // table.onUpdatePageDeleteRows(dataInPage.length, dataFiltered.length);
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
-  const handleFilterStatus = useCallback(
+
+    const handleFilterOpportunity = useCallback(
     (event, newValue) => {
       table.onResetPage();
-      updateFilters({ Status: newValue });
+      updateFilters({ Opportunity: newValue });
     },
     [updateFilters, table]
   );
+
 
   const renderConfirmDialog = () => (
     <ConfirmDialog
@@ -175,8 +177,8 @@ export function UserListView() {
         </Typography>
         <Card>
           <Tabs
-            value={currentFilters.Status}
-            onChange={handleFilterStatus}
+            value={currentFilters.Opportunity}
+            onChange={handleFilterOpportunity}
             sx={[
               (theme) => ({
                 px: { md: 2.5 },
@@ -184,7 +186,7 @@ export function UserListView() {
               }),
             ]}
           >
-            {STATUS_OPTIONS.map((tab) => (
+            {OPPORTUNITY_OPTIONS.map((tab) => (
               <Tab
                 key={tab.value}
                 iconPosition="end"
@@ -193,18 +195,17 @@ export function UserListView() {
                 icon={
                   <Label
                     variant={
-                      ((tab.value === 'all' || tab.value === currentFilters.Status) && 'filled') ||
+                      ((tab.value === 'all' || tab.value === currentFilters.Opportunity) && 'filled') ||
                       'soft'
                     }
                     color={
-                      (tab.value === 'Sold' && 'success') ||
-                      (tab.value === 'No Contact' && 'warning') ||
-                      (tab.value === 'Contacted' && 'error') ||
+                      (tab.value === 'Fresh' && 'primary') ||
+                      (tab.value === 'Aged' && 'secondary') ||
                       'Unsold'
                     }
                   >
-                    {['Unsold', 'No Contact', 'Contacted', 'Sold'].includes(tab.value)
-                      ? tableData.filter((leadUser) => leadUser.Status === tab.value).length
+                    {['Fresh', 'Aged'].includes(tab.value)
+                      ? tableData.filter((leadUser) => leadUser.Opportunity === tab.value).length
                       : tableData.length}
                   </Label>
                 }
@@ -311,7 +312,7 @@ export function UserListView() {
 // ----------------------------------------------------------------------
 
 function applyFilter({ inputData, comparator, filters }) {
-  const { full_name, Status, role } = filters;
+  const { full_name, Opportunity, role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
@@ -327,8 +328,8 @@ function applyFilter({ inputData, comparator, filters }) {
     inputData = inputData.filter((user) => user.full_name.toLowerCase().includes(full_name.toLowerCase()));
   }
 
-  if (Status !== 'all') {
-    inputData = inputData.filter((user) => user.Status === Status);
+  if (Opportunity !== 'all') {
+    inputData = inputData.filter((user) => user.Opportunity === Opportunity);
   }
 
   if (role.length) {

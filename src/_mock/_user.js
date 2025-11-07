@@ -14,6 +14,12 @@ export const LEAD_STATUS_OPTIONS = [
   { value: 'Sold', label: 'Sold' },
 ];
 
+export const LEAD_OPPORTUNITY_OPTIONS = [
+  { value: 'Fresh', label: 'Fresh' },
+  { value: 'Aged', label: 'Aged' },
+];
+
+
 export const _userAbout = {
   id: _mock.id(1),
   role: _mock.role(1),
