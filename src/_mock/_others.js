@@ -307,7 +307,7 @@ export const _legacyWebsiteMixedPricingPlans = [
   {
     credit: '30/40',
     opportunity: 'Mixed',
-    type: 'Veteran Website Leads',
+    type: 'Legacy Website Leads',
     description: '30 Fresh & 40 Aged',
     freshPrice: 29,
     agedPrice: 5,
@@ -319,7 +319,7 @@ export const _legacyWebsiteMixedPricingPlans = [
   {
     credit: '40/50',
     opportunity: 'Mixed',
-    type: 'Veteran Website Leads',
+    type: 'Legacy Website Leads',
     description: '40 Fresh & 50 Aged',
     freshPrice: 27,
     agedPrice: 5,
@@ -331,7 +331,7 @@ export const _legacyWebsiteMixedPricingPlans = [
   {
     credit: '50/60',
     opportunity: 'Mixed',
-    type: 'Veteran Website Leads',
+    type: 'Legacy Website Leads',
     description: '50 Fresh & 60 Aged',
     freshPrice: 26,
     agedPrice: 5,
@@ -343,7 +343,7 @@ export const _legacyWebsiteMixedPricingPlans = [
   {
     credit: '60/70',
     opportunity: 'Mixed',
-    type: 'Veteran Website Leads',
+    type: 'Legacy Website Leads',
     description: '60 Fresh & 70 Aged',
     freshPrice: 24,
     agedPrice: 5,
