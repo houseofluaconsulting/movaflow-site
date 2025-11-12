@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans, _veteranWebsiteMixedPricingPlans, _veteranWebsiteAgedPricingPlans } from 'src/_mock';
+import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans, _veteranWebsiteMixedPricingPlans, _veteranWebsiteAgedPricingPlans, _legacyWebsiteMixedPricingPlans } from 'src/_mock';
 
 import { PricingCard, MixedPricingCard } from '../pricing-card';
 
@@ -115,6 +115,20 @@ export function PricingView() {
       >
         {_legacyWebsitePricingPlans.map((card, index) => (
           <PricingCard key={card.subscription} card={card} index={index} />
+        ))}
+      </Box>
+
+      <Box
+        sx={{
+          display: 'grid',
+          gap: { xs: 3, md: 0 },
+          alignItems: { md: 'center' },
+          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+          mb: 3
+        }}
+      >
+        {_legacyWebsiteMixedPricingPlans.map((card, index) => (
+          <MixedPricingCard key={card.subscription} card={card} index={index}/>
         ))}
       </Box>
     </Container>

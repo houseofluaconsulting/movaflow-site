@@ -303,6 +303,57 @@ export const _legacyWebsitePricingPlans = [
   },
 ];
 
+export const _legacyWebsiteMixedPricingPlans = [
+  {
+    credit: '30/40',
+    opportunity: 'Mixed',
+    type: 'Veteran Website Leads',
+    description: '30 Fresh & 40 Aged',
+    freshPrice: 29,
+    agedPrice: 5,
+    amount: '$1070.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SSfnvGHAeFkU5hvlDuwqsWO',
+  },
+  {
+    credit: '40/50',
+    opportunity: 'Mixed',
+    type: 'Veteran Website Leads',
+    description: '40 Fresh & 50 Aged',
+    freshPrice: 27,
+    agedPrice: 5,
+    amount: '$1330.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SSfopGHAeFkU5hvch4ixgSN',
+  },
+  {
+    credit: '50/60',
+    opportunity: 'Mixed',
+    type: 'Veteran Website Leads',
+    description: '50 Fresh & 60 Aged',
+    freshPrice: 26,
+    agedPrice: 5,
+    amount: '$1600.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SSfwKGHAeFkU5hvdcbCJHpe',
+  },
+  {
+    credit: '60/70',
+    opportunity: 'Mixed',
+    type: 'Veteran Website Leads',
+    description: '60 Fresh & 70 Aged',
+    freshPrice: 24,
+    agedPrice: 5,
+    amount: '$1790.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1SSfxKGHAeFkU5hvyGOCcPWr',
+  },
+];
+
 // ----------------------------------------------------------------------
 
 export const _testimonials = [
