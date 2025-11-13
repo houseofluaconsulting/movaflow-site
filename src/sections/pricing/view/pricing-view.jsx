@@ -47,7 +47,7 @@ export function PricingView() {
       Veteran Website Leads
       </Typography>
 
-      <Box align="center">
+      {/* <Box align="center">
             <Alert
               variant="outlined"
               severity="info"
@@ -55,7 +55,7 @@ export function PricingView() {
             >
               Purchasing of <b>Fresh Veteran Leads</b> has been suspended to fill current orders.
             </Alert>
-          </Box>
+          </Box> */}
 
       {/* <Box
         sx={{
@@ -69,7 +69,7 @@ export function PricingView() {
         {_veteranWebsitePricingPlans.map((card, index) => (
           <PricingCard key={card.subscription} card={card} index={index} />
         ))}
-      </Box>
+      </Box> */}
 
       <Box
         sx={{
@@ -83,7 +83,7 @@ export function PricingView() {
         {_veteranWebsiteMixedPricingPlans.map((card, index) => (
           <MixedPricingCard key={card.subscription} card={card} index={index}/>
         ))}
-      </Box> */}
+      </Box>
 
       <Box
         sx={{
