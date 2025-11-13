@@ -105,6 +105,14 @@ export function OverviewAppView() {
             total={data['LegacyWebsiteFresh']}
           />
         </Grid>
+
+        <Grid size={{ xs: 12, md: 3 }}>
+          <LeadCreditSummary
+            type="Legacy Website"
+            opportunity="Aged"
+            total={data['LegacyWebsiteAged']}
+          />
+        </Grid>
       </Grid>
     </DashboardContent>
   );
