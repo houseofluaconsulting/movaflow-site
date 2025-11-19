@@ -24,6 +24,8 @@ export async function getCustomer(id) {
         RingyAuthTokenVeteranWebsiteAged: customer.LeadType.VeteranWebsite.Aged.CRMIntegration.Ringy.AuthToken,
         RingySIDLegacyWebsite: customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.SID,
         RingyAuthTokenLegacyWebsite: customer.LeadType.LegacyWebsite.Fresh.CRMIntegration.Ringy.AuthToken,
+        RingySIDLegacyWebsiteAged: customer.LeadType.LegacyWebsite.Aged.CRMIntegration.Ringy.SID,
+        RingyAuthTokenLegacyWebsiteAged: customer.LeadType.LegacyWebsite.Aged.CRMIntegration.Ringy.AuthToken,
         GHLAccessToken: customer.CRMIntegration.GoHighLevel.AccessToken,
         GHLocationID: customer.CRMIntegration.GoHighLevel.LocationID,
         CloseCRMAPIKey: customer.CRMIntegration.CloseCRM.APIKey,
@@ -36,8 +38,8 @@ export async function getCustomer(id) {
     return user_data
 }
 
-export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications) {
-    const data = { id , stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications};
+export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsiteAged, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications) {
+    const data = { id , stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsiteAged, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications};
 
     const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'update-customer' } })
     const response_data = await response.data

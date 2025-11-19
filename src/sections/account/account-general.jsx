@@ -44,6 +44,8 @@ export const UpdateUserSchema = zod.object({
   ringyAuthTokenVeteranWebsiteAged: zod.string(),
   ringySIDLegacyWebsite: zod.string(),
   ringyAuthTokenLegacyWebsite: zod.string(),
+  ringySIDLegacyWebsiteAged: zod.string(),
+  ringyAuthTokenLegacyWebsiteAged: zod.string(),
   ghlAccessToken: zod.string(),
   ghlLocationID: zod.string(),
   closeCRMAPIKey: zod.string(),
@@ -81,6 +83,8 @@ export function AccountGeneral() {
     ringySIDVeteranWebsiteAged: userData['RingySIDVeteranWebsiteAged'] ?? "",
     ringyAuthTokenVeteranWebsiteAged: userData['RingyAuthTokenVeteranWebsiteAged'] ?? "",
     ringySIDLegacyWebsite: userData['RingySIDLegacyWebsite'] ?? "",
+    ringyAuthTokenLegacyWebsiteAged: userData['RingyAuthTokenLegacyWebsiteAged'] ?? "",
+    ringySIDLegacyWebsiteAged: userData['RingySIDLegacyWebsiteAged'] ?? "",
     ringyAuthTokenLegacyWebsite: userData['RingyAuthTokenLegacyWebsite'] ?? "",
     ghlAccessToken: userData['GHLAccessToken'] ?? "",
     ghlLocationID: userData['GHLocationID'] ?? "",
@@ -100,6 +104,8 @@ export function AccountGeneral() {
     ringyAuthTokenVeteranWebsiteAged: '',
     ringySIDLegacyWebsite: '',
     ringyAuthTokenLegacyWebsite: '',
+    ringySIDLegacyWebsiteAged: '',
+    ringyAuthTokenLegacyWebsiteAged: '',
     ghlAccessToken: '',
     ghlLocationID: '',
     closeCRMAPIKey: '',
@@ -122,7 +128,7 @@ export function AccountGeneral() {
   const onSubmit = handleSubmit(async (data) => {
     // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications);
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications);
 
     try {
       // await new Promise((resolve) => setTimeout(resolve, 500));
@@ -289,8 +295,6 @@ export function AccountGeneral() {
                   <Field.Text name="ringySIDVeteranWebsiteAged" label="sid" />
                   <Field.Text name="ringyAuthTokenVeteranWebsiteAged" label="authToken" />
                 </Stack>
-
-
               </Box>
 
               <Box
@@ -328,6 +332,34 @@ export function AccountGeneral() {
 
                   <Field.Text name="ringySIDLegacyWebsite" label="sid" />
                   <Field.Text name="ringyAuthTokenLegacyWebsite" label="authToken" />
+
+                </Stack>
+                <Stack spacing={2} sx={{ mt: 0 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    columnGap: 1,
+                  }}>
+
+                    <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
+                      Legacy Website Lead Vendor
+                    </Typography>
+
+                    <Label
+                      variant="soft"
+                      color='secondary'
+                      sx={{
+                        // ml: 10,
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700
+                      }}
+                    >
+                      Aged
+                    </Label>
+                  </Box>
+
+                  <Field.Text name="ringySIDLegacyWebsiteAged" label="sid" />
+                  <Field.Text name="ringyAuthTokenLegacyWebsiteAged" label="authToken" />
 
                 </Stack>
               </Box>
