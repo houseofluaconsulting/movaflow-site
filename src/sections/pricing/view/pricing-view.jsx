@@ -85,7 +85,7 @@ export function PricingView() {
         ))}
       </Box> */}
 
-      <Box
+      {/* <Box
         sx={{
           display: 'grid',
           gap: { xs: 3, md: 0 },
@@ -97,7 +97,7 @@ export function PricingView() {
         {_veteranWebsiteAgedPricingPlans.map((card, index) => (
           <PricingCard key={card.subscription} card={card} index={index} />
         ))}
-      </Box>
+      </Box> */}
 
       
 
