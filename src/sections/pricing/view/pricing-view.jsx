@@ -47,7 +47,7 @@ export function PricingView() {
       Veteran Website Leads
       </Typography>
 
-      <Box align="center">
+      {/* <Box align="center">
             <Alert
               variant="outlined"
               severity="info"
@@ -55,7 +55,7 @@ export function PricingView() {
             >
               Purchasing of <b>Fresh Veteran Leads</b> is currently suspended.
             </Alert>
-          </Box>
+          </Box> */}
 
       {/* <Box
         sx={{
