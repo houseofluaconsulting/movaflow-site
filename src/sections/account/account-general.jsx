@@ -74,7 +74,7 @@ export function AccountGeneral() {
 
   const currentUser = {
     id: user?.id,
-    displayName: user?.displayName,
+    displayName: userData['Name'],
     email: user?.email,
     phoneNumber: userData['Phone'],
     stateLicenses: userData['StateLicenses'],
