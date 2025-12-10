@@ -32,6 +32,7 @@ export function PricingCard({ card, sx, ...other }) {
   const { credit, opportunity, type, price, amount, lists, labelAction, priceId } = card;
   const termsConstentConfirmDialog = useBoolean();
   const termsAccepted = useBoolean();
+  const isProcessing = useBoolean();
   const CONSENT_ID = Math.floor(100000000000 + Math.random() * 900000000000);
 
   const arrowIcon = () => (
@@ -128,19 +129,29 @@ export function PricingCard({ card, sx, ...other }) {
           />
         </DialogContent>
 
-        <DialogActions>
-          <Button variant="outlined" onClick={termsConstentConfirmDialog.onFalse}>
-            Disagree
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => createCheckoutSession(priceId, user?.id, 1, CONSENT_ID)}
-            autoFocus
-            color="primary"
-            disabled={!termsAccepted.value}
-          >
-            Agree
-          </Button>
+        <DialogActions sx={{ flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
+          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
+            <Button variant="outlined" onClick={termsConstentConfirmDialog.onFalse}>
+              Disagree
+            </Button>
+            <Button
+              variant="contained"
+              onClick={async () => {
+                isProcessing.onTrue();
+                await createCheckoutSession(priceId, user?.id, 1, CONSENT_ID);
+              }}
+              autoFocus
+              color="primary"
+              disabled={!termsAccepted.value}
+            >
+              Agree
+            </Button>
+          </Box>
+          {isProcessing.value && (
+            <Typography variant="caption" sx={{ color: 'primary.main', textAlign: 'center', width: '100%', mt: 2, fontWeight: 'bold' }}>
+              Hang tight! We{`'`}re securely redirecting you to Stripe…
+            </Typography>
+          )}
         </DialogActions>
       </Dialog>
   );
@@ -273,6 +284,10 @@ export function PricingCard({ card, sx, ...other }) {
 export function MixedPricingCard({ card, sx, ...other }) {
   const { user } = useAuthContext();
   const { credit, opportunity, type, description, freshPrice, agedPrice, amount, lists, labelAction, priceId } = card;
+  const termsConstentConfirmDialog = useBoolean();
+  const termsAccepted = useBoolean();
+  const isProcessing = useBoolean();
+  const CONSENT_ID = Math.floor(100000000000 + Math.random() * 900000000000);
 
   const arrowIcon = () => (
     <SvgIcon
@@ -344,6 +359,55 @@ export function MixedPricingCard({ card, sx, ...other }) {
           </Box>
         </Box>}
     </Box>
+  );
+
+  const renderTermsConstentConfirmDialog = () => (
+    <Dialog open={termsConstentConfirmDialog.value} onClose={termsConstentConfirmDialog.onFalse}>
+        <DialogTitle>Accept Terms & Conditions</DialogTitle>
+
+        <DialogContent sx={{ color: 'text.secondary' }}>
+          Please review and accept our{' '}
+          <Link href="https://lifejacketleads.com/terms-of-service/" target="_blank" rel="noopener">
+            Terms of Service
+          </Link>
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={termsAccepted.value}
+                onChange={termsAccepted.onToggle}
+              />
+            }
+            label="I have read and agree to the terms and conditions."
+            sx={{ mt: 2, display: 'flex' }}
+          />
+        </DialogContent>
+
+        <DialogActions sx={{ flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
+          <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
+            <Button variant="outlined" onClick={termsConstentConfirmDialog.onFalse}>
+              Disagree
+            </Button>
+            <Button
+              variant="contained"
+              onClick={async () => {
+                isProcessing.onTrue();
+                await createCheckoutSession(priceId, user?.id, 1, CONSENT_ID);
+              }}
+              autoFocus
+              color="primary"
+              disabled={!termsAccepted.value}
+            >
+              Agree
+            </Button>
+          </Box>
+          {isProcessing.value && (
+            <Typography variant="caption" sx={{ color: 'primary.main', textAlign: 'center', width: '100%', mt: 2, fontWeight: 'bold' }}>
+              Hang tight! We{`'`}re securely redirecting you to Stripe…
+            </Typography>
+          )}
+        </DialogActions>
+      </Dialog>
   );
 
   const renderSubscription = () => (
@@ -472,13 +536,14 @@ export function MixedPricingCard({ card, sx, ...other }) {
       {renderIcon()}
       {renderSubscription()}
       {renderPrice()}
+      {renderTermsConstentConfirmDialog()}
 
       {/* <Divider sx={{ borderStyle: 'dashed' }} /> */}
 
       {/* {renderList()} */}
 
       <Button
-        onClick={() => createCheckoutSession(priceId, user?.id, 1)}
+        onClick={termsConstentConfirmDialog.onTrue}
         // type="submit"
         fullWidth
         size="medium"
