@@ -1,12 +1,19 @@
 import { varAlpha } from 'minimal-shared/utils';
+import { useBoolean, usePopover } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
 import Divider from '@mui/material/Divider';
 import SvgIcon from '@mui/material/SvgIcon';
+import Checkbox from '@mui/material/Checkbox';
 import Typography from '@mui/material/Typography';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { CONFIG } from 'src/global-config';
 // import { getCustomer } from 'src/actions/customer'
@@ -23,6 +30,9 @@ import { useAuthContext } from 'src/auth/hooks';
 export function PricingCard({ card, sx, ...other }) {
   const { user } = useAuthContext();
   const { credit, opportunity, type, price, amount, lists, labelAction, priceId } = card;
+  const termsConstentConfirmDialog = useBoolean();
+  const termsAccepted = useBoolean();
+  const CONSENT_ID = Math.floor(100000000000 + Math.random() * 900000000000);
 
   const arrowIcon = () => (
     <SvgIcon
@@ -94,6 +104,45 @@ export function PricingCard({ card, sx, ...other }) {
           </Box>
         </Box>}
     </Box>
+  );
+
+  const renderTermsConstentConfirmDialog = () => (
+    <Dialog open={termsConstentConfirmDialog.value} onClose={termsConstentConfirmDialog.onFalse}>
+        <DialogTitle>Accept Terms & Conditions</DialogTitle>
+
+        <DialogContent sx={{ color: 'text.secondary' }}>
+          Please review and accept our{' '}
+          <Link href="https://lifejacketleads.com/terms-of-service/" target="_blank" rel="noopener">
+            Terms of Service
+          </Link>
+
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={termsAccepted.value}
+                onChange={termsAccepted.onToggle}
+              />
+            }
+            label="I have read and agree to the terms and conditions."
+            sx={{ mt: 2, display: 'flex' }}
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button variant="outlined" onClick={termsConstentConfirmDialog.onFalse}>
+            Disagree
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => createCheckoutSession(priceId, user?.id, 1, CONSENT_ID)}
+            autoFocus
+            color="primary"
+            disabled={!termsAccepted.value}
+          >
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
   );
 
   const renderSubscription = () => (
@@ -198,13 +247,15 @@ export function PricingCard({ card, sx, ...other }) {
       {renderIcon()}
       {renderSubscription()}
       {renderPrice()}
+      {renderTermsConstentConfirmDialog()}
 
       {/* <Divider sx={{ borderStyle: 'dashed' }} /> */}
 
       {/* {renderList()} */}
 
+      {/* Purchase button */}
       <Button
-        onClick={() => createCheckoutSession(priceId, user?.id, 1)}
+        onClick={termsConstentConfirmDialog.onTrue}
         // type="submit"
         fullWidth
         size="medium"
@@ -214,6 +265,8 @@ export function PricingCard({ card, sx, ...other }) {
         {labelAction}
       </Button>
     </Box>
+
+    
   );
 }
 
