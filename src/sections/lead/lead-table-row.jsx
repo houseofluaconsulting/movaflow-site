@@ -193,7 +193,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
           />
         </TableCell>
 
-        <TableCell sx={{ minWidth: 400 }}>
+        <TableCell sx={{ minWidth: 250 }}>
           {row.Note && row.Note.trim() !== '' ? (
             <Box
               sx={{
