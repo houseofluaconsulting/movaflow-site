@@ -12,8 +12,11 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
+import ListItemText from '@mui/material/ListItemText';
 
 import { RouterLink } from 'src/routes/components';
+
+import { fDate, fTime } from 'src/utils/format-time';
 
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
@@ -105,7 +108,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
   return (
     <>
       <TableRow hover selected={selected} aria-checked={selected} tabIndex={-1}>
-        <TableCell padding="checkbox">
+        {/* <TableCell padding="checkbox">
           <Checkbox
             checked={selected}
             onClick={onSelectRow}
@@ -116,7 +119,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               },
             }}
           />
-        </TableCell>
+        </TableCell> */}
 
         {/* <TableCell>
           <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
@@ -138,11 +141,23 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
           </Box>
         </TableCell> */}
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Type}</TableCell>
+        <TableCell align="center" sx={{ whiteSpace: 'nowrap' }}>
+          <Box sx={{ typography: 'caption' }}># {row.OrderId}</Box>
+        </TableCell>
+
+        <TableCell sx={{ whiteSpace: 'nowrap', fontWeight: 'bold' }}>{row.Type}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Amount}</TableCell>
 
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.LeadType}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>
+           {row.LeadType === 'VeteranWebsite'
+            ? 'Veteran'
+            : row.LeadType === 'LegacyWebsite'
+              ? 'Legacy'
+              : row.LeadType === 'FinalExpense'
+                ? 'Final Expense'
+                : row.LeadType}
+        </TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
           <Stack>
@@ -150,7 +165,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               <Label
                 variant="soft"
                 color="primary"
-                sx={{ ml: -6, mt: 1, alignSelf: 'center', typography: 'text', fontWeight: 700 }}
+                sx={{ ml: 0, mt: 1, alignSelf: 'center', typography: 'text', fontWeight: 700 }}
               >
                 {row.CreditFresh} Fresh
               </Label>
@@ -160,7 +175,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               <Label
                 variant="soft"
                 color="secondary"
-                sx={{ ml: -6, mt: 1, alignSelf: 'center', typography: 'text', fontWeight: 700 }}
+                sx={{ ml: 0, mt: 1, alignSelf: 'center', typography: 'text', fontWeight: 700 }}
               >
                 {row.CreditAged} Aged
               </Label>
@@ -172,7 +187,14 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
         {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell> */}
 
        <TableCell sx={{ whiteSpace: 'nowrap' }}>
-          {formatToLocalTime(row.Created)}
+          <ListItemText
+            primary={fDate(formatToLocalTime(row.Created))}
+            secondary={fTime(formatToLocalTime(row.Created))}
+            slotProps={{
+              primary: { noWrap: true, sx: { typography: 'body2' } },
+              secondary: { sx: { mt: 0.5, typography: 'caption' } },
+            }}
+          />
         </TableCell>
 
         <TableCell>

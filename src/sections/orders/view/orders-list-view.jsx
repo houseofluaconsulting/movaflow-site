@@ -50,10 +50,11 @@ import { UserTableFiltersResult } from '../orders-table-filters-result';
 const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
 
 const TABLE_HEAD = [
+  { id: 'OrderId', label: 'Order ID', width: 100, align: 'center' },
   { id: 'Type', label: 'Order Type', width: 120 },
   { id: 'Amount', label: 'Amount', width: 120 },
-  { id: 'LeadType', label: 'Lead Type', width: 180 },
-  { id: 'CreditFresh', label: 'Credit', width: 120 },
+  { id: 'LeadType', label: 'Lead Type', width: 120 },
+  { id: 'CreditFresh', label: 'Credit', width: 120, align: 'center' },
   { id: 'Created', label: 'Date', width: 180 },
   { id: 'Status', label: 'Status', width: 120 },
 ];
@@ -207,12 +208,6 @@ export function OrderListView() {
                   rowCount={dataFiltered.length}
                   numSelected={table.selected.length}
                   onSort={table.onSort}
-                  onSelectAllRows={(checked) =>
-                    table.onSelectAllRows(
-                      checked,
-                      dataFiltered.map((row) => row.OrderId)
-                    )
-                  }
                 />
 
                 <TableBody>
@@ -225,8 +220,6 @@ export function OrderListView() {
                       <UserTableRow
                         key={row.OrderId}
                         row={row}
-                        selected={table.selected.includes(row.OrderId)}
-                        onSelectRow={() => table.onSelectRow(row.OrderId)}
                         onDeleteRow={() => handleDeleteRow(row.OrderId)}
                       />
                     ))}
