@@ -107,7 +107,7 @@ export function LeadCreditSummary({ type, opportunity, total, sx, ...other }) {
             variant="soft"
             color={labelColor}
             sx={{
-            ml: 5,
+            ml: 1,
             alignSelf: 'center',
             typography: 'text',
             fontWeight: 700

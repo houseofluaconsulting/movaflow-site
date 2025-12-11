@@ -12,8 +12,11 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 import TableCell from '@mui/material/TableCell';
 import IconButton from '@mui/material/IconButton';
+import ListItemText from '@mui/material/ListItemText';
 
 import { RouterLink } from 'src/routes/components';
+
+import { fDate, fTime } from 'src/utils/format-time';
 
 import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
@@ -180,10 +183,36 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
         </TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
-          {formatToLocalTime(row.Delivered)}
+          <ListItemText
+            primary={fDate(formatToLocalTime(row.Created))}
+            secondary={fTime(formatToLocalTime(row.Created))}
+            slotProps={{
+              primary: { noWrap: true, sx: { typography: 'body2' } },
+              secondary: { sx: { mt: 0.5, typography: 'caption' } },
+            }}
+          />
         </TableCell>
 
-        <TableCell>{row.Note}</TableCell>
+        <TableCell sx={{ minWidth: 400 }}>
+          {row.Note && row.Note.trim() !== '' ? (
+            <Box
+              sx={{
+                fontSize: '0.875rem',
+                lineHeight: 1.3,
+                whiteSpace: 'pre-wrap',
+                backgroundColor: 'primary.main',
+                color: 'primary.contrastText',
+                padding: '8px 12px',
+                borderRadius: '12px',
+                display: 'inline-block',
+              }}
+            >
+              {row.Note}
+            </Box>
+          ) : (
+            row.Note
+          )}
+        </TableCell>
 
         <TableCell>
           <Label
