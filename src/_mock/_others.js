@@ -354,6 +354,29 @@ export const _legacyWebsiteMixedPricingPlans = [
   },
 ];
 
+export const _legacyWebsiteAgedPricingPlans = [
+  {
+    credit: '50',
+    opportunity: 'Aged',
+    type: 'Legacy Website Leads',
+    price: 6,
+    amount: '$300.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1ScyqUGHAeFkU5hvQ7HyIaPd',
+  },
+  {
+    credit: '100',
+    opportunity: 'Aged',
+    type: 'Legacy Website Leads',
+    price: 5,
+    amount: '$500.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1ScyqtGHAeFkU5hvFSsIGehY',
+  },
+];
+
 // ----------------------------------------------------------------------
 
 export const _testimonials = [
