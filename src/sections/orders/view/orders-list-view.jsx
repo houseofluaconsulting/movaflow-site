@@ -49,7 +49,15 @@ import { UserTableFiltersResult } from '../orders-table-filters-result';
 
 const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_STATUS_OPTIONS];
 
-const TABLE_HEAD = [];
+const TABLE_HEAD = [
+  { id: 'OrderId', label: 'Order ID', width: 100, align: 'center', sortable: false },
+  { id: 'Type', label: 'Order Type', width: 120, sortable: false },
+  { id: 'Amount', label: 'Amount', width: 120, sortable: false },
+  { id: 'LeadType', label: 'Lead Type', width: 120, sortable: false },
+  { id: 'CreditFresh', label: 'Credit', width: 120, align: 'center', sortable: false },
+  { id: 'Created', label: 'Date', width: 180, sortable: false },
+  { id: 'Status', label: 'Status', width: 120, sortable: false },
+];
 
 // ----------------------------------------------------------------------
 
