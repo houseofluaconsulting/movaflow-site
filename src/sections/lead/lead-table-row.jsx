@@ -184,8 +184,8 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
           <ListItemText
-            primary={fDate(formatToLocalTime(row.Created))}
-            secondary={fTime(formatToLocalTime(row.Created))}
+            primary={fDate(formatToLocalTime(row.Delivered))}
+            secondary={fTime(formatToLocalTime(row.Delivered))}
             slotProps={{
               primary: { noWrap: true, sx: { typography: 'body2' } },
               secondary: { sx: { mt: 0.5, typography: 'caption' } },
