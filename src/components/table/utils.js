@@ -35,9 +35,31 @@ function getNestedProperty(obj, key) {
   return key.split('.').reduce((acc, part) => acc && acc[part], obj);
 }
 
+function parseDateString(dateStr) {
+  if (!dateStr || typeof dateStr !== 'string') return null;
+
+  // Parse "MM/DD/YYYY, HH:mm:ss" format
+  const match = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4}),?\s+(\d{1,2}):(\d{2})(?::(\d{2}))?/);
+  if (!match) return null;
+
+  const [, month, day, year, hour, minute, second = '0'] = match;
+  return new Date(year, month - 1, day, hour, minute, second);
+}
+
 function descendingComparator(a, b, orderBy) {
-  const aValue = getNestedProperty(a, orderBy);
-  const bValue = getNestedProperty(b, orderBy);
+  let aValue = getNestedProperty(a, orderBy);
+  let bValue = getNestedProperty(b, orderBy);
+
+  // Try to parse as dates for date-like fields (Created, Delivered, etc.)
+  if (orderBy === 'Created' || orderBy === 'Delivered') {
+    const aDate = parseDateString(aValue);
+    const bDate = parseDateString(bValue);
+
+    if (aDate && bDate) {
+      aValue = aDate.getTime();
+      bValue = bDate.getTime();
+    }
+  }
 
   if (bValue < aValue) {
     return -1;
