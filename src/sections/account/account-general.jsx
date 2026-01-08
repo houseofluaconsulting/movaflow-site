@@ -365,7 +365,7 @@ export function AccountGeneral() {
               </Box>
             </Stack>
 
-            <Stack spacing={3} sx={{ mt: 6 }}>
+            <Stack spacing={2} sx={{ mt: 6 }}>
 
               <Typography
                 component="span"
@@ -375,26 +375,14 @@ export function AccountGeneral() {
               >
                 GoHighLevel Integration
               </Typography>
-              <Box
-                sx={{
-                  rowGap: 3,
-                  columnGap: 2,
-                  display: 'grid',
-                  gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
-                }}
-              >
-                <Stack spacing={1} sx={{ mt: -1 }}>
-                  <Typography variant="caption">You can get your API Key by going to Settings (bottom left menu) ➡️ Business Profile. Under your basic info you’ll see an API Key and a clipboard 📋 icon to copy & paste.</Typography>
-                  <Field.Text name="ghlAccessToken" label="API Key" />
-                </Stack>
-                <Stack spacing={1} sx={{ mt: -1 }}>
-                  <Typography variant="caption">Your URL should look like: app.gohighlevel.com/v2/location/abc123XYZ/dashboard - abc123XYZ would be the Location ID.</Typography>
-                  <Field.Text name="ghlLocationID" label="Location ID" />
-                </Stack>
-
-              </Box>
-
-
+              <Typography variant="caption" sx={{ mb: -2 }}><strong>API Key:</strong> Settings (bottom left menu) ➡️ Business Profile. Under your basic info you&apos;ll see an API Key and a clipboard 📋 icon to copy & paste below.</Typography>
+              <Typography variant="caption" sx={{ mt: 0 }}><strong>Private Integration Token:</strong> Settings (bottom left menu) ➡️ Integrations ➡️ Private Integrations ➡️ Create Private Integration. Select permissions, create the integration, then use the clipboard 📋 icon to copy the token & paste below.</Typography>
+              <Field.Text name="ghlAccessToken" label="API Key OR Private Integration Token" />
+              {/* Settings → Developer → API Keys, then click + New API Key */}
+              <Typography variant="caption" sx={{ mb: -2 }}>Your Go High Level URL should look like: app.gohighlevel.com/v2/location/abc123XYZ/dashboard</Typography>
+              <Typography variant="caption" sx={{ mt: 0 }}>abc123XYZ would be the Location ID</Typography>
+              
+              <Field.Text name="ghlLocationID" label="Location ID" />
             </Stack>
 
             <Stack spacing={2} sx={{ mt: 6 }}>
