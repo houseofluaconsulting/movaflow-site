@@ -14,6 +14,7 @@ import { SeoIllustration } from 'src/assets/illustrations';
 import { _appAuthors, _appRelated, _appFeatured, _appInvoices, _appInstalled } from 'src/_mock';
 
 import { svgColorClasses } from 'src/components/svg-color';
+import { LoadingScreen } from 'src/components/loading-screen';
 
 import { useAuthContext } from 'src/auth/hooks';
 
@@ -33,22 +34,29 @@ export function OverviewAppView() {
   const user_id = user?.id;
   const [data, setData] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(true);
   const theme = useTheme();
-  
+
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       const promise = getLeadCredit(user_id); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       const stateLicenses = result?.StateLicenses || [];
       if (stateLicenses.length === 0) {
         setShowAlert(true);
       }
-      
+
       setData(result);
+      setLoading(false);
     }
 
     fetchData();
   }, [user_id]);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <DashboardContent maxWidth="xl">

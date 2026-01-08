@@ -25,6 +25,7 @@ import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { ConfirmDialog } from 'src/components/custom-dialog';
+import { LoadingScreen } from 'src/components/loading-screen';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import {
   useTable,
@@ -72,12 +73,15 @@ export function OrderListView() {
 
   // const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([])
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       const promise = getCustomerOrders(user_id); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       setTableData(result);
+      setLoading(false);
     }
 
     fetchData();
@@ -162,6 +166,10 @@ export function OrderListView() {
       }
     />
   );
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <>
