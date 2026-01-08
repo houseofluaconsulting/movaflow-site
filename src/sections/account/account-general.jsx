@@ -22,9 +22,9 @@ import { updateCustomer } from 'src/actions/customer'
 
 import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
+import { LoadingScreen } from 'src/components/loading-screen';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
-import { useMockedUser } from 'src/auth/hooks';
 import { useAuthContext } from 'src/auth/hooks';
 
 
@@ -60,24 +60,29 @@ export function AccountGeneral() {
   const { user } = useAuthContext();
 
   const [userData, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     async function fetchData() {
+      if (!user?.id) return;
+
+      setLoading(true);
       const promise = getCustomer(user?.id); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       setData(result);
+      setLoading(false);
     }
     fetchData();
-  }, []);
+  }, [user?.id]);
 
 
   const currentUser = {
     id: user?.id,
-    displayName: userData['Name'],
-    email: user?.email,
-    phoneNumber: userData['Phone'],
-    stateLicenses: userData['StateLicenses'],
+    displayName: userData['Name'] ?? "",
+    email: user?.email ?? "",
+    phoneNumber: userData['Phone'] ?? "",
+    stateLicenses: userData['StateLicenses'] ?? [],
     ringySIDVeteranWebsite: userData['RingySIDVeteranWebsite'] ?? "",
     ringyAuthTokenVeteranWebsite: userData['RingyAuthTokenVeteranWebsite'] ?? "",
     ringySIDVeteranWebsiteAged: userData['RingySIDVeteranWebsiteAged'] ?? "",
@@ -90,7 +95,7 @@ export function AccountGeneral() {
     ghlLocationID: userData['GHLocationID'] ?? "",
     closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
     closeCRMLeadSourceCustomField: userData['CloseCRMLeadSourceCustomField'] ?? "",
-    emailNotifications: userData['EmailNotifications'] ?? "",
+    emailNotifications: userData['EmailNotifications'] ?? false,
   };
 
   const defaultValues = {
@@ -139,6 +144,10 @@ export function AccountGeneral() {
       console.error(error);
     }
   });
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <Form methods={methods} onSubmit={onSubmit}>
