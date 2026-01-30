@@ -11,6 +11,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
+import Tooltip from '@mui/material/Tooltip';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -385,7 +386,7 @@ export function AccountGeneral() {
                 GoHighLevel Integration
               </Typography>
               <Typography variant="caption" sx={{ mb: -2 }}><strong>API Key:</strong> Settings (bottom left menu) ➡️ Business Profile. Under your basic info you&apos;ll see an API Key and a clipboard 📋 icon to copy & paste below.</Typography>
-              <Typography variant="caption" sx={{ mt: 0 }}><strong>Private Integration Token:</strong> Settings (bottom left menu) ➡️ Integrations ➡️ Private Integrations ➡️ Create Private Integration. Select permissions, create the integration, then use the clipboard 📋 icon to copy the token & paste below.</Typography>
+              <Typography variant="caption" sx={{ mt: 0 }}><strong>Private Integration Token:</strong> Settings (bottom left menu) ➡️ Integrations ➡️ Private Integrations ➡️ Create Private Integration. Select <Tooltip title="Required: contacts.write, tags.write, customFields.write"><span style={{ textDecoration: 'underline', cursor: 'help' }}>permissions</span></Tooltip>, create the integration, then use the clipboard 📋 icon to copy the token & paste below.</Typography>
               <Field.Text name="ghlAccessToken" label="API Key OR Private Integration Token" />
               {/* Settings → Developer → API Keys, then click + New API Key */}
               <Typography variant="caption" sx={{ mb: -2 }}>Your Go High Level URL should look like: app.gohighlevel.com/v2/location/abc123XYZ/dashboard</Typography>
@@ -408,7 +409,7 @@ export function AccountGeneral() {
               <Field.Text name="closeCRMAPIKey" label="API Key" />
               {/* Settings → Developer → API Keys, then click + New API Key */}
               <Typography variant="caption">Settings ➡️ Custom Fields, Create Select or Lead Custom Field ➡️ press ⋯ button to the right of Custom Field ➡️ 📋 Copy ID (API) & paste below.</Typography>
-              <Field.Text name="closeCRMLeadSourceCustomField" label="Lead Source Custom Field ID" />
+              <Field.Text name="closeCRMLeadSourceCustomField" label="Lead Source Custom Field ID (optional)" />
             </Stack>
 
 
