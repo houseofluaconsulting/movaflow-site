@@ -76,19 +76,19 @@ export function UserListView() {
   const [tableData, setTableData] = useState([])
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      if (!user?.id || !user?.idToken) return;
+  const fetchData = useCallback(async () => {
+    if (!user?.id || !user?.idToken) return;
 
-      setLoading(true);
-      const promise = getLeads(user.id, user.idToken.toString()); // returns a Promise that resolves to an array
-      const result = await promise; // result is the array
-      setTableData(result[0]);
-      setLoading(false);
-    }
-
-    fetchData();
+    setLoading(true);
+    const promise = getLeads(user.id, user.idToken.toString());
+    const result = await promise;
+    setTableData(result[0]);
+    setLoading(false);
   }, [user?.id, user?.idToken]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   tableData.map((item, index) => (
     <div key={index}>{item}</div>
@@ -285,6 +285,7 @@ export function UserListView() {
                         selected={table.selected.includes(row.contact_id)}
                         onSelectRow={() => table.onSelectRow(row.contact_id)}
                         onDeleteRow={() => handleDeleteRow(row.contact_id)}
+                        onUpdateSuccess={fetchData}
                       />
                     ))}
 

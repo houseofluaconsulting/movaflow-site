@@ -38,7 +38,7 @@ export const UserQuickEditSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-export function UserQuickEditForm({ currentUser, open, onClose, created }) {
+export function UserQuickEditForm({ currentUser, open, onClose, created, onUpdateSuccess }) {
   const { user } = useAuthContext();
 
   const defaultValues = {
@@ -92,13 +92,10 @@ export function UserQuickEditForm({ currentUser, open, onClose, created }) {
 
       await promise;
 
-      console.info('DATA', data);
-      const reloadAfterDelay = () => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
-      };
-      reloadAfterDelay();
+      // Call the callback to refresh the table data
+      if (onUpdateSuccess) {
+        onUpdateSuccess();
+      }
     } catch (error) {
       console.error(error);
     }

@@ -49,7 +49,7 @@ function formatToLocalTime(utcTimestamp) {
   });
 }
 
-export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow }) {
+export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow, onUpdateSuccess }) {
   const menuActions = usePopover();
   const confirmDialog = useBoolean();
   const quickEditForm = useBoolean();
@@ -60,6 +60,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
       open={quickEditForm.value}
       onClose={quickEditForm.onFalse}
       created={formatToLocalTime(row.Created)}
+      onUpdateSuccess={onUpdateSuccess}
     />
   );
 
