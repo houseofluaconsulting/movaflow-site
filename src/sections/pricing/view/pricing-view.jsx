@@ -67,7 +67,7 @@ export function PricingView() {
         }}
       >
         {_veteranWebsitePricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
+          <PricingCard key={card.subscription} card={card} index={index} />
         ))}
       </Box>
 
@@ -81,7 +81,7 @@ export function PricingView() {
         }}
       >
         {_veteranWebsiteMixedPricingPlans.map((card, index) => (
-          <MixedPricingCard key={card.priceId} card={card} index={index}/>
+          <MixedPricingCard key={card.subscription} card={card} index={index}/>
         ))}
       </Box>
 
@@ -95,7 +95,7 @@ export function PricingView() {
         }}
       >
         {_veteranWebsiteAgedPricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
+          <PricingCard key={card.subscription} card={card} index={index} />
         ))}
       </Box> */}
 
@@ -114,7 +114,7 @@ export function PricingView() {
         }}
       >
         {_legacyWebsitePricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
+          <PricingCard key={card.subscription} card={card} index={index} />
         ))}
       </Box>
 
@@ -128,7 +128,7 @@ export function PricingView() {
         }}
       >
         {_legacyWebsiteMixedPricingPlans.map((card, index) => (
-          <MixedPricingCard key={card.priceId} card={card} index={index}/>
+          <MixedPricingCard key={card.subscription} card={card} index={index}/>
         ))}
       </Box>
       {/* <Box
@@ -141,7 +141,7 @@ export function PricingView() {
         }}
       >
         {_legacyWebsiteAgedPricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
+          <PricingCard key={card.subscription} card={card} index={index} />
         ))}
       </Box> */}
     </Container>

@@ -215,8 +215,8 @@ export function PricingCard({ card, sx, ...other }) {
         </Box>
       </Box>
 
-      {lists.map((item, index) => (
-        <Box key={index} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
+      {lists.map((item) => (
+        <Box key={item} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
           <Iconify icon="eva:checkmark-fill" width={16} />
           {item}
         </Box>
@@ -493,8 +493,8 @@ export function MixedPricingCard({ card, sx, ...other }) {
         </Box>
       </Box>
 
-      {lists.map((item, index) => (
-        <Box key={index} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
+      {lists.map((item) => (
+        <Box key={item} sx={{ gap: 1, display: 'flex', typography: 'body2', alignItems: 'center' }}>
           <Iconify icon="eva:checkmark-fill" width={16} />
           {item}
         </Box>
