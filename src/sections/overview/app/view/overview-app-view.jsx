@@ -38,10 +38,16 @@ export function OverviewAppView() {
   const theme = useTheme();
 
   useEffect(() => {
+    let isInitialLoad = true;
+
     async function fetchData() {
       if (!user?.id || !user?.idToken) return;
 
-      setLoading(true);
+      // Only show loading screen on initial load
+      if (isInitialLoad) {
+        setLoading(true);
+      }
+
       const promise = getLeadCredit(user.id, user.idToken.toString()); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       const stateLicenses = result?.StateLicenses || [];
@@ -50,10 +56,22 @@ export function OverviewAppView() {
       }
 
       setData(result);
-      setLoading(false);
+
+      if (isInitialLoad) {
+        setLoading(false);
+        isInitialLoad = false;
+      }
     }
 
     fetchData();
+
+    // Reload data 3 seconds after initial load
+    const timeoutId = setTimeout(() => {
+      fetchData();
+    }, 3000);
+
+    // Cleanup timeout on unmount
+    return () => clearTimeout(timeoutId);
   }, [user?.id, user?.idToken]);
 
   if (loading) {
