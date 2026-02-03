@@ -1,7 +1,7 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { CognitoIdentityClient } from "@aws-sdk/client-cognito-identity";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
-import { DynamoDBDocumentClient, GetCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, GetCommand, QueryCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 import axios, { fetcher, endpoints } from 'src/lib/axios';
 
@@ -77,15 +77,75 @@ export async function getCustomer(customerId, idToken) {
     }
 }
 
-export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsiteAged, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications) {
-    const data = { id , stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsiteAged, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsite, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications};
+export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsiteAged, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications, idToken) {
+    try {
+        const docClient = getDynamoDBClient(idToken);
+        const tableEnv = import.meta.env.VITE_DYNAMODB_TABLE_ENV;
 
-    const response = await axios.post(CUSTOMER_ENDPOINT, data, { params: { endpoint: 'update-customer' } })
-    const response_data = await response.data
-    
-    console.log(response_data)
+        const command = new UpdateCommand({
+            TableName: `lifejacketleads-customers-${tableEnv}`,
+            Key: {
+                CustomerId: id
+            },
+            UpdateExpression:
+                "SET #StateLicenses = :stateLicenses, " +
+                "#CRM.#EmailNotifications = :emailNotifications, " +
+                "#CRM.#GoHighLevel.#AccessToken = :ghlAccessToken, " +
+                "#CRM.#GoHighLevel.#LocationID = :ghlLocationId, " +
+                "#CRM.#CloseCRM.#APIKey = :closeCRMAPIKey, " +
+                "#CRM.#CloseCRM.#LeadSourceCustomField = :closeCRMLeadSourceCF, " +
+                "#LeadType.#VeteranWebsite.#Fresh.#CRM.#Ringy.#AuthToken = :vetAuthToken, " +
+                "#LeadType.#VeteranWebsite.#Fresh.#CRM.#Ringy.#SID = :vetSid, " +
+                "#LeadType.#VeteranWebsite.#Aged.#CRM.#Ringy.#AuthToken = :vetAuthTokenAged, " +
+                "#LeadType.#VeteranWebsite.#Aged.#CRM.#Ringy.#SID = :vetSidAged, " +
+                "#LeadType.#LegacyWebsite.#Fresh.#CRM.#Ringy.#AuthToken = :legacyAuthToken, " +
+                "#LeadType.#LegacyWebsite.#Fresh.#CRM.#Ringy.#SID = :legacySid, " +
+                "#LeadType.#LegacyWebsite.#Aged.#CRM.#Ringy.#AuthToken = :legacyAuthTokenAged, " +
+                "#LeadType.#LegacyWebsite.#Aged.#CRM.#Ringy.#SID = :legacySidAged",
+            ExpressionAttributeNames: {
+                "#StateLicenses": "StateLicenses",
+                "#EmailNotifications": "EmailNotifications",
+                "#CRM": "CRMIntegration",
+                "#GoHighLevel": "GoHighLevel",
+                "#AccessToken": "AccessToken",
+                "#LocationID": "LocationID",
+                "#CloseCRM": "CloseCRM",
+                "#APIKey": "APIKey",
+                "#LeadSourceCustomField": "LeadSourceCustomField",
+                "#LeadType": "LeadType",
+                "#VeteranWebsite": "VeteranWebsite",
+                "#LegacyWebsite": "LegacyWebsite",
+                "#Fresh": "Fresh",
+                "#Aged": "Aged",
+                "#Ringy": "Ringy",
+                "#SID": "SID",
+                "#AuthToken": "AuthToken"
+            },
+            ExpressionAttributeValues: {
+                ":stateLicenses": stateLicenses,
+                ":emailNotifications": emailNotifications,
+                ":ghlAccessToken": ghlAccessToken,
+                ":ghlLocationId": ghlLocationID,
+                ":closeCRMAPIKey": closeCRMAPIKey,
+                ":closeCRMLeadSourceCF": closeCRMLeadSourceCustomField,
+                ":vetAuthToken": ringyAuthTokenVeteranWebsite,
+                ":vetSid": ringySIDVeteranWebsite,
+                ":vetAuthTokenAged": ringyAuthTokenVeteranWebsiteAged,
+                ":vetSidAged": ringySIDVeteranWebsiteAged,
+                ":legacyAuthToken": ringyAuthTokenLegacyWebsite,
+                ":legacySid": ringySIDLegacyWebsite,
+                ":legacyAuthTokenAged": ringyAuthTokenLegacyWebsiteAged,
+                ":legacySidAged": ringySIDLegacyWebsiteAged
+            },
+            ReturnValues: "UPDATED_NEW"
+        });
 
-    return response_data
+        const response = await docClient.send(command);
+        return response.Attributes;
+    } catch (error) {
+        console.error('Error updating customer in DynamoDB:', error);
+        throw error;
+    }
 }
 
 export async function getCustomerOrders(customerId, idToken) {

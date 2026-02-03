@@ -134,15 +134,16 @@ export function AccountGeneral() {
   const onSubmit = handleSubmit(async (data) => {
     // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications);
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications, user.idToken.toString());
 
     try {
-      // await new Promise((resolve) => setTimeout(resolve, 500));
+      await promise;
       toast.success('Update success!');
       data.id = currentUser.id
       console.info('DATA', data);
     } catch (error) {
       console.error(error);
+      toast.error('Update failed!');
     }
   });
 
