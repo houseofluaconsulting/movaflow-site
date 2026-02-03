@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -37,7 +38,11 @@ export const SignUpSchema = zod.object({
   password: zod
     .string()
     .min(1, { message: 'Password is required!' })
-    .min(6, { message: 'Password must be at least 6 characters!' }),
+    .min(8, { message: 'Password must be at least 8 characters!' })
+    .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter!' })
+    .regex(/[A-Z]/, { message: 'Password must contain at least one uppercase letter!' })
+    .regex(/[0-9]/, { message: 'Password must contain at least one number!' })
+    .regex(/[^a-zA-Z0-9]/, { message: 'Password must contain at least one symbol!' }),
 });
 
 // ----------------------------------------------------------------------
@@ -113,24 +118,45 @@ export function AmplifySignUpView() {
 
       <Field.Phone name="phoneNumber" label="Phone Number" defaultCountry="US" value='' slotProps={{ inputLabel: { shrink: true } }} />
 
-      <Field.Text
-        name="password"
-        label="Password"
-        placeholder="6+ characters"
-        type={showPassword.value ? 'text' : 'password'}
-        slotProps={{
-          inputLabel: { shrink: true },
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={showPassword.onToggle} edge="end">
-                  <Iconify icon={showPassword.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          },
-        }}
-      />
+      <Box>
+        <Field.Text
+          name="password"
+          label="Password"
+          placeholder="8+ characters"
+          type={showPassword.value ? 'text' : 'password'}
+          slotProps={{
+            inputLabel: { shrink: true },
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={showPassword.onToggle} edge="end">
+                    <Iconify icon={showPassword.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 0.5, mt: 0.5 }}>
+          <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Password Policy</Box>
+          <Tooltip
+            title={
+              <Box sx={{ p: 0.5 }}>
+                <Box sx={{ fontSize: '0.75rem' }}>• Minimum length: 8 characters</Box>
+                <Box sx={{ fontSize: '0.75rem' }}>• Requires lowercase</Box>
+                <Box sx={{ fontSize: '0.75rem' }}>• Requires uppercase</Box>
+                <Box sx={{ fontSize: '0.75rem' }}>• Requires number</Box>
+                <Box sx={{ fontSize: '0.75rem' }}>• Requires symbol</Box>
+              </Box>
+            }
+            arrow
+          >
+            <IconButton size="small" sx={{ p: 0 }}>
+              <Iconify icon="solar:info-circle-bold" width={16} />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </Box>
 
       <Button
         fullWidth
@@ -154,7 +180,7 @@ export function AmplifySignUpView() {
           <>
             {`Already have an account? `}
             <Link component={RouterLink} href={paths.auth.amplify.signIn} variant="subtitle2">
-              Get started
+              Sign in
             </Link>
           </>
         }

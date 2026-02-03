@@ -93,7 +93,7 @@ export function AmplifySignInView() {
         <Field.Text
           name="password"
           label="Password"
-          placeholder="6+ characters"
+          // placeholder="8+ characters"
           type={showPassword.value ? 'text' : 'password'}
           slotProps={{
             inputLabel: { shrink: true },
