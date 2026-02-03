@@ -39,8 +39,10 @@ export function OverviewAppView() {
 
   useEffect(() => {
     async function fetchData() {
+      if (!user?.id || !user?.idToken) return;
+
       setLoading(true);
-      const promise = getLeadCredit(user_id); // returns a Promise that resolves to an array
+      const promise = getLeadCredit(user.id, user.idToken.toString()); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       const stateLicenses = result?.StateLicenses || [];
       if (stateLicenses.length === 0) {
@@ -52,7 +54,7 @@ export function OverviewAppView() {
     }
 
     fetchData();
-  }, [user_id]);
+  }, [user?.id, user?.idToken]);
 
   if (loading) {
     return <LoadingScreen />;

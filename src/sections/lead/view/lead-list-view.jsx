@@ -71,7 +71,6 @@ export function UserListView() {
   const confirmDialog = useBoolean();
 
   const user_id = user?.id
-  console.log(user_id)
 
   // const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([])
@@ -79,21 +78,22 @@ export function UserListView() {
 
   useEffect(() => {
     async function fetchData() {
+      if (!user?.id || !user?.idToken) return;
+
       setLoading(true);
-      const promise = getLeads(user_id); // returns a Promise that resolves to an array
+      const promise = getLeads(user.id, user.idToken.toString()); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       setTableData(result[0]);
       setLoading(false);
     }
 
     fetchData();
-  }, []);
+  }, [user?.id, user?.idToken]);
 
   tableData.map((item, index) => (
     <div key={index}>{item}</div>
   ))
 
-  console.log(tableData)
 
 
 
@@ -118,7 +118,6 @@ export function UserListView() {
       const deleteRow = tableData.filter((row) => row.contact_id !== contact_id);
 
       toast.success('Delete success!');
-      console.log('Hello')
 
       setTableData(deleteRow);
 

@@ -66,16 +66,16 @@ export function AccountGeneral() {
 
   useEffect(() => {
     async function fetchData() {
-      if (!user?.id) return;
+      if (!user?.id || !user?.idToken) return;
 
       setLoading(true);
-      const promise = getCustomer(user?.id); // returns a Promise that resolves to an array
+      const promise = getCustomer(user?.id, user.idToken.toString()); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       setData(result);
       setLoading(false);
     }
     fetchData();
-  }, [user?.id]);
+  }, [user?.id, user?.idToken]);
 
 
   const currentUser = {

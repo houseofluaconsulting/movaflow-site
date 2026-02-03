@@ -18,6 +18,8 @@ import { LEAD_STATUS_OPTIONS } from 'src/_mock';
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
+import { useAuthContext } from 'src/auth/hooks';
+
 // ----------------------------------------------------------------------
 
 export const UserQuickEditSchema = zod.object({
@@ -37,6 +39,8 @@ export const UserQuickEditSchema = zod.object({
 // ----------------------------------------------------------------------
 
 export function UserQuickEditForm({ currentUser, open, onClose, created }) {
+  const { user } = useAuthContext();
+
   const defaultValues = {
     contact_id: '',
     full_name: '',
@@ -74,7 +78,7 @@ export function UserQuickEditForm({ currentUser, open, onClose, created }) {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    const promise = updateLead(data.contact_id, data.Status, data.email, data.Note);
+    const promise = updateLead(data.contact_id, data.Status, data.email, data.Note, user.idToken.toString());
 
     try {
       reset();
@@ -92,7 +96,7 @@ export function UserQuickEditForm({ currentUser, open, onClose, created }) {
       const reloadAfterDelay = () => {
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 500);
       };
       reloadAfterDelay();
     } catch (error) {

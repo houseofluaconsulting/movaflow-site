@@ -69,7 +69,6 @@ export function OrderListView() {
   const confirmDialog = useBoolean();
 
   const user_id = user?.id
-  console.log(user_id)
 
   // const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([])
@@ -77,22 +76,21 @@ export function OrderListView() {
 
   useEffect(() => {
     async function fetchData() {
+      if (!user?.id || !user?.idToken) return;
+
       setLoading(true);
-      const promise = getCustomerOrders(user_id); // returns a Promise that resolves to an array
+      const promise = getCustomerOrders(user.id, user.idToken.toString()); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       setTableData(result);
       setLoading(false);
     }
 
     fetchData();
-  }, []);
+  }, [user?.id, user?.idToken]);
 
   tableData.map((item, index) => (
         <div key={index}>{item}</div>
-      ))
-
-  console.log(tableData)
-      
+      ))      
 
 
   const filters = useSetState({ full_name: '', role: [], Status: 'all' });
