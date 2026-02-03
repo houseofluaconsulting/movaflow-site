@@ -124,18 +124,18 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
             ExpressionAttributeValues: {
                 ":stateLicenses": stateLicenses,
                 ":emailNotifications": emailNotifications,
-                ":ghlAccessToken": ghlAccessToken,
-                ":ghlLocationId": ghlLocationID,
-                ":closeCRMAPIKey": closeCRMAPIKey,
-                ":closeCRMLeadSourceCF": closeCRMLeadSourceCustomField,
-                ":vetAuthToken": ringyAuthTokenVeteranWebsite,
-                ":vetSid": ringySIDVeteranWebsite,
-                ":vetAuthTokenAged": ringyAuthTokenVeteranWebsiteAged,
-                ":vetSidAged": ringySIDVeteranWebsiteAged,
-                ":legacyAuthToken": ringyAuthTokenLegacyWebsite,
-                ":legacySid": ringySIDLegacyWebsite,
-                ":legacyAuthTokenAged": ringyAuthTokenLegacyWebsiteAged,
-                ":legacySidAged": ringySIDLegacyWebsiteAged
+                ":ghlAccessToken": ghlAccessToken.replace(/\s+/g, ""),
+                ":ghlLocationId": ghlLocationID.replace(/\s+/g, ""),
+                ":closeCRMAPIKey": closeCRMAPIKey.replace(/\s+/g, ""),
+                ":closeCRMLeadSourceCF": closeCRMLeadSourceCustomField.replace(/\s+/g, ""),
+                ":vetAuthToken": ringyAuthTokenVeteranWebsite.replace(/\s+/g, ""),
+                ":vetSid": ringySIDVeteranWebsite.replace(/\s+/g, ""),
+                ":vetAuthTokenAged": ringyAuthTokenVeteranWebsiteAged.replace(/\s+/g, ""),
+                ":vetSidAged": ringySIDVeteranWebsiteAged.replace(/\s+/g, ""),
+                ":legacyAuthToken": ringyAuthTokenLegacyWebsite.replace(/\s+/g, ""),
+                ":legacySid": ringySIDLegacyWebsite.replace(/\s+/g, ""),
+                ":legacyAuthTokenAged": ringyAuthTokenLegacyWebsiteAged.replace(/\s+/g, ""),
+                ":legacySidAged": ringySIDLegacyWebsiteAged.replace(/\s+/g, "")
             },
             ReturnValues: "UPDATED_NEW"
         });
