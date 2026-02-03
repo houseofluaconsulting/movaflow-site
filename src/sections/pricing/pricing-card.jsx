@@ -138,7 +138,7 @@ export function PricingCard({ card, sx, ...other }) {
               variant="contained"
               onClick={async () => {
                 isProcessing.onTrue();
-                await createCheckoutSession(priceId, user?.id, 1, CONSENT_ID);
+                await createCheckoutSession(priceId, user?.id, 1, CONSENT_ID, user.idToken.toString());
               }}
               autoFocus
               color="primary"
@@ -392,7 +392,7 @@ export function MixedPricingCard({ card, sx, ...other }) {
               variant="contained"
               onClick={async () => {
                 isProcessing.onTrue();
-                await createCheckoutSession(priceId, user?.id, 1, CONSENT_ID);
+                await createCheckoutSession(priceId, user?.id, 1, CONSENT_ID, user.idToken.toString());
               }}
               autoFocus
               color="primary"
