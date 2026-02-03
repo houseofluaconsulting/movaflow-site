@@ -140,7 +140,6 @@ export function AccountGeneral() {
       await promise;
       toast.success('Update success!');
       data.id = currentUser.id
-      console.info('DATA', data);
     } catch (error) {
       console.error(error);
       toast.error('Update failed!');
@@ -390,8 +389,8 @@ export function AccountGeneral() {
               <Typography variant="caption" sx={{ mt: 0 }}><strong>Private Integration Token:</strong> Settings (bottom left menu) ➡️ Integrations ➡️ Private Integrations ➡️ Create Private Integration. Select <Tooltip title="Required: contacts.write, tags.write, customFields.write"><span style={{ textDecoration: 'underline', cursor: 'help' }}>permissions</span></Tooltip>, create the integration, then use the clipboard 📋 icon to copy the token & paste below.</Typography>
               <Field.Text name="ghlAccessToken" label="API Key OR Private Integration Token" />
               {/* Settings → Developer → API Keys, then click + New API Key */}
-              <Typography variant="caption" sx={{ mb: -2 }}>Your Go High Level URL should look like: app.gohighlevel.com/v2/location/abc123XYZ/dashboard</Typography>
-              <Typography variant="caption" sx={{ mt: 0 }}>abc123XYZ would be the Location ID</Typography>
+              <Typography variant="caption" sx={{ mb: -2 }}>Your Go High Level URL should look like: app.gohighlevel.com/v2/location/<strong>abc123XYZ</strong>/dashboard</Typography>
+              <Typography variant="caption" sx={{ mt: 0 }}><strong>Location ID</strong> would be abc123XYZ in the example above</Typography>
               
               <Field.Text name="ghlLocationID" label="Location ID" />
             </Stack>
