@@ -47,7 +47,6 @@ export async function getCustomer(customerId, idToken) {
         if (!customer) {
             throw new Error('Customer not found');
         }
-
         const user_data = {
             ID: customer.ID,
             Phone: customer.Phone,
@@ -67,7 +66,8 @@ export async function getCustomer(customerId, idToken) {
             GHLocationID: customer.CRMIntegration?.GoHighLevel?.LocationID,
             CloseCRMAPIKey: customer.CRMIntegration?.CloseCRM?.APIKey,
             CloseCRMLeadSourceCustomField: customer.CRMIntegration?.CloseCRM?.LeadSourceCustomField,
-            EmailNotifications: customer.CRMIntegration?.EmailNotifications
+            EmailNotifications: customer.CRMIntegration?.EmailNotifications,
+            Status: customer.Status
         }
 
         return user_data;

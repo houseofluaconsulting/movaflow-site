@@ -138,7 +138,7 @@ export function AmplifySignUpView() {
           }}
         />
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 0.5, mt: 0.5 }}>
-          <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Password Policy</Box>
+          {/* <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Password Policy</Box> */}
           <Tooltip
             title={
               <Box sx={{ p: 0.5 }}>

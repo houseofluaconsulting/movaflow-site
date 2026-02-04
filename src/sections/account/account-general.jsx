@@ -7,6 +7,7 @@ import { isValidPhoneNumber } from 'react-phone-number-input/input';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -97,6 +98,7 @@ export function AccountGeneral() {
     closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
     closeCRMLeadSourceCustomField: userData['CloseCRMLeadSourceCustomField'] ?? "",
     emailNotifications: userData['EmailNotifications'] ?? false,
+    status: userData['Status'] ?? "",
   };
 
   const defaultValues = {
@@ -116,7 +118,8 @@ export function AccountGeneral() {
     ghlLocationID: '',
     closeCRMAPIKey: '',
     closeCRMLeadSourceCustomField: '',
-    emailNotifications: false
+    emailNotifications: false,
+    status: '',
   };
 
   const methods = useForm({
@@ -158,11 +161,75 @@ export function AccountGeneral() {
                     Only <b>State Licenses</b> can be edited.
                   </Alert> */}
           <Card sx={{ p: 3 }}>
+            
             <Box
               sx={{
                 rowGap: 3,
                 columnGap: 2,
                 display: 'grid',
+                // gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+              }}
+            >
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                {currentUser?.status === 'Pending' ? (
+                  <Tooltip
+                    title={
+                      <Box>
+                        Schedule a{' '}
+                        <Link
+                          href="https://calendly.com/lifejacketleads/30min"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{ color: 'inherit', textDecoration: 'underline' }}
+                        >
+                          call
+                        </Link>
+                        {' '}with LifeJacket to activate account.
+                      </Box>
+                    }
+                    arrow
+                  >
+                    <Label
+                      variant="soft"
+                      color="warning"
+                      sx={{
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700,
+                        cursor: 'help'
+                      }}
+                    >
+                      {currentUser?.status}
+                    </Label>
+                  </Tooltip>
+                ) : (
+                  <Label
+                    variant="soft"
+                    color={
+                      currentUser?.status === 'Active' ? 'primary' :
+                      currentUser?.status === 'Pending' ? 'warning' :
+                      currentUser?.status === 'Paused' ? 'info' :
+                      currentUser?.status === 'Inactive' ? 'error' :
+                      'default'
+                    }
+                    sx={{
+                      alignSelf: 'center',
+                      typography: 'text',
+                      fontWeight: 700
+                    }}
+                  >
+                    {currentUser?.status || '-'}
+                  </Label>
+                )}
+              </Box>
+
+            </Box>
+            <Box
+              sx={{
+                rowGap: 3,
+                columnGap: 2,
+                display: 'grid',
+                mt: 2,
                 gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
               }}
             >

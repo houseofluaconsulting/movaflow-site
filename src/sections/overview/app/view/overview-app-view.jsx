@@ -34,6 +34,7 @@ export function OverviewAppView() {
   const user_id = user?.id;
   const [data, setData] = useState([]);
   const [showAlert, setShowAlert] = useState(false);
+  const [showStatusAlert, setShowStatusAlert] = useState(false);
   const [loading, setLoading] = useState(true);
   const theme = useTheme();
 
@@ -51,7 +52,12 @@ export function OverviewAppView() {
       const promise = getLeadCredit(user.id, user.idToken.toString()); // returns a Promise that resolves to an array
       const result = await promise; // result is the array
       const stateLicenses = result?.StateLicenses || [];
-      if (stateLicenses.length === 0) {
+      const status = result?.Status || 'Unknown';
+
+      if (status === 'Pending') {
+        setShowStatusAlert(true);
+      }
+      if (stateLicenses.length === 0 && (status === 'Active')) {
         setShowAlert(true);
       }
 
@@ -106,6 +112,31 @@ export function OverviewAppView() {
               }
             >
               You haven’t added any <b>State Licenses</b> yet.
+            </Alert>
+          </Grid>
+        )}
+
+        {showStatusAlert && (
+          <Grid size={{ xs: 12, md: 12 }}>
+            <Alert
+              variant="outlined"
+              severity="warning"
+              sx={{ mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+              action={
+                <Button
+                  color="warning"
+                  variant="outlined"
+                  size="small"
+                  component="a"
+                  href="https://calendly.com/lifejacketleads/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Schedule a Call
+                </Button>
+              }
+            >
+              Your account is currently <b>{data?.Status}</b>. Please schedule a call with LifeJacket to activate your account.
             </Alert>
           </Grid>
         )}

@@ -1,20 +1,54 @@
+import { useEffect, useState } from 'react';
 import { varAlpha } from 'minimal-shared/utils';
 
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
 import SvgIcon from '@mui/material/SvgIcon';
 import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import { getCustomer } from 'src/actions/customer';
 import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans, _veteranWebsiteMixedPricingPlans, _veteranWebsiteAgedPricingPlans, _legacyWebsiteMixedPricingPlans, _legacyWebsiteAgedPricingPlans } from 'src/_mock';
+
+import { LoadingScreen } from 'src/components/loading-screen';
+
+import { useAuthContext } from 'src/auth/hooks';
 
 import { PricingCard, MixedPricingCard } from '../pricing-card';
 
 // ----------------------------------------------------------------------
 
 export function PricingView() {
+  const { user } = useAuthContext();
+  const [customerData, setCustomerData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (!user?.id || !user?.idToken) return;
+
+      setLoading(true);
+      try {
+        const result = await getCustomer(user.id, user.idToken.toString());
+        setCustomerData(result);
+      } catch (error) {
+        console.error('Error fetching customer data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
+  }, [user?.id, user?.idToken]);
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  const customerStatus = customerData?.Status;
+  const showPricing = customerStatus === 'Active' || customerStatus === 'Paused';
   const arrowIcon = () => (
     <SvgIcon
       viewBox="0 0 48 48"
@@ -43,9 +77,11 @@ export function PricingView() {
         Purchase Leads
       </Typography>
 
-      <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
-      Veteran Website Leads
-      </Typography>
+      {showPricing ? (
+        <>
+          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
+          Veteran Website Leads
+          </Typography>
 
       <Box align="center">
             <Alert
@@ -85,65 +121,72 @@ export function PricingView() {
         ))}
       </Box> */}
 
-      {/* <Box
-        sx={{
-          display: 'grid',
-          gap: { xs: 3, md: 0 },
-          alignItems: { md: 'center' },
-          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-          mb: 2
-        }}
-      >
-        {_veteranWebsiteAgedPricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
-        ))}
-      </Box> */}
+          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
+          Legacy Website Leads
+          </Typography>
 
-      
+          <Box
+            sx={{
+              display: 'grid',
+              gap: { xs: 3, md: 0 },
+              alignItems: { md: 'center' },
+              gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+            }}
+          >
+            {_legacyWebsitePricingPlans.map((card, index) => (
+              <PricingCard key={card.priceId} card={card} index={index} />
+            ))}
+          </Box>
 
-      <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
-      Legacy Website Leads
-      </Typography>
-
-      <Box
-        sx={{
-          display: 'grid',
-          gap: { xs: 3, md: 0 },
-          alignItems: { md: 'center' },
-          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-        }}
-      >
-        {_legacyWebsitePricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
-        ))}
-      </Box>
-
-      <Box
-        sx={{
-          display: 'grid',
-          gap: { xs: 3, md: 0 },
-          alignItems: { md: 'center' },
-          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-          mb: 3
-        }}
-      >
-        {_legacyWebsiteMixedPricingPlans.map((card, index) => (
-          <MixedPricingCard key={card.priceId} card={card} index={index}/>
-        ))}
-      </Box>
-      {/* <Box
-        sx={{
-          display: 'grid',
-          gap: { xs: 3, md: 0 },
-          alignItems: { md: 'center' },
-          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-          mb: 2
-        }}
-      >
-        {_legacyWebsiteAgedPricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
-        ))}
-      </Box> */}
+          <Box
+            sx={{
+              display: 'grid',
+              gap: { xs: 3, md: 0 },
+              alignItems: { md: 'center' },
+              gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+              mb: 3
+            }}
+          >
+            {_legacyWebsiteMixedPricingPlans.map((card, index) => (
+              <MixedPricingCard key={card.priceId} card={card} index={index}/>
+            ))}
+          </Box>
+          {/* <Box
+            sx={{
+              display: 'grid',
+              gap: { xs: 3, md: 0 },
+              alignItems: { md: 'center' },
+              gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+              mb: 2
+            }}
+          >
+            {_legacyWebsiteAgedPricingPlans.map((card, index) => (
+              <PricingCard key={card.priceId} card={card} index={index} />
+            ))}
+          </Box> */}
+        </>
+      ) : (
+        <Alert
+          variant="outlined"
+          severity="warning"
+          sx={{ mt: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+          action={
+            <Button
+              color="warning"
+              variant="outlined"
+              size="small"
+              component="a"
+              href="https://calendly.com/lifejacketleads/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Schedule a Call
+            </Button>
+          }
+        >
+          Your account status does not allow purchasing leads at this time. Please schedule a call with LifeJacket to activate your account.
+        </Alert>
+      )}
     </Container>
   );
 }
