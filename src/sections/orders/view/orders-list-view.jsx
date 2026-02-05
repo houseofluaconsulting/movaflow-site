@@ -63,7 +63,7 @@ const TABLE_HEAD = [
 // ----------------------------------------------------------------------
 
 export function OrderListView() {
-  const table = useTable();
+  const table = useTable({ defaultOrderBy: 'Created', defaultOrder: 'desc' });
   const { user } = useAuthContext();
 
   const confirmDialog = useBoolean();
@@ -267,6 +267,27 @@ function applyFilter({ inputData, comparator, filters }) {
 
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
+
+    // If sorting by date and comparator returns a non-zero result,
+    // we need to properly compare dates instead of strings
+    if (a[0].Created && b[0].Created && order !== 0) {
+      // Parse dates from "MM/DD/YYYY, HH:mm:ss" format
+      const parseDate = (dateStr) => {
+        if (!dateStr) return new Date(0);
+        const [datePart, timePart] = dateStr.split(', ');
+        const [month, day, year] = datePart.split('/');
+        const [hour, minute, second] = timePart.split(':');
+        return new Date(year, month - 1, day, hour, minute, second);
+      };
+
+      const dateA = parseDate(a[0].Created);
+      const dateB = parseDate(b[0].Created);
+
+      // Compare dates as timestamps
+      const dateComparison = dateB.getTime() - dateA.getTime();
+      if (dateComparison !== 0) return dateComparison;
+    }
+
     if (order !== 0) return order;
     return a[1] - b[1];
   });
