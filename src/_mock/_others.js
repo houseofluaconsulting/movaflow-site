@@ -189,6 +189,7 @@ export const _veteranWebsiteMixedPricingPlans = [
     labelAction: 'Purchase',
     priceId: 'price_1Syfa1GHAeFkU5hvlWp7Q8Ws',
   },
+  
   {
     credit: '30/40',
     opportunity: 'Mixed',
