@@ -82,7 +82,7 @@ export function PricingView() {
           <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
           Veteran Website Leads
           </Typography>
-
+{/* 
       <Box align="center">
             <Alert
               variant="outlined"
@@ -91,9 +91,9 @@ export function PricingView() {
             >
               Purchasing of <b>Veteran Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
             </Alert>
-          </Box>
+          </Box> */}
 
-      {/* <Box
+      <Box
         sx={{
           display: 'grid',
           gap: { xs: 3, md: 0 },
@@ -119,24 +119,13 @@ export function PricingView() {
         {_veteranWebsiteMixedPricingPlans.map((card, index) => (
           <MixedPricingCard key={card.priceId} card={card} index={index}/>
         ))}
-      </Box> */}
+      </Box>
 
           <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
           Legacy Website Leads
           </Typography>
 
-          <Box align="center">
-            <Alert
-              variant="outlined"
-              severity="info"
-              sx={{ mb: 2, display: 'flex', alignItems: 'center'}}
-            >
-              Purchasing of <b>Legacy Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
-            </Alert>
-          </Box>
-
-
-          {/* <Box
+          <Box
             sx={{
               display: 'grid',
               gap: { xs: 3, md: 0 },
@@ -161,7 +150,7 @@ export function PricingView() {
             {_legacyWebsiteMixedPricingPlans.map((card, index) => (
               <MixedPricingCard key={card.priceId} card={card} index={index}/>
             ))}
-          </Box> */}
+          </Box>
           {/* <Box
             sx={{
               display: 'grid',
