@@ -72,28 +72,28 @@ export function PricingView() {
   );
 
   return (
-    <Container sx={{ pt: { xs: 3}, pb: 10 }}>
+    <Container sx={{ pt: { xs: 3 }, pb: 10 }}>
       <Typography variant="h3" align="center" sx={{ mb: 5 }}>
         Purchase Leads
       </Typography>
 
       {showPricing ? (
         <>
-          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
-          Veteran Website Leads
+          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2 }}>
+            Veteran Website Leads
           </Typography>
 
-      <Box align="center">
+          <Box align="center">
             <Alert
               variant="outlined"
               severity="info"
-              sx={{ mb: 2, display: 'flex', alignItems: 'center'}}
+              sx={{ mb: 2, display: 'flex', alignItems: 'center' }}
             >
               Purchasing of <b>Veteran Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
             </Alert>
           </Box>
 
-      {/* <Box
+          {/* <Box
         sx={{
           display: 'grid',
           gap: { xs: 3, md: 0 },
@@ -107,7 +107,7 @@ export function PricingView() {
         ))}
       </Box> */}
 
-      {/* <Box
+          {/* <Box
         sx={{
           display: 'grid',
           gap: { xs: 3, md: 0 },
@@ -121,11 +121,21 @@ export function PricingView() {
         ))}
       </Box> */}
 
-          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2}}>
-          Legacy Website Leads
+          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2 }}>
+            Legacy Website Leads
           </Typography>
 
-          <Box
+          <Box align="center">
+            <Alert
+              variant="outlined"
+              severity="info"
+              sx={{ mb: 2, display: 'flex', alignItems: 'center' }}
+            >
+              Purchasing of <b>Legacy Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
+            </Alert>
+          </Box>
+
+          {/* <Box
             sx={{
               display: 'grid',
               gap: { xs: 3, md: 0 },
@@ -148,9 +158,9 @@ export function PricingView() {
             }}
           >
             {_legacyWebsiteMixedPricingPlans.map((card, index) => (
-              <MixedPricingCard key={card.priceId} card={card} index={index}/>
+              <MixedPricingCard key={card.priceId} card={card} index={index} />
             ))}
-          </Box>
+          </Box> */}
           {/* <Box
             sx={{
               display: 'grid',
