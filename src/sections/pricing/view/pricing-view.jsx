@@ -125,7 +125,7 @@ export function PricingView() {
             Legacy Website Leads
           </Typography>
 
-          <Box align="center">
+          {/* <Box align="center">
             <Alert
               variant="outlined"
               severity="info"
@@ -133,9 +133,9 @@ export function PricingView() {
             >
               Purchasing of Fresh <b>Legacy Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
             </Alert>
-          </Box>
+          </Box> */}
 
-          {/* <Box
+          <Box
             sx={{
               display: 'grid',
               gap: { xs: 3, md: 0 },
@@ -160,7 +160,7 @@ export function PricingView() {
             {_legacyWebsiteMixedPricingPlans.map((card, index) => (
               <MixedPricingCard key={card.priceId} card={card} index={index} />
             ))}
-          </Box> */}
+          </Box>
           <Box
             sx={{
               display: 'grid',
