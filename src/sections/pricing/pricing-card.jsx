@@ -234,21 +234,17 @@ export function PricingCard({ card, sx, ...other }) {
           borderRadius: 2,
           flexDirection: 'column',
           bgcolor: 'background.default',
+          border: `1px solid ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
           boxShadow: theme.vars.customShadows.card,
-          [theme.breakpoints.up('md')]: {
-            boxShadow: 'none',
-          },
           ...((isBasic || isDiscount10) && {
             borderTopRightRadius: { md: 0 },
             borderBottomRightRadius: { md: 0 },
           }),
           ...((isDiscount10 || isDiscount15) && {
-            [theme.breakpoints.up('md')]: {
-              boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
-              ...theme.applyStyles('dark', {
-                boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.common.blackChannel, 0.16)}`,
-              }),
-            },
+            boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
+            ...theme.applyStyles('dark', {
+              boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.common.blackChannel, 0.16)}`,
+            }),
           }),
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
@@ -260,14 +256,8 @@ export function PricingCard({ card, sx, ...other }) {
       {renderPrice()}
       {renderTermsConstentConfirmDialog()}
 
-      {/* <Divider sx={{ borderStyle: 'dashed' }} /> */}
-
-      {/* {renderList()} */}
-
-      {/* Purchase button */}
       <Button
         onClick={termsConstentConfirmDialog.onTrue}
-        // type="submit"
         fullWidth
         size="medium"
         variant="contained"
@@ -276,8 +266,6 @@ export function PricingCard({ card, sx, ...other }) {
         {labelAction}
       </Button>
     </Box>
-
-    
   );
 }
 
@@ -512,21 +500,17 @@ export function MixedPricingCard({ card, sx, ...other }) {
           borderRadius: 2,
           flexDirection: 'column',
           bgcolor: 'background.default',
+          border: `1px solid ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
           boxShadow: theme.vars.customShadows.card,
-          [theme.breakpoints.up('md')]: {
-            boxShadow: 'none',
-          },
           ...((isBasic || isDiscount10) && {
             borderTopRightRadius: { md: 0 },
             borderBottomRightRadius: { md: 0 },
           }),
           ...((isDiscount10 || isDiscount15) && {
-            [theme.breakpoints.up('md')]: {
-              boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
-              ...theme.applyStyles('dark', {
-                boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.common.blackChannel, 0.16)}`,
-              }),
-            },
+            boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
+            ...theme.applyStyles('dark', {
+              boxShadow: `-40px 40px 80px 0px ${varAlpha(theme.vars.palette.common.blackChannel, 0.16)}`,
+            }),
           }),
         }),
         ...(Array.isArray(sx) ? sx : [sx]),
@@ -538,13 +522,8 @@ export function MixedPricingCard({ card, sx, ...other }) {
       {renderPrice()}
       {renderTermsConstentConfirmDialog()}
 
-      {/* <Divider sx={{ borderStyle: 'dashed' }} /> */}
-
-      {/* {renderList()} */}
-
       <Button
         onClick={termsConstentConfirmDialog.onTrue}
-        // type="submit"
         fullWidth
         size="medium"
         variant="contained"

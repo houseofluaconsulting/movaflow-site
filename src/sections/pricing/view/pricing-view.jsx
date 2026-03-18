@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { varAlpha } from 'minimal-shared/utils';
 
 import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
@@ -25,6 +27,7 @@ export function PricingView() {
   const { user } = useAuthContext();
   const [customerData, setCustomerData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentTab, setCurrentTab] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
@@ -49,6 +52,13 @@ export function PricingView() {
 
   const customerStatus = customerData?.Status;
   const showPricing = customerStatus === 'Active' || customerStatus === 'Paused';
+  const campaigns = customerData?.Campaigns;
+
+  const availableTabs = [
+    ...(campaigns?.VeteranWebsite ? [{ key: 'VeteranWebsite', label: 'Veteran Leads' }] : []),
+    ...(campaigns?.LegacyWebsite ? [{ key: 'LegacyWebsite', label: 'Legacy Leads' }] : []),
+  ];
+
   const arrowIcon = () => (
     <SvgIcon
       viewBox="0 0 48 48"
@@ -77,103 +87,103 @@ export function PricingView() {
         Purchase Leads
       </Typography>
 
+      
+
       {showPricing ? (
         <>
-          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2 }}>
-            Veteran Website Leads
-          </Typography>
-
-          {/* <Box align="center">
-            <Alert
-              variant="outlined"
-              severity="info"
-              sx={{ mb: 2, display: 'flex', alignItems: 'center' }}
+          {availableTabs.length > 0 && (
+            <Tabs
+              value={currentTab}
+              onChange={(_, newValue) => setCurrentTab(newValue)}
+              centered
+              sx={{ mb: 4 }}
             >
-              Purchasing of <b>Veteran Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
-            </Alert>
-          </Box> */}
+              {availableTabs.map((tab) => (
+                <Tab key={tab.key} label={tab.label} />
+              ))}
+            </Tabs>
+          )}
 
-          <Box
-        sx={{
-          display: 'grid',
-          gap: { xs: 3, md: 0 },
-          alignItems: { md: 'center' },
-          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-          mb: 2
-        }}
-      >
-        {_veteranWebsitePricingPlans.map((card, index) => (
-          <PricingCard key={card.priceId} card={card} index={index} />
-        ))}
-      </Box>
+          {/* VeteranWebsite */}
 
-          <Box
-        sx={{
-          display: 'grid',
-          gap: { xs: 3, md: 0 },
-          alignItems: { md: 'center' },
-          gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-          mb: 3
-        }}
-      >
-        {_veteranWebsiteMixedPricingPlans.map((card, index) => (
-          <MixedPricingCard key={card.priceId} card={card} index={index}/>
-        ))}
-      </Box>
+          {availableTabs[currentTab]?.key === 'VeteranWebsite' && (
+            <>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: 3,
+                  alignItems: { md: 'center' },
+                  gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                  mb: 2,
+                }}
+              >
+                {_veteranWebsitePricingPlans.map((card, index) => (
+                  <PricingCard key={card.priceId} card={card} index={index} />
+                ))}
+              </Box>
 
-          <Typography variant="h4" align="center" sx={{ fontWeight: 600, mb: 2 }}>
-            Legacy Website Leads
-          </Typography>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: 3,
+                  alignItems: { md: 'center' },
+                  gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                  mb: 2,
+                }}
+              >
+                {_veteranWebsiteMixedPricingPlans.map((card, index) => (
+                  <MixedPricingCard key={card.priceId} card={card} index={index} />
+                ))}
+              </Box>
+            </>
+          )}
 
-          {/* <Box align="center">
-            <Alert
-              variant="outlined"
-              severity="info"
-              sx={{ mb: 2, display: 'flex', alignItems: 'center' }}
-            >
-              Purchasing of Fresh <b>Legacy Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
-            </Alert>
-          </Box> */}
+          {/* LegacyWebsite */}
+          {availableTabs[currentTab]?.key === 'LegacyWebsite' && (
+            <>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: 3,
+                  alignItems: { md: 'center' },
+                  gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                  mb: 2,
+                }}
+              >
+                {_legacyWebsitePricingPlans.map((card, index) => (
+                  <PricingCard key={card.priceId} card={card} index={index} />
+                ))}
+              </Box>
 
-          <Box
-            sx={{
-              display: 'grid',
-              gap: { xs: 3, md: 0 },
-              alignItems: { md: 'center' },
-              gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-            }}
-          >
-            {_legacyWebsitePricingPlans.map((card, index) => (
-              <PricingCard key={card.priceId} card={card} index={index} />
-            ))}
-          </Box>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: 3,
+                  alignItems: { md: 'center' },
+                  gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                  mb: 2,
+                }}
+              >
+                {_legacyWebsiteMixedPricingPlans.map((card, index) => (
+                  <MixedPricingCard key={card.priceId} card={card} index={index} />
+                ))}
+              </Box>
 
-          <Box
-            sx={{
-              display: 'grid',
-              gap: { xs: 3, md: 0 },
-              alignItems: { md: 'center' },
-              gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-              mb: 3
-            }}
-          >
-            {_legacyWebsiteMixedPricingPlans.map((card, index) => (
-              <MixedPricingCard key={card.priceId} card={card} index={index} />
-            ))}
-          </Box>
-          <Box
-            sx={{
-              display: 'grid',
-              gap: { xs: 3, md: 0 },
-              alignItems: { md: 'center' },
-              gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-              mb: 2
-            }}
-          >
-            {_legacyWebsiteAgedPricingPlans.map((card, index) => (
-              <PricingCard key={card.priceId} card={card} index={index} />
-            ))}
-          </Box>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: 3,
+                  alignItems: { md: 'center' },
+                  gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                  mb: 2,
+                }}
+              >
+                {_legacyWebsiteAgedPricingPlans.map((card, index) => (
+                  <PricingCard key={card.priceId} card={card} index={index} />
+                ))}
+              </Box>
+            </>
+          )}
         </>
       ) : (
         <Alert

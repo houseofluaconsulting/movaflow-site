@@ -67,7 +67,8 @@ export async function getCustomer(customerId, idToken) {
             CloseCRMAPIKey: customer.CRMIntegration?.CloseCRM?.APIKey,
             CloseCRMLeadSourceCustomField: customer.CRMIntegration?.CloseCRM?.LeadSourceCustomField,
             EmailNotifications: customer.CRMIntegration?.EmailNotifications,
-            Status: customer.Status
+            Status: customer.Status,
+            Campaigns: customer.Campaigns
         }
 
         return user_data;
