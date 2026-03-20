@@ -4,10 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { isValidPhoneNumber } from 'react-phone-number-input/input';
 
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import MenuItem from '@mui/material/MenuItem';
+import Typography from '@mui/material/Typography';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -15,6 +18,7 @@ import DialogContent from '@mui/material/DialogContent';
 import { updateLead } from 'src/actions/leads'
 import { LEAD_STATUS_OPTIONS } from 'src/_mock';
 
+import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
@@ -38,8 +42,12 @@ export const UserQuickEditSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-export function UserQuickEditForm({ currentUser, open, onClose, created, onUpdateSuccess }) {
+export function UserQuickEditForm({ currentUser, campaigns, open, onClose, created, delivered, onUpdateSuccess }) {
   const { user } = useAuthContext();
+
+  const campaignData = campaigns?.find((c) => c.LeadType === currentUser?.LeadType)?.Data || {};
+  const alwaysShownKeys = ['full_name', 'phone_number', 'state', 'email'];
+  const campaignFields = Object.entries(campaignData).filter(([key]) => !alwaysShownKeys.includes(key));
 
   const defaultValues = {
     contact_id: '',
@@ -129,7 +137,65 @@ export function UserQuickEditForm({ currentUser, open, onClose, created, onUpdat
               gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
             }}
           >
-            <Field.Select name="Status" label="Status">
+            <Box
+              sx={{
+                gridColumn: '1 / -1',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                border: (theme) => `1px solid ${theme.vars.palette.divider}`,
+                borderRadius: 1.5,
+                p: 2.5,
+              }}
+            >
+              <Stack sx={{ typography: 'body2', alignItems: 'flex-start' }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                  {currentUser?.full_name}
+                </Typography>
+                <Box component="span" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                  {currentUser?.email}
+                </Box>
+                <Box component="span" sx={{ color: 'text.secondary' }}>
+                  {currentUser?.phone_number}
+                </Box>
+                <Box component="span" sx={{ color: 'text.secondary' }}>
+                  {currentUser?.state}
+                </Box>
+              </Stack>
+
+              <Stack sx={{ typography: 'body2', alignItems: 'flex-end' }}>
+                <Label
+                  variant="soft"
+                  color={currentUser?.Opportunity === 'Fresh' ? 'primary' : 'secondary'}
+                >
+                  {(currentUser?.LeadType === 'VeteranWebsite'
+                    ? 'Veteran'
+                    : currentUser?.LeadType === 'LegacyWebsite'
+                      ? 'Legacy'
+                      : currentUser?.LeadType === 'FinalExpense'
+                        ? 'Final Expense'
+                        : currentUser?.LeadType === 'OctavianMortgage'
+                          ? 'Octavian Mortgage'
+                          : currentUser?.LeadType)}{' '}{currentUser?.Opportunity}
+                </Label>
+                <Box component="span" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                  <b>Created:</b> {created}
+                </Box>
+                {currentUser?.Opportunity === 'Aged' && (
+                  <Box component="span" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                    <b>Delivered:</b> {delivered}
+                  </Box>
+                )}
+              </Stack>
+            </Box>
+
+            {campaignFields.map(([fieldKey, fieldLabel]) =>
+              currentUser?.[fieldKey] ? (
+                <Field.Text key={fieldKey} name={fieldKey} label={fieldLabel} disabled />
+              ) : null
+            )}
+
+            <Field.Select name="Status" label="Status" sx={{ gridColumn: '1 / 2' }}>
               {LEAD_STATUS_OPTIONS.map((Status) => (
                 <MenuItem key={Status.value} value={Status.value}>
                   {Status.label}
@@ -137,32 +203,7 @@ export function UserQuickEditForm({ currentUser, open, onClose, created, onUpdat
               ))}
             </Field.Select>
 
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }} />
-
-            <Field.Text name="LeadType" label="Lead Type" disabled />
-            <Field.Text
-              name="Created"
-              label="Received"
-              value={created}     // ✅ set value directly
-              disabled
-            />
-
-            <Field.Text name="full_name" label="Full Name" disabled />
-            <Field.Text name="email" label="Email Address" disabled />
-            <Field.Phone name="phone_number" label="Phone Number" disabled />
-            <Field.Text name="state" label="State" disabled />
-            <Field.Text name="beneficiary" label="Beneficiary" disabled />
-            <Field.Text name="gender" label="Gender" disabled />
-            <Field.Text name="birthday" label="Birthday" disabled />
-            <Field.Text name="age" label="Age" disabled />
-            <Field.Text name="desired_coverage_amount" label="Desired Coverage Amount" disabled />
-            <Field.Text name="desired_coverage_type" label="Desired Coverage Type" disabled />
-            <Field.Text name="current_coverage" label="Current Coverage" disabled />
-            <Field.Text name="military_status" label="Military Status" disabled />
-            <Field.Text name="tobacco_use" label="Tobacco Use" disabled />
-            <Field.Text name="health" label="Health Status" disabled />
-
-            <Field.Text name="Note" label="Note" multiline rows={4} />
+            <Field.Text name="Note" label="Note" multiline rows={4} sx={{ gridColumn: '2 / 3' }} />
 
           </Box>
         </DialogContent>

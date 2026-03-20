@@ -18,6 +18,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { getLeads } from 'src/actions/leads'
 import { exportLeads } from 'src/actions/leads'
+import { getCampaigns } from 'src/actions/leadcredit'
 import { DashboardContent } from 'src/layouts/dashboard';
 import { _stateNames, _leadList, LEAD_STATUS_OPTIONS, LEAD_OPPORTUNITY_OPTIONS } from 'src/_mock';
 
@@ -74,15 +75,19 @@ export function UserListView() {
 
   // const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([])
+  const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
     if (!user?.id || !user?.idToken) return;
 
     setLoading(true);
-    const promise = getLeads(user.id, user.idToken.toString());
-    const result = await promise;
-    setTableData(result[0]);
+    const [leadsResult, campaignsResult] = await Promise.all([
+      getLeads(user.id, user.idToken.toString()),
+      getCampaigns(user.idToken.toString()),
+    ]);
+    setTableData(leadsResult[0]);
+    setCampaigns(campaignsResult);
     setLoading(false);
   }, [user?.id, user?.idToken]);
 
@@ -282,6 +287,7 @@ export function UserListView() {
                       <UserTableRow
                         key={row.contact_id}
                         row={row}
+                        campaigns={campaigns}
                         selected={table.selected.includes(row.contact_id)}
                         onSelectRow={() => table.onSelectRow(row.contact_id)}
                         onDeleteRow={() => handleDeleteRow(row.contact_id)}

@@ -29,6 +29,23 @@ const getDynamoDBClient = (idToken) => {
   return DynamoDBDocumentClient.from(client);
 };
 
+export async function getCampaigns(idToken) {
+    try {
+        const docClient = getDynamoDBClient(idToken);
+        const tableEnv = import.meta.env.VITE_DYNAMODB_TABLE_ENV;
+
+        const command = new ScanCommand({
+            TableName: `lifejacketleads-campaigns-${tableEnv}`
+        });
+
+        const response = await docClient.send(command);
+        return response.Items || [];
+    } catch (error) {
+        console.error('Error fetching campaigns from DynamoDB:', error);
+        throw error;
+    }
+}
+
 export async function getLeadCredit(customerId, idToken) {
     try {
         const docClient = getDynamoDBClient(idToken);

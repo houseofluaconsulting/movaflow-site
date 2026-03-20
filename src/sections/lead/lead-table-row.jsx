@@ -49,7 +49,7 @@ function formatToLocalTime(utcTimestamp) {
   });
 }
 
-export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow, onUpdateSuccess }) {
+export function UserTableRow({ row, campaigns, selected, editHref, onSelectRow, onDeleteRow, onUpdateSuccess }) {
   const menuActions = usePopover();
   const confirmDialog = useBoolean();
   const quickEditForm = useBoolean();
@@ -57,9 +57,11 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
   const renderQuickEditForm = () => (
     <UserQuickEditForm
       currentUser={row}
+      campaigns={campaigns}
       open={quickEditForm.value}
       onClose={quickEditForm.onFalse}
       created={formatToLocalTime(row.Created)}
+      delivered={formatToLocalTime(row.Delivered)}
       onUpdateSuccess={onUpdateSuccess}
     />
   );
@@ -155,7 +157,9 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               ? 'Legacy'
               : row.LeadType === 'FinalExpense'
                 ? 'Final Expense'
-                : row.LeadType}
+                  : row.LeadType === 'OctavianMortgage'
+                    ? 'Octavian Mortgage'
+                    : row.LeadType}
         </TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap', }}>
