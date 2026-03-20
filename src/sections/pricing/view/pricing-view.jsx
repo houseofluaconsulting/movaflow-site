@@ -52,11 +52,11 @@ export function PricingView() {
 
   const customerStatus = customerData?.Status;
   const showPricing = customerStatus === 'Active' || customerStatus === 'Paused';
-  const campaigns = customerData?.Campaigns;
+  const leadTypes = customerData?.LeadType;
 
   const availableTabs = [
-    ...(campaigns?.VeteranWebsite ? [{ key: 'VeteranWebsite', label: 'Veteran Leads' }] : []),
-    ...(campaigns?.LegacyWebsite ? [{ key: 'LegacyWebsite', label: 'Legacy Leads' }] : []),
+    ...(leadTypes?.VeteranWebsite?.Active ? [{ key: 'VeteranWebsite', label: 'Veteran Leads' }] : []),
+    ...(leadTypes?.LegacyWebsite?.Active ? [{ key: 'LegacyWebsite', label: 'Legacy Leads' }] : []),
   ];
 
   const arrowIcon = () => (

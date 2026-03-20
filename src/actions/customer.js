@@ -68,7 +68,8 @@ export async function getCustomer(customerId, idToken) {
             CloseCRMLeadSourceCustomField: customer.CRMIntegration?.CloseCRM?.LeadSourceCustomField,
             EmailNotifications: customer.CRMIntegration?.EmailNotifications,
             Status: customer.Status,
-            Campaigns: customer.Campaigns
+            Campaigns: customer.Campaigns,
+            LeadType: customer.LeadType
         }
 
         return user_data;
