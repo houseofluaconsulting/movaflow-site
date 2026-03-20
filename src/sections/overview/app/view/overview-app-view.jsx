@@ -141,37 +141,65 @@ export function OverviewAppView() {
           </Grid>
         )}
 
-        <Grid size={{ xs: 12, md: 3 }}>
-          <LeadCreditSummary
-            type="Veteran Website"
-            opportunity="Fresh"
-            total={data['VeteranWebsiteFresh']}
-          />
-        </Grid>
+        {data?.LeadType?.VeteranWebsite?.Active && (
+          <>
+            <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Veteran Website"
+                opportunity="Fresh"
+                total={data['VeteranWebsiteFresh']}
+              />
+            </Grid>
 
-        <Grid size={{ xs: 12, md: 3 }}>
-          <LeadCreditSummary
-            type="Veteran Website"
-            opportunity="Aged"
-            total={data['VeteranWebsiteAged']}
-          />
-        </Grid>
+            <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Veteran Website"
+                opportunity="Aged"
+                total={data['VeteranWebsiteAged']}
+              />
+            </Grid>
+          </>
+        )}
 
-        <Grid size={{ xs: 12, md: 3 }}>
-          <LeadCreditSummary
-            type="Legacy Website"
-            opportunity="Fresh"
-            total={data['LegacyWebsiteFresh']}
-          />
-        </Grid>
+        {data?.LeadType?.LegacyWebsite?.Active && (
+          <>
+            <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Legacy Website"
+                opportunity="Fresh"
+                total={data['LegacyWebsiteFresh']}
+              />
+            </Grid>
 
-        <Grid size={{ xs: 12, md: 3 }}>
-          <LeadCreditSummary
-            type="Legacy Website"
-            opportunity="Aged"
-            total={data['LegacyWebsiteAged']}
-          />
-        </Grid>
+            <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Legacy Website"
+                opportunity="Aged"
+                total={data['LegacyWebsiteAged']}
+              />
+            </Grid>
+          </>
+        )}
+
+        {data?.LeadType?.OctavianMortgage?.Active && (
+          <>
+            <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Octavian Mortgage"
+                opportunity="Fresh"
+                total={data['OctavianMortgageFresh']}
+              />
+            </Grid>
+
+            <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Octavian Mortgage"
+                opportunity="Aged"
+                total={data['OctavianMortgageAged']}
+              />
+            </Grid>
+          </>
+        )}
       </Grid>
     </DashboardContent>
   );

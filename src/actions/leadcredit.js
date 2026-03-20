@@ -62,7 +62,8 @@ export async function getLeadCredit(customerId, idToken) {
 
         const lead_credit = {
             StateLicenses: customer.StateLicenses || [],
-            Status: customer.Status || 'Unknown'
+            Status: customer.Status || 'Unknown',
+            LeadType: customer.LeadType || {}
         };
 
         // Build lead credit object for each campaign
