@@ -181,11 +181,9 @@ export function UserQuickEditForm({ currentUser, campaigns, open, onClose, creat
                 <Box component="span" sx={{ color: 'text.secondary', mt: 0.5 }}>
                   <b>Created:</b> {created}
                 </Box>
-                {currentUser?.Opportunity === 'Aged' && (
-                  <Box component="span" sx={{ color: 'text.secondary', mt: 0.5 }}>
-                    <b>Delivered:</b> {delivered}
-                  </Box>
-                )}
+                <Box component="span" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                  <b>Delivered:</b> {delivered}
+                </Box>
               </Stack>
             </Box>
 
