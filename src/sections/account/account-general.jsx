@@ -48,6 +48,10 @@ export const UpdateUserSchema = zod.object({
   ringyAuthTokenLegacyWebsite: zod.string(),
   ringySIDLegacyWebsiteAged: zod.string(),
   ringyAuthTokenLegacyWebsiteAged: zod.string(),
+  ringySIDOctavianMortgage: zod.string(),
+  ringyAuthTokenOctavianMortgage: zod.string(),
+  ringySIDOctavianMortgageAged: zod.string(),
+  ringyAuthTokenOctavianMortgageAged: zod.string(),
   ghlAccessToken: zod.string(),
   ghlLocationID: zod.string(),
   closeCRMAPIKey: zod.string(),
@@ -93,6 +97,10 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsiteAged: userData['RingyAuthTokenLegacyWebsiteAged'] ?? "",
     ringySIDLegacyWebsiteAged: userData['RingySIDLegacyWebsiteAged'] ?? "",
     ringyAuthTokenLegacyWebsite: userData['RingyAuthTokenLegacyWebsite'] ?? "",
+    ringySIDOctavianMortgage: userData['RingySIDOctavianMortgage'] ?? "",
+    ringyAuthTokenOctavianMortgage: userData['RingyAuthTokenOctavianMortgage'] ?? "",
+    ringySIDOctavianMortgageAged: userData['RingySIDOctavianMortgageAged'] ?? "",
+    ringyAuthTokenOctavianMortgageAged: userData['RingyAuthTokenOctavianMortgageAged'] ?? "",
     ghlAccessToken: userData['GHLAccessToken'] ?? "",
     ghlLocationID: userData['GHLocationID'] ?? "",
     closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
@@ -100,6 +108,8 @@ export function AccountGeneral() {
     emailNotifications: userData['EmailNotifications'] ?? false,
     status: userData['Status'] ?? "",
   };
+
+  const leadTypes = userData['LeadType'] || {};
 
   const defaultValues = {
     displayName: '',
@@ -114,6 +124,10 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsite: '',
     ringySIDLegacyWebsiteAged: '',
     ringyAuthTokenLegacyWebsiteAged: '',
+    ringySIDOctavianMortgage: '',
+    ringyAuthTokenOctavianMortgage: '',
+    ringySIDOctavianMortgageAged: '',
+    ringyAuthTokenOctavianMortgageAged: '',
     ghlAccessToken: '',
     ghlLocationID: '',
     closeCRMAPIKey: '',
@@ -137,7 +151,7 @@ export function AccountGeneral() {
   const onSubmit = handleSubmit(async (data) => {
     // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications, user.idToken.toString());
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ringyAuthTokenOctavianMortgage, data.ringySIDOctavianMortgage, data.ringyAuthTokenOctavianMortgageAged, data.ringySIDOctavianMortgageAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications, user.idToken.toString());
 
     try {
       await promise;
@@ -307,6 +321,7 @@ export function AccountGeneral() {
               >
                 Ringy Integration
               </Typography>
+              {leadTypes?.VeteranWebsite?.Active && (
               <Box
                 sx={{
                   rowGap: 3,
@@ -330,7 +345,6 @@ export function AccountGeneral() {
                       variant="soft"
                       color='primary'
                       sx={{
-                        // ml: 10,
                         alignSelf: 'center',
                         typography: 'text',
                         fontWeight: 700
@@ -359,7 +373,6 @@ export function AccountGeneral() {
                       variant="soft"
                       color='secondary'
                       sx={{
-                        // ml: 10,
                         alignSelf: 'center',
                         typography: 'text',
                         fontWeight: 700
@@ -373,7 +386,9 @@ export function AccountGeneral() {
                   <Field.Text name="ringyAuthTokenVeteranWebsiteAged" label="authToken" />
                 </Stack>
               </Box>
+              )}
 
+              {leadTypes?.LegacyWebsite?.Active && (
               <Box
                 sx={{
                   rowGap: 3,
@@ -397,7 +412,6 @@ export function AccountGeneral() {
                       variant="soft"
                       color='primary'
                       sx={{
-                        // ml: 10,
                         alignSelf: 'center',
                         typography: 'text',
                         fontWeight: 700
@@ -425,7 +439,6 @@ export function AccountGeneral() {
                       variant="soft"
                       color='secondary'
                       sx={{
-                        // ml: 10,
                         alignSelf: 'center',
                         typography: 'text',
                         fontWeight: 700
@@ -440,6 +453,74 @@ export function AccountGeneral() {
 
                 </Stack>
               </Box>
+              )}
+
+              {leadTypes?.OctavianMortgage?.Active && (
+              <Box
+                sx={{
+                  rowGap: 3,
+                  columnGap: 20,
+                  display: 'grid',
+                  mt: -1,
+                  gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+              >
+                <Stack spacing={2} sx={{ mt: 0 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    columnGap: 1,
+                  }}>
+
+                    <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
+                      Octavian Mortgage Lead Vendor
+                    </Typography>
+
+                    <Label
+                      variant="soft"
+                      color='primary'
+                      sx={{
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700
+                      }}
+                    >
+                      Fresh
+                    </Label>
+                  </Box>
+
+                  <Field.Text name="ringySIDOctavianMortgage" label="sid" />
+                  <Field.Text name="ringyAuthTokenOctavianMortgage" label="authToken" />
+
+                </Stack>
+                <Stack spacing={2} sx={{ mt: 0 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    columnGap: 1,
+                  }}>
+
+                    <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
+                      Octavian Mortgage Lead Vendor
+                    </Typography>
+
+                    <Label
+                      variant="soft"
+                      color='secondary'
+                      sx={{
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700
+                      }}
+                    >
+                      Aged
+                    </Label>
+                  </Box>
+
+                  <Field.Text name="ringySIDOctavianMortgageAged" label="sid" />
+                  <Field.Text name="ringyAuthTokenOctavianMortgageAged" label="authToken" />
+
+                </Stack>
+              </Box>
+              )}
             </Stack>
 
             <Stack spacing={2} sx={{ mt: 6 }}>
