@@ -27,6 +27,7 @@ export function PricingView() {
   const { user } = useAuthContext();
   const [customerData, setCustomerData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(false);
   const [currentTab, setCurrentTab] = useState(0);
 
   useEffect(() => {
@@ -34,11 +35,13 @@ export function PricingView() {
       if (!user?.id || !user?.idToken) return;
 
       setLoading(true);
+      setFetchError(false);
       try {
         const result = await getCustomer(user.id, user.idToken.toString());
         setCustomerData(result);
       } catch (error) {
         console.error('Error fetching customer data:', error);
+        setFetchError(true);
       } finally {
         setLoading(false);
       }
@@ -185,6 +188,14 @@ export function PricingView() {
             </>
           )}
         </>
+      ) : fetchError ? (
+        <Alert
+          variant="outlined"
+          severity="error"
+          sx={{ mt: 3, display: 'flex', alignItems: 'center' }}
+        >
+          Something went wrong loading your account. Please try refreshing the page.
+        </Alert>
       ) : (
         <Alert
           variant="outlined"
