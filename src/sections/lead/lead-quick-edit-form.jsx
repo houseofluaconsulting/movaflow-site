@@ -125,9 +125,6 @@ export function UserQuickEditForm({ currentUser, campaigns, open, onClose, creat
 
       <Form methods={methods} onSubmit={onSubmit}>
         <DialogContent>
-          <Alert variant="outlined" severity="info" sx={{ mb: 3 }}>
-            Leads may be updated either through adding a <b>Note</b> or by marking them as <b>Sold/Unsold</b>.
-          </Alert>
 
           <Box
             sx={{
@@ -192,16 +189,18 @@ export function UserQuickEditForm({ currentUser, campaigns, open, onClose, creat
                 <Field.Text key={fieldKey} name={fieldKey} label={fieldLabel} disabled />
               ) : null
             )}
+            <Alert variant="outlined" severity="info" sx={{ gridColumn: '1 / -1' }}>
+              Leads may be updated either through adding a <b>Note</b> or by marking them as <b>Sold/Unsold</b>.
+            </Alert>
+            <Field.Text name="Note" label="Note" multiline rows={4} sx={{ gridColumn: '1 / 2' }} />
 
-            <Field.Select name="Status" label="Status" sx={{ gridColumn: '1 / 2' }}>
+            <Field.Select name="Status" label="Status" sx={{ gridColumn: '2 / 3' }}>
               {LEAD_STATUS_OPTIONS.map((Status) => (
                 <MenuItem key={Status.value} value={Status.value}>
                   {Status.label}
                 </MenuItem >
               ))}
             </Field.Select>
-
-            <Field.Text name="Note" label="Note" multiline rows={4} sx={{ gridColumn: '2 / 3' }} />
 
           </Box>
         </DialogContent>
