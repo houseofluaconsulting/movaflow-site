@@ -73,7 +73,8 @@ export async function getCustomer(customerId, idToken) {
             EmailNotifications: customer.CRMIntegration?.EmailNotifications,
             Status: customer.Status,
             Campaigns: customer.Campaigns,
-            LeadType: customer.LeadType
+            LeadType: customer.LeadType,
+            RewardsTotal: customer.RewardsTotal ?? 0
         }
 
         return user_data;

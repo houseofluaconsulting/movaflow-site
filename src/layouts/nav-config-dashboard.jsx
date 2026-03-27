@@ -67,6 +67,7 @@ export const navData = [
       { title: 'Leads', path: paths.dashboard.leads, icon: ICONS.user },
       { title: 'Purchase', path: paths.dashboard.purchase, icon: ICONS.order },
       { title: 'Orders', path: paths.dashboard.orders, icon: ICONS.invoice },
+      { title: 'Rewards', path: paths.dashboard.rewards, icon: <Iconify icon="solar:star-bold-duotone" width={24} />, info: <Label color="info" variant="inverted">Coming Soon</Label> },
     ],
   },
   /**

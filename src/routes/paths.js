@@ -101,6 +101,7 @@ export const paths = {
     leads: `${ROOTS.DASHBOARD}/leads`,
     orders: `${ROOTS.DASHBOARD}/orders`,
     purchase: `${ROOTS.DASHBOARD}/purchase`,
+    rewards: `${ROOTS.DASHBOARD}/rewards`,
     general: {
       app: `${ROOTS.DASHBOARD}/app`,
       ecommerce: `${ROOTS.DASHBOARD}/ecommerce`,
