@@ -156,7 +156,9 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
               ? 'Legacy'
               : row.LeadType === 'FinalExpense'
                 ? 'Final Expense'
-                : row.LeadType}
+                  : row.LeadType === 'OctavianMortgage'
+                    ? 'Octavian Mortgage'
+                    : row.LeadType}
         </TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
