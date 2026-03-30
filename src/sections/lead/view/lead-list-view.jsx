@@ -233,7 +233,7 @@ export function UserListView() {
               }
             />
 
-            <Box sx={{ maxHeight: 600, overflowY: 'auto' }}>
+            <Box>
               <Table size={table.dense ? 'small' : 'medium'}>
                 <TableHeadCustom
                   order={table.order}
