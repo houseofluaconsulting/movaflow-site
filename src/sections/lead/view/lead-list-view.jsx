@@ -233,7 +233,8 @@ export function UserListView() {
               }
             />
 
-            <Box sx={{ maxHeight: 600, overflow: 'auto' }}>
+            <Box sx={{ overflowX: 'auto' }}>
+             <Box sx={{ maxHeight: 600, overflowY: 'auto', minWidth: 960 }}>
               <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
                 <TableHeadCustom
                   order={table.order}
@@ -272,6 +273,7 @@ export function UserListView() {
                   <TableNoData notFound={notFound} />
                 </TableBody>
               </Table>
+             </Box>
             </Box>
           </Box>
         </Card>
