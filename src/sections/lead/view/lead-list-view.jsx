@@ -274,6 +274,9 @@ export function UserListView() {
               </Table>
             </Box>
           </Box>
+          <Typography variant="body2" sx={{ color: 'text.secondary', p: 2, textAlign: 'right' }}>
+            {dataFiltered.length} {dataFiltered.length === 1 ? 'Lead' : 'Leads'}
+          </Typography>
         </Card>
       </DashboardContent>
 
