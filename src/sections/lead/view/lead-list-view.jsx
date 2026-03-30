@@ -1,6 +1,6 @@
 import { varAlpha } from 'minimal-shared/utils';
-import { useEffect, useState, useCallback } from 'react';
 import { useBoolean, useSetState } from 'minimal-shared/hooks';
+import { useRef, useEffect, useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -13,14 +13,10 @@ import TableBody from '@mui/material/TableBody';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
-
-import { getLeads } from 'src/actions/leads'
-import { exportLeads } from 'src/actions/leads'
 import { getCampaigns } from 'src/actions/leadcredit'
 import { DashboardContent } from 'src/layouts/dashboard';
-import { _stateNames, _leadList, LEAD_STATUS_OPTIONS, LEAD_OPPORTUNITY_OPTIONS } from 'src/_mock';
+import { getLeads, exportLeads } from 'src/actions/leads'
+import { _stateNames, LEAD_OPPORTUNITY_OPTIONS } from 'src/_mock';
 
 import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
@@ -28,17 +24,12 @@ import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { LoadingScreen } from 'src/components/loading-screen';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 import {
   useTable,
-  emptyRows,
-  rowInPage,
   TableNoData,
   getComparator,
-  TableEmptyRows,
   TableHeadCustom,
   TableSelectedAction,
-  TablePaginationCustom,
 } from 'src/components/table';
 
 import { useAuthContext } from 'src/auth/hooks';
@@ -71,9 +62,6 @@ export function UserListView() {
 
   const confirmDialog = useBoolean();
 
-  const user_id = user?.id
-
-  // const [data, setData] = useState([]);
   const [tableData, setTableData] = useState([])
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -95,12 +83,17 @@ export function UserListView() {
     fetchData();
   }, [fetchData]);
 
-  tableData.map((item, index) => (
-    <div key={index}>{item}</div>
-  ))
+  const BATCH_SIZE = 20;
+  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
+  const scrollRef = useRef(null);
 
-
-
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 200) {
+      setVisibleCount((prev) => prev + BATCH_SIZE);
+    }
+  }, []);
 
   const filters = useSetState({ full_name: '', role: [], Opportunity: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
@@ -111,7 +104,10 @@ export function UserListView() {
     filters: currentFilters,
   });
 
-  const dataInPage = rowInPage(dataFiltered, table.page, table.rowsPerPage);
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(BATCH_SIZE);
+  }, [currentFilters.full_name, currentFilters.role, currentFilters.Opportunity]);
 
   const canReset =
     !!currentFilters.full_name || currentFilters.role.length > 0 || currentFilters.Opportunity !== 'all';
@@ -125,22 +121,16 @@ export function UserListView() {
       toast.success('Delete success!');
 
       setTableData(deleteRow);
-
-      table.onUpdatePageDeleteRow(dataInPage.length);
     },
-    [dataInPage.length, table, tableData]
+    [tableData]
   );
 
   const handleExportRows = useCallback(() => {
-    // const exportRows = tableData.filter((row) => !table.selected.includes(row.contact_id));
     const exportRows = tableData.filter((row) => table.selected.includes(row.contact_id));
 
-    // setTableData(exportRows);
-    const promise = exportLeads(exportRows)
+    exportLeads(exportRows);
     toast.success('Export sent to Email!');
-
-    // table.onUpdatePageDeleteRows(dataInPage.length, dataFiltered.length);
-  }, [dataFiltered.length, dataInPage.length, table, tableData]);
+  }, [table, tableData]);
 
 
     const handleFilterOpportunity = useCallback(
@@ -260,7 +250,11 @@ export function UserListView() {
               }
             />
 
-            <Scrollbar>
+            <Scrollbar
+              ref={scrollRef}
+              onScroll={handleScroll}
+              sx={{ maxHeight: 600 }}
+            >
               <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
                 <TableHeadCustom
                   order={table.order}
@@ -279,10 +273,7 @@ export function UserListView() {
 
                 <TableBody>
                   {dataFiltered
-                    .slice(
-                      table.page * table.rowsPerPage,
-                      table.page * table.rowsPerPage + table.rowsPerPage
-                    )
+                    .slice(0, visibleCount)
                     .map((row) => (
                       <UserTableRow
                         key={row.contact_id}
@@ -291,30 +282,21 @@ export function UserListView() {
                         selected={table.selected.includes(row.contact_id)}
                         onSelectRow={() => table.onSelectRow(row.contact_id)}
                         onDeleteRow={() => handleDeleteRow(row.contact_id)}
-                        onUpdateSuccess={fetchData}
+                        onUpdateSuccess={(updatedData) => {
+                          setTableData((prev) =>
+                            prev.map((item) =>
+                              item.contact_id === updatedData.contact_id ? { ...item, ...updatedData } : item
+                            )
+                          );
+                        }}
                       />
                     ))}
-
-                  <TableEmptyRows
-                    height={table.dense ? 56 : 56 + 20}
-                    emptyRows={emptyRows(table.page, table.rowsPerPage, dataFiltered.length)}
-                  />
 
                   <TableNoData notFound={notFound} />
                 </TableBody>
               </Table>
             </Scrollbar>
           </Box>
-
-          <TablePaginationCustom
-            page={table.page}
-            dense={table.dense}
-            count={dataFiltered.length}
-            rowsPerPage={table.rowsPerPage}
-            onPageChange={table.onChangePage}
-            // onChangeDense={table.onChangeDense}
-            onRowsPerPageChange={table.onChangeRowsPerPage}
-          />
         </Card>
       </DashboardContent>
 

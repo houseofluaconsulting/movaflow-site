@@ -37,7 +37,7 @@ export const UserQuickEditSchema = zod.object({
   // Not required
   Status: zod.string(),
   contact_id: zod.string(),
-  Note: zod.string(),
+  Note: zod.string().optional().default(''),
 });
 
 // ----------------------------------------------------------------------
@@ -100,9 +100,8 @@ export function UserQuickEditForm({ currentUser, campaigns, open, onClose, creat
 
       await promise;
 
-      // Call the callback to refresh the table data
       if (onUpdateSuccess) {
-        onUpdateSuccess();
+        onUpdateSuccess(data);
       }
     } catch (error) {
       console.error(error);
