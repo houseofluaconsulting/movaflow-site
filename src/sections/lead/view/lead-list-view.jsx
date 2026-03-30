@@ -44,7 +44,7 @@ const OPPORTUNITY_OPTIONS = [{ value: 'all', label: 'All' }, ...LEAD_OPPORTUNITY
 
 const TABLE_HEAD = [
   { id: 'contact', label: 'Contact', width: 150, sortable: false },
-  { id: 'state', label: 'State', width: 80 },
+  { id: 'state', label: 'State', width: 60 },
   { id: 'LeadType', label: 'Type', width: 80 },
   { id: 'Opportunity', label: '', width: 80 },
   { id: 'Delivered', label: 'Delivered', width: 120 },
