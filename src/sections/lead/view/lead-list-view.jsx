@@ -1,6 +1,6 @@
 import { varAlpha } from 'minimal-shared/utils';
+import { useEffect, useState, useCallback } from 'react';
 import { useBoolean, useSetState } from 'minimal-shared/hooks';
-import { useRef, useEffect, useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
@@ -21,7 +21,6 @@ import { _stateNames, LEAD_OPPORTUNITY_OPTIONS } from 'src/_mock';
 import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
-import { Scrollbar } from 'src/components/scrollbar';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 import { LoadingScreen } from 'src/components/loading-screen';
 import {
@@ -83,18 +82,6 @@ export function UserListView() {
     fetchData();
   }, [fetchData]);
 
-  const BATCH_SIZE = 20;
-  const [visibleCount, setVisibleCount] = useState(BATCH_SIZE);
-  const scrollRef = useRef(null);
-
-  const handleScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    if (el.scrollTop + el.clientHeight >= el.scrollHeight - 200) {
-      setVisibleCount((prev) => prev + BATCH_SIZE);
-    }
-  }, []);
-
   const filters = useSetState({ full_name: '', role: [], Opportunity: 'all' });
   const { state: currentFilters, setState: updateFilters } = filters;
 
@@ -104,10 +91,6 @@ export function UserListView() {
     filters: currentFilters,
   });
 
-  // Reset visible count when filters change
-  useEffect(() => {
-    setVisibleCount(BATCH_SIZE);
-  }, [currentFilters.full_name, currentFilters.role, currentFilters.Opportunity]);
 
   const canReset =
     !!currentFilters.full_name || currentFilters.role.length > 0 || currentFilters.Opportunity !== 'all';
@@ -250,11 +233,7 @@ export function UserListView() {
               }
             />
 
-            <Scrollbar
-              ref={scrollRef}
-              onScroll={handleScroll}
-              sx={{ maxHeight: 600 }}
-            >
+            <Box sx={{ maxHeight: 600, overflow: 'auto' }}>
               <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 960 }}>
                 <TableHeadCustom
                   order={table.order}
@@ -272,9 +251,7 @@ export function UserListView() {
                 />
 
                 <TableBody>
-                  {dataFiltered
-                    .slice(0, visibleCount)
-                    .map((row) => (
+                  {dataFiltered.map((row) => (
                       <UserTableRow
                         key={row.contact_id}
                         row={row}
@@ -295,7 +272,7 @@ export function UserListView() {
                   <TableNoData notFound={notFound} />
                 </TableBody>
               </Table>
-            </Scrollbar>
+            </Box>
           </Box>
         </Card>
       </DashboardContent>
