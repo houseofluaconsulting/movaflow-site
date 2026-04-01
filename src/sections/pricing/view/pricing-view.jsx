@@ -90,19 +90,11 @@ export function PricingView() {
         Purchase Leads
       </Typography>
 
-      <Alert
-          variant="outlined"
-          severity="info"
-          sx={{ mt: 3, display: 'flex', alignItems: 'center' }}
-        >
-          We are currently experiecing issues with Stripe. Purchasing of leads has been temporarily disabled while we resolve the issue. Thank you for your patience and understanding.
-        </Alert>
-
       
 
       {showPricing ? (
         <>
-          {/* {availableTabs.length > 0 && (
+          {availableTabs.length > 0 && (
             <Tabs
               value={currentTab}
               onChange={(_, newValue) => setCurrentTab(newValue)}
@@ -113,11 +105,11 @@ export function PricingView() {
                 <Tab key={tab.key} label={tab.label} />
               ))}
             </Tabs>
-          )} */}
+          )}
 
           {/* VeteranWebsite */}
 
-          {/* {availableTabs[currentTab]?.key === 'VeteranWebsite' && (
+          {availableTabs[currentTab]?.key === 'VeteranWebsite' && (
             <>
               <Box
                 sx={{
@@ -147,10 +139,10 @@ export function PricingView() {
                 ))}
               </Box>
             </>
-          )} */}
+          )}
 
           {/* LegacyWebsite */}
-          {/* {availableTabs[currentTab]?.key === 'LegacyWebsite' && (
+          {availableTabs[currentTab]?.key === 'LegacyWebsite' && (
             <>
               <Box
                 sx={{
@@ -194,7 +186,7 @@ export function PricingView() {
                 ))}
               </Box>
             </>
-          )} */}
+          )}
         </>
       ) : fetchError ? (
         <Alert
