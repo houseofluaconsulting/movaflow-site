@@ -423,3 +423,56 @@ export const _testimonials = [
     content: `CEO of Codealy.io here. We’ve built a developer assessment platform that makes sense - tasks are based on git repositories and run in virtual machines. We automate the pain points - storing candidates code, running it and sharing test results with the whole team, remotely. Bought this template as we need to provide an awesome dashboard for our early customers. I am super happy with purchase. The code is just as good as the design. Thanks!`,
   },
 ];
+
+// ----------------------------------------------------------------------
+
+export const _rewardsPricingPlans = [
+  {
+    credit: '15',
+    opportunity: 'Fresh',
+    type: 'Veteran Website Leads',
+    leadType: 'VeteranWebsite',
+    amount: '10000',
+    labelAction: 'Redeem',
+  },
+  {
+    credit: '15',
+    opportunity: 'Fresh',
+    type: 'Legacy Website Leads',
+    leadType: 'LegacyWebsite',
+    amount: '6000',
+    labelAction: 'Redeem',
+  },
+  {
+    credit: '5',
+    opportunity: 'Fresh',
+    type: 'Veteran Website Leads',
+    leadType: 'VeteranWebsite',
+    amount: '5000',
+    labelAction: 'Redeem',
+  },
+  {
+    credit: '5',
+    opportunity: 'Fresh',
+    type: 'Legacy Website Leads',
+    leadType: 'LegacyWebsite',
+    amount: '3000',
+    labelAction: 'Redeem',
+  },
+  {
+    credit: '25',
+    opportunity: 'Aged',
+    type: 'Veteran Website Leads',
+    leadType: 'VeteranWebsite',
+    amount: '5000',
+    labelAction: 'Redeem',
+  },
+  {
+    credit: '25',
+    opportunity: 'Aged',
+    type: 'Legacy Website Leads',
+    leadType: 'LegacyWebsite',
+    amount: '3000',
+    labelAction: 'Redeem',
+  },
+];

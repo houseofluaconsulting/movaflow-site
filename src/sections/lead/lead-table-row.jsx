@@ -131,10 +131,9 @@ export function UserTableRow({ row, campaigns, selected, editHref, onSelectRow, 
 
             <Stack sx={{ typography: 'body2', flex: '1 1 auto', alignItems: 'flex-start' }}>
               <Link
-                component={RouterLink}
-                href={editHref}
                 color="inherit"
                 sx={{ cursor: 'pointer' }}
+                onClick={quickEditForm.onTrue}
               >
                 {row.full_name}
               </Link>
