@@ -8,6 +8,7 @@ import { SplashScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
 
+const RewardsProgramPage = lazy(() => import('src/pages/rewards-program'));
 const FaqsPage = lazy(() => import('src/pages/faqs'));
 const AboutPage = lazy(() => import('src/pages/about-us'));
 const ContactPage = lazy(() => import('src/pages/contact-us'));
@@ -68,6 +69,14 @@ export const mainRoutes = [
             ],
           },
         ],
+      },
+      {
+        path: 'rewards-program',
+        element: (
+          <MainLayout slotProps={{ footer: { sx: { display: 'none' } } }}>
+            <RewardsProgramPage />
+          </MainLayout>
+        ),
       },
       {
         path: 'pricing',

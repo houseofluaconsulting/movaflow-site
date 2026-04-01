@@ -16,6 +16,7 @@ const ROOTS = {
 // ----------------------------------------------------------------------
 
 export const paths = {
+  rewardsProgram: '/rewards-program',
   comingSoon: '/coming-soon',
   maintenance: '/maintenance',
   pricing: '/pricing',
@@ -102,6 +103,7 @@ export const paths = {
     orders: `${ROOTS.DASHBOARD}/orders`,
     purchase: `${ROOTS.DASHBOARD}/purchase`,
     rewards: `${ROOTS.DASHBOARD}/rewards`,
+    rewardsProgram: `${ROOTS.DASHBOARD}/rewards-program`,
     general: {
       app: `${ROOTS.DASHBOARD}/app`,
       ecommerce: `${ROOTS.DASHBOARD}/ecommerce`,

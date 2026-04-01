@@ -5,9 +5,13 @@ import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import LinearProgress from '@mui/material/LinearProgress';
+
+import { paths } from 'src/routes/paths';
+import { RouterLink } from 'src/routes/components';
 
 import { getRewards } from 'src/actions/rewards';
 import { _rewardsPricingPlans } from 'src/_mock';
@@ -114,9 +118,22 @@ export function RewardsView() {
 
   return (
     <DashboardContent maxWidth="xl">
-      <Typography variant="h3" sx={{ mb: 5 }}>
-        Rewards
-      </Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 5 }}>
+        <Typography variant="h3">
+          Rewards
+        </Typography>
+
+        <Button
+          component={RouterLink}
+          href={paths.dashboard.rewardsProgram}
+          variant="contained"
+          color="secondary"
+          sx={{ color: 'common.white' }}
+          endIcon={<Iconify icon="solar:arrow-right-linear" />}
+        >
+          Learn More
+        </Button>
+      </Box>
 
       <Alert severity="info" sx={{ mb: 3 }}>
         Welcome to our new <b>Rewards Program</b>! Earn points on every purchase and redeem them for lead credits. All purchases from March 2026 onward count toward your rewards balance.

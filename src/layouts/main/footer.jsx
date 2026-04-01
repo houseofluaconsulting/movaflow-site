@@ -68,38 +68,6 @@ export function Footer({ sx, layoutQuery = 'md', ...other }) {
             }),
           ]}
         >
-          <Grid size={{ xs: 12, [layoutQuery]: 3 }}>
-            <Typography
-              variant="body2"
-              sx={(theme) => ({
-                mx: 'auto',
-                maxWidth: 280,
-                [theme.breakpoints.up(layoutQuery)]: { mx: 'unset' },
-              })}
-            >
-              The starting point for your next project with Minimal UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
-            </Typography>
-
-            <Box
-              sx={(theme) => ({
-                mt: 3,
-                mb: 5,
-                display: 'flex',
-                justifyContent: 'center',
-                [theme.breakpoints.up(layoutQuery)]: { mb: 0, justifyContent: 'flex-start' },
-              })}
-            >
-              {_socials.map((social) => (
-                <IconButton key={social.label}>
-                  {social.value === 'twitter' && <Iconify icon="socials:twitter" />}
-                  {social.value === 'facebook' && <Iconify icon="socials:facebook" />}
-                  {social.value === 'instagram' && <Iconify icon="socials:instagram" />}
-                  {social.value === 'linkedin' && <Iconify icon="socials:linkedin" />}
-                </IconButton>
-              ))}
-            </Box>
-          </Grid>
 
           <Grid size={{ xs: 12, [layoutQuery]: 6 }}>
             <Box
