@@ -15,9 +15,10 @@ import { RouterLink } from 'src/routes/components';
 
 import { getRewards } from 'src/actions/rewards';
 import { _rewardsPricingPlans } from 'src/_mock';
-import { getCustomer } from 'src/actions/customer';
 import { DashboardContent } from 'src/layouts/dashboard';
+import { getCustomer, getCustomerOrders } from 'src/actions/customer';
 
+import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { Carousel, useCarousel, CarouselArrowBasicButtons } from 'src/components/carousel';
@@ -60,6 +61,7 @@ export function RewardsView() {
   const { user } = useAuthContext();
   const [rewards, setRewards] = useState([]);
   const [rewardsTotal, setRewardsTotal] = useState(0);
+  const [ordersMap, setOrdersMap] = useState({});
   const [loading, setLoading] = useState(true);
 
   const carousel = useCarousel({
@@ -72,10 +74,19 @@ export function RewardsView() {
 
     setLoading(true);
     try {
-      const [rewardsResult, customerResult] = await Promise.all([
+      const [rewardsResult, customerResult, ordersResult] = await Promise.all([
         getRewards(user.id, user.idToken.toString()),
         getCustomer(user.id, user.idToken.toString()),
+        getCustomerOrders(user.id, user.idToken.toString()),
       ]);
+
+      // Build orders lookup by OrderId
+      const ordersLookup = {};
+      (ordersResult || []).forEach((order) => {
+        if (order.OrderId) {
+          ordersLookup[order.OrderId] = order;
+        }
+      });
 
       // Resolve referring customer names for Referral rewards
       const referralRewards = rewardsResult.filter(
@@ -100,6 +111,7 @@ export function RewardsView() {
       );
 
       setRewards(enrichedRewards);
+      setOrdersMap(ordersLookup);
       setRewardsTotal(customerResult?.RewardsTotal ?? 0);
     } catch (error) {
       console.error('Error fetching rewards:', error);
@@ -256,6 +268,30 @@ export function RewardsView() {
                       Referred by {reward.ReferringCustomerName}
                     </Typography>
                   )}
+                  {reward.RewardType === 'Redeemed' && reward.OrderId && ordersMap[reward.OrderId] && (() => {
+                    const order = ordersMap[reward.OrderId];
+                    const leadTypeLabel = order.LeadType === 'VeteranWebsite'
+                      ? 'Veteran'
+                      : order.LeadType === 'LegacyWebsite'
+                        ? 'Legacy'
+                        : order.LeadType === 'FinalExpense'
+                          ? 'Final Expense'
+                          : order.LeadType === 'OctavianMortgage'
+                            ? 'Octavian Mortgage'
+                            : order.LeadType;
+                    const labels = [];
+                    if (Number(order?.CreditFresh) > 0) labels.push(`${order.CreditFresh} ${leadTypeLabel || ''} Fresh`.trim());
+                    if (Number(order?.CreditAged) > 0) labels.push(`${order.CreditAged} ${leadTypeLabel || ''} Aged`.trim());
+                    return labels.length > 0 ? (
+                      <Label
+                        variant="soft"
+                        color={Number(order?.CreditFresh) > 0 ? 'primary' : 'secondary'}
+                        sx={{ mt: 0.5, fontWeight: 700 }}
+                      >
+                        {labels.join(' · ')}
+                      </Label>
+                    ) : null;
+                  })()}
                 </Box>
                 <Box sx={{ textAlign: 'right' }}>
                   <Typography variant="h5" sx={{ fontWeight: 700, color: reward.RewardType === 'Redeemed' ? 'error.main' : isCurrentMonth(reward.Created) ? 'text.disabled' : 'success.main' }}>
