@@ -71,7 +71,7 @@ const REDEMPTION_TIERS = [
 const FAQ_ITEMS = [
   {
     question: 'When do my points become available?',
-    answer: 'Points from purchases made in the current month become available at the start of the following month. For example, points earned from March purchases are available starting April 1st. Referral bonus points are available immediately.',
+    answer: 'Points from purchases made in the current month become available at the start of the following month. For example, points earned from March purchases are available starting April 1st.',
   },
   {
     question: 'Do my points expire?',
