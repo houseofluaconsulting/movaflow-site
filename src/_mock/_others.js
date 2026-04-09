@@ -377,6 +377,19 @@ export const _legacyWebsiteAgedPricingPlans = [
   },
 ];
 
+export const _octavianMortgagePricingPlans = [
+  {
+    credit: '40',
+    opportunity: 'Fresh',
+    type: 'Veteran Website Leads',
+    price: 39,
+    amount: '$1560.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TKN1oGHAeFkU5hvHlbOJBnL',
+  }
+];
+
 // ----------------------------------------------------------------------
 
 export const _testimonials = [
