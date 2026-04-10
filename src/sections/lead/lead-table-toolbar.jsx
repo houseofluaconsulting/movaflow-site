@@ -117,7 +117,7 @@ export function UserTableToolbar({ filters, options, onResetPage }) {
             fullWidth
             value={currentFilters.full_name}
             onChange={handleFilterName}
-            placeholder="Search by Name..."
+            placeholder="Search by Name, Email, Phone, or State..."
             slotProps={{
               input: {
                 startAdornment: (

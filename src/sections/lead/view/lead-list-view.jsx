@@ -301,7 +301,13 @@ function applyFilter({ inputData, comparator, filters }) {
   inputData = stabilizedThis.map((el) => el[0]);
 
   if (full_name) {
-    inputData = inputData.filter((user) => user.full_name.toLowerCase().includes(full_name.toLowerCase()));
+    const query = full_name.toLowerCase();
+    inputData = inputData.filter((user) =>
+      (user.full_name && user.full_name.toLowerCase().includes(query)) ||
+      (user.email && user.email.toLowerCase().includes(query)) ||
+      (user.phone_number && user.phone_number.toLowerCase().includes(query)) ||
+      (user.state && user.state.toLowerCase().includes(query))
+    );
   }
 
   if (Opportunity !== 'all') {
