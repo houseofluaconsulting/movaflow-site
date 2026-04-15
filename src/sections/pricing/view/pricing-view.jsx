@@ -60,7 +60,7 @@ export function PricingView() {
   const availableTabs = [
     ...(leadTypes?.VeteranWebsite?.Active ? [{ key: 'VeteranWebsite', label: 'Veteran Leads' }] : []),
     ...(leadTypes?.LegacyWebsite?.Active ? [{ key: 'LegacyWebsite', label: 'Legacy Leads' }] : []),
-    ...(leadTypes?.OctavianMortgage?.Active ? [{ key: 'OctavianMortgage', label: 'Octavian Mortgage Leads' }] : []),
+    ...(leadTypes?.OctavianMortgage?.Active ? [{ key: 'OctavianMortgage', label: 'Mortgage Leads' }] : []),
   ];
 
   const arrowIcon = () => (
