@@ -340,7 +340,7 @@ export const _legacyWebsiteMixedPricingPlans = [
     originalFreshPrice: 29,
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
-    priceId: 'price_1SSfnvGHAeFkU5hvlDuwqsWO',
+    priceId: 'price_1TONElGHAeFkU5hvjJNZ9KGB',
   },
   {
     credit: '40/50',
@@ -354,7 +354,7 @@ export const _legacyWebsiteMixedPricingPlans = [
     originalFreshPrice: 27,
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
-    priceId: 'price_1SSfopGHAeFkU5hvch4ixgSN',
+    priceId: 'price_1TONFCGHAeFkU5hvojzkvaUm',
   },
   {
     credit: '50/60',
