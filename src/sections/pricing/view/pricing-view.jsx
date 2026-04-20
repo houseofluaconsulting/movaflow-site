@@ -109,7 +109,6 @@ export function PricingView() {
           )}
 
           {/* VeteranWebsite */}
-
           {availableTabs[currentTab]?.key === 'VeteranWebsite' && (
             <>
               <Box
@@ -137,6 +136,19 @@ export function PricingView() {
               >
                 {_veteranWebsiteMixedPricingPlans.map((card, index) => (
                   <MixedPricingCard key={card.priceId} card={card} index={index} />
+                ))}
+              </Box>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gap: 3,
+                  alignItems: { md: 'center' },
+                  gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                  mb: 2,
+                }}
+              >
+                {_veteranWebsiteAgedPricingPlans.map((card, index) => (
+                  <PricingCard key={card.priceId} card={card} index={index} />
                 ))}
               </Box>
             </>
