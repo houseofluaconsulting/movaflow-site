@@ -195,7 +195,7 @@ export function PricingCard({ card, sx, ...other }) {
   (
     <Box sx={{ position: 'relative' }}>
       {originalPrice && (
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5, ml: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mt: -4, mb: -1.5, ml: 3.5 }}>
           {arrowIcon()}
           <Box
             component="span"
