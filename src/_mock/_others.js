@@ -368,6 +368,7 @@ export const _legacyWebsiteMixedPricingPlans = [
     originalFreshPrice: 26,
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
+    priceId: 'price_1TONFfGHAeFkU5hvr6cSwEio',
   },
   {
     credit: '60/70',
