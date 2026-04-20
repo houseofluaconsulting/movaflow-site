@@ -29,7 +29,7 @@ import { useAuthContext } from 'src/auth/hooks';
 
 export function PricingCard({ card, sx, ...other }) {
   const { user } = useAuthContext();
-  const { credit, opportunity, type, price, amount, lists, labelAction, priceId } = card;
+  const { credit, opportunity, type, price, originalPrice, originalAmount, amount, lists, labelAction, priceId } = card;
   const termsConstentConfirmDialog = useBoolean();
   const termsAccepted = useBoolean();
   const isProcessing = useBoolean();
@@ -182,28 +182,47 @@ export function PricingCard({ card, sx, ...other }) {
         </Typography>
       </Box>
 
-      <Typography variant="h6" sx={{ textTransform: 'capitalize', color: 'text.disabled', mt: 1 }}>{amount}</Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
+        {originalAmount && (
+          <Typography variant="h6" sx={{ textTransform: 'capitalize', color: 'grey.400', textDecoration: 'line-through' }}>{originalAmount}</Typography>
+        )}
+        <Typography variant="h6" sx={{ textTransform: 'capitalize', color: originalAmount ? 'success.main' : 'text.disabled' }}>{amount}</Typography>
+      </Box>
     </Stack>
   );
 
   const renderPrice = () =>
   (
-    <Box sx={{ display: 'flex', }}>
-      <Typography variant="h4">$</Typography>
+    <Box sx={{ position: 'relative' }}>
+      {originalPrice && (
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5, ml: 2 }}>
+          {arrowIcon()}
+          <Box
+            component="span"
+            sx={{ whiteSpace: 'nowrap', color: 'grey.500', typography: 'subtitle1', textDecoration: 'line-through', mt: -2 }}
+          >
+            ${originalPrice}/lead
+          </Box>
+        </Box>
+      )}
 
-      <Typography variant="h2">{price}</Typography>
+      <Box sx={{ display: 'flex', }}>
+        <Typography variant="h4">$</Typography>
 
-      <Typography
-        component="span"
-        sx={{
-          ml: 1,
-          alignSelf: 'center',
-          typography: 'body2',
-          color: 'text.disabled',
-        }}
-      >
-        / lead
-      </Typography>
+        <Typography variant="h2">{price}</Typography>
+
+        <Typography
+          component="span"
+          sx={{
+            ml: 1,
+            alignSelf: 'center',
+            typography: 'body2',
+            color: 'text.disabled',
+          }}
+        >
+          / lead
+        </Typography>
+      </Box>
     </Box>
   );
 
@@ -234,6 +253,7 @@ export function PricingCard({ card, sx, ...other }) {
           borderRadius: 2,
           flexDirection: 'column',
           bgcolor: 'background.default',
+          position: 'relative',
           border: `1px solid ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
           boxShadow: theme.vars.customShadows.card,
           ...((isBasic || isDiscount10) && {
@@ -251,6 +271,11 @@ export function PricingCard({ card, sx, ...other }) {
       ]}
       {...other}
     >
+      {originalPrice && (
+        <Label color="success" sx={{ position: 'absolute', top: 16, right: 16 }}>
+          ON SALE
+        </Label>
+      )}
       {renderIcon()}
       {renderSubscription()}
       {renderPrice()}
