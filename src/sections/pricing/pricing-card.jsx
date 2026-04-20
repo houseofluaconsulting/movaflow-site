@@ -465,22 +465,26 @@ export function MixedPricingCard({ card, sx, ...other }) {
   const renderPrice = () =>
   (
     <Stack sx={{ mt: -2 }}>
-      {originalFreshPrice && originalAgedPrice && (
+      {(originalFreshPrice || originalAgedPrice) && (
         <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 0.5, ml: 2 }}>
           {arrowIcon()}
           <Stack>
-            <Box
-              component="span"
-              sx={{ whiteSpace: 'nowrap', color: 'grey.500', typography: 'subtitle2', textDecoration: 'line-through', mt: 0 }}
-            >
-              ${originalFreshPrice} /Fresh lead
-            </Box>
-            <Box
-              component="span"
-              sx={{ whiteSpace: 'nowrap', color: 'grey.500', typography: 'subtitle2', textDecoration: 'line-through', mt: -1 }}
-            >
-              ${originalAgedPrice} /Aged lead
-            </Box>
+            {originalFreshPrice && (
+              <Box
+                component="span"
+                sx={{ whiteSpace: 'nowrap', color: 'grey.500', typography: 'subtitle2', textDecoration: 'line-through', mt: 0 }}
+              >
+                ${originalFreshPrice} /Fresh lead
+              </Box>
+            )}
+            {originalAgedPrice && (
+              <Box
+                component="span"
+                sx={{ whiteSpace: 'nowrap', color: 'grey.500', typography: 'subtitle2', textDecoration: 'line-through', mt: originalFreshPrice ? -1 : 0 }}
+              >
+                ${originalAgedPrice} /Aged lead
+              </Box>
+            )}
           </Stack>
         </Box>
       )}
