@@ -296,7 +296,7 @@ export function PricingCard({ card, sx, ...other }) {
 
 export function MixedPricingCard({ card, sx, ...other }) {
   const { user } = useAuthContext();
-  const { credit, opportunity, type, description, freshPrice, agedPrice, amount, lists, labelAction, priceId } = card;
+  const { credit, opportunity, type, description, freshPrice, agedPrice, originalFreshPrice, originalAgedPrice, originalAmount, amount, lists, labelAction, priceId } = card;
   const termsConstentConfirmDialog = useBoolean();
   const termsAccepted = useBoolean();
   const isProcessing = useBoolean();
@@ -453,13 +453,37 @@ export function MixedPricingCard({ card, sx, ...other }) {
           {description}
         </Typography>
       </Box>
-      <Typography variant="h6" sx={{ textTransform: 'capitalize', color: 'text.disabled', mt: 1 }}>{amount}</Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
+        {originalAmount && (
+          <Typography variant="h6" sx={{ textTransform: 'capitalize', color: 'grey.400', textDecoration: 'line-through' }}>{originalAmount}</Typography>
+        )}
+        <Typography variant="h6" sx={{ textTransform: 'capitalize', color: originalAmount ? 'success.main' : 'text.disabled' }}>{amount}</Typography>
+      </Box>
     </Stack>
   );
 
   const renderPrice = () =>
   (
     <Stack sx={{ mt: -2 }}>
+      {originalFreshPrice && originalAgedPrice && (
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 0.5, ml: 2 }}>
+          {arrowIcon()}
+          <Stack>
+            <Box
+              component="span"
+              sx={{ whiteSpace: 'nowrap', color: 'grey.500', typography: 'subtitle2', textDecoration: 'line-through', mt: 0 }}
+            >
+              ${originalFreshPrice} /Fresh lead
+            </Box>
+            <Box
+              component="span"
+              sx={{ whiteSpace: 'nowrap', color: 'grey.500', typography: 'subtitle2', textDecoration: 'line-through', mt: -1 }}
+            >
+              ${originalAgedPrice} /Aged lead
+            </Box>
+          </Stack>
+        </Box>
+      )}
       <Box sx={{ display: 'flex', mb: -1}}>
         <Typography variant="h6">$</Typography>
 
@@ -523,6 +547,7 @@ export function MixedPricingCard({ card, sx, ...other }) {
           gap: 5,
           display: 'flex',
           borderRadius: 2,
+          position: 'relative',
           flexDirection: 'column',
           bgcolor: 'background.default',
           border: `1px solid ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
@@ -542,6 +567,11 @@ export function MixedPricingCard({ card, sx, ...other }) {
       ]}
       {...other}
     >
+      {originalAmount && (
+        <Label color="success" sx={{ position: 'absolute', top: 16, right: 16 }}>
+          ON SALE
+        </Label>
+      )}
       {renderIcon()}
       {renderSubscription()}
       {renderPrice()}
