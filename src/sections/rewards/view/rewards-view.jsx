@@ -198,7 +198,7 @@ export function RewardsView() {
             color="primary"
             sx={{ height: 10, borderRadius: 5 }}
           />
-        
+
           <Box
             sx={{
               position: 'absolute',
@@ -278,7 +278,9 @@ export function RewardsView() {
                           ? 'Final Expense'
                           : order.LeadType === 'OctavianMortgage'
                             ? 'Octavian Mortgage'
-                            : order.LeadType;
+                            : order.LeadType === 'LegacyMortgage'
+                              ? 'Legacy Mortgage'
+                              : order.LeadType;
                     const labels = [];
                     if (Number(order?.CreditFresh) > 0) labels.push(`${order.CreditFresh} ${leadTypeLabel || ''} Fresh`.trim());
                     if (Number(order?.CreditAged) > 0) labels.push(`${order.CreditAged} ${leadTypeLabel || ''} Aged`.trim());

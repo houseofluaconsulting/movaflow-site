@@ -48,10 +48,10 @@ export const UpdateUserSchema = zod.object({
   ringyAuthTokenLegacyWebsite: zod.string(),
   ringySIDLegacyWebsiteAged: zod.string(),
   ringyAuthTokenLegacyWebsiteAged: zod.string(),
-  ringySIDOctavianMortgage: zod.string(),
-  ringyAuthTokenOctavianMortgage: zod.string(),
-  ringySIDOctavianMortgageAged: zod.string(),
-  ringyAuthTokenOctavianMortgageAged: zod.string(),
+  ringySIDLegacyMortgage: zod.string(),
+  ringyAuthTokenLegacyMortgage: zod.string(),
+  ringySIDLegacyMortgageAged: zod.string(),
+  ringyAuthTokenLegacyMortgageAged: zod.string(),
   ghlAccessToken: zod.string(),
   ghlLocationID: zod.string(),
   closeCRMAPIKey: zod.string(),
@@ -97,10 +97,10 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsiteAged: userData['RingyAuthTokenLegacyWebsiteAged'] ?? "",
     ringySIDLegacyWebsiteAged: userData['RingySIDLegacyWebsiteAged'] ?? "",
     ringyAuthTokenLegacyWebsite: userData['RingyAuthTokenLegacyWebsite'] ?? "",
-    ringySIDOctavianMortgage: userData['RingySIDOctavianMortgage'] ?? "",
-    ringyAuthTokenOctavianMortgage: userData['RingyAuthTokenOctavianMortgage'] ?? "",
-    ringySIDOctavianMortgageAged: userData['RingySIDOctavianMortgageAged'] ?? "",
-    ringyAuthTokenOctavianMortgageAged: userData['RingyAuthTokenOctavianMortgageAged'] ?? "",
+    ringySIDLegacyMortgage: userData['RingySIDOctavianMortgage'] ?? "",
+    ringyAuthTokenLegacyMortgage: userData['RingyAuthTokenOctavianMortgage'] ?? "",
+    ringySIDLegacyMortgageAged: userData['RingySIDOctavianMortgageAged'] ?? "",
+    ringyAuthTokenLegacyMortgageAged: userData['RingyAuthTokenOctavianMortgageAged'] ?? "",
     ghlAccessToken: userData['GHLAccessToken'] ?? "",
     ghlLocationID: userData['GHLocationID'] ?? "",
     closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
@@ -124,10 +124,10 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsite: '',
     ringySIDLegacyWebsiteAged: '',
     ringyAuthTokenLegacyWebsiteAged: '',
-    ringySIDOctavianMortgage: '',
-    ringyAuthTokenOctavianMortgage: '',
-    ringySIDOctavianMortgageAged: '',
-    ringyAuthTokenOctavianMortgageAged: '',
+    ringySIDLegacyMortgage: '',
+    ringyAuthTokenLegacyMortgage: '',
+    ringySIDLegacyMortgageAged: '',
+    ringyAuthTokenLegacyMortgageAged: '',
     ghlAccessToken: '',
     ghlLocationID: '',
     closeCRMAPIKey: '',
@@ -151,7 +151,7 @@ export function AccountGeneral() {
   const onSubmit = handleSubmit(async (data) => {
     // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ringyAuthTokenOctavianMortgage, data.ringySIDOctavianMortgage, data.ringyAuthTokenOctavianMortgageAged, data.ringySIDOctavianMortgageAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications, user.idToken.toString());
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ringyAuthTokenLegacyMortgage, data.ringySIDLegacyMortgage, data.ringyAuthTokenLegacyMortgageAged, data.ringySIDLegacyMortgageAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications, user.idToken.toString());
 
     try {
       await promise;
@@ -472,7 +472,7 @@ export function AccountGeneral() {
                   }}>
 
                     <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
-                      Octavian Mortgage Lead Vendor
+                      Mortgage Lead Vendor
                     </Typography>
 
                     <Label
@@ -488,8 +488,8 @@ export function AccountGeneral() {
                     </Label>
                   </Box>
 
-                  <Field.Text name="ringySIDOctavianMortgage" label="sid" />
-                  <Field.Text name="ringyAuthTokenOctavianMortgage" label="authToken" />
+                  <Field.Text name="ringySIDLegacyMortgage" label="sid" />
+                  <Field.Text name="ringyAuthTokenLegacyMortgage" label="authToken" />
 
                 </Stack>
                 <Stack spacing={2} sx={{ mt: 0 }}>
@@ -499,7 +499,7 @@ export function AccountGeneral() {
                   }}>
 
                     <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
-                      Octavian Mortgage Lead Vendor
+                      Mortgage Lead Vendor
                     </Typography>
 
                     <Label
@@ -515,8 +515,8 @@ export function AccountGeneral() {
                     </Label>
                   </Box>
 
-                  <Field.Text name="ringySIDOctavianMortgageAged" label="sid" />
-                  <Field.Text name="ringyAuthTokenOctavianMortgageAged" label="authToken" />
+                  <Field.Text name="ringySIDLegacyMortgageAged" label="sid" />
+                  <Field.Text name="ringyAuthTokenLegacyMortgageAged" label="authToken" />
 
                 </Stack>
               </Box>

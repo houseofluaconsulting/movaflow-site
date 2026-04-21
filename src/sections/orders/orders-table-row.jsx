@@ -150,14 +150,16 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
         <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.Amount}</TableCell>
 
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
-           {row.LeadType === 'VeteranWebsite'
+          {row.LeadType === 'VeteranWebsite'
             ? 'Veteran'
             : row.LeadType === 'LegacyWebsite'
               ? 'Legacy'
               : row.LeadType === 'FinalExpense'
                 ? 'Final Expense'
-                  : row.LeadType === 'OctavianMortgage'
-                    ? 'Octavian Mortgage'
+                : row.LeadType === 'OctavianMortgage'
+                  ? 'Octavian Mortgage'
+                  : row.LeadType === 'LegacyMortgage'
+                    ? 'Legacy Mortgage'
                     : row.LeadType}
         </TableCell>
 
@@ -188,7 +190,7 @@ export function UserTableRow({ row, selected, editHref, onSelectRow, onDeleteRow
 
         {/* <TableCell sx={{ whiteSpace: 'nowrap' }}>{row.beneficiary}</TableCell> */}
 
-       <TableCell sx={{ whiteSpace: 'nowrap' }}>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>
           <ListItemText
             primary={fDate(formatToLocalTime(row.Created))}
             secondary={fTime(formatToLocalTime(row.Created))}

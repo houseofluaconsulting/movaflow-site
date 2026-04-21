@@ -172,7 +172,9 @@ export function UserQuickEditForm({ currentUser, campaigns, open, onClose, creat
                         ? 'Final Expense'
                         : currentUser?.LeadType === 'OctavianMortgage'
                           ? 'Octavian Mortgage'
-                          : currentUser?.LeadType)}{' '}{currentUser?.Opportunity}
+                          : currentUser?.LeadType === '`LegacyMortgage`'
+                            ? 'Legacy Mortgage'
+                            : currentUser?.LeadType)}{' '}{currentUser?.Opportunity}
                 </Label>
                 <Box component="span" sx={{ color: 'text.secondary', mt: 0.5 }}>
                   <b>Created:</b> {created}

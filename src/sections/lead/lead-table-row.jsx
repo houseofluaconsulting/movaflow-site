@@ -156,8 +156,10 @@ export function UserTableRow({ row, campaigns, selected, editHref, onSelectRow, 
               ? 'Legacy'
               : row.LeadType === 'FinalExpense'
                 ? 'Final Expense'
-                  : row.LeadType === 'OctavianMortgage'
-                    ? 'Octavian Mortgage'
+                : row.LeadType === 'OctavianMortgage'
+                  ? 'Octavian Mortgage'
+                  : row.LeadType === 'LegacyMortgage'
+                    ? 'Legacy Mortgage'
                     : row.LeadType}
         </TableCell>
 

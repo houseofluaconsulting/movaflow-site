@@ -421,12 +421,55 @@ export const _octavianMortgagePricingPlans = [
   {
     credit: '40',
     opportunity: 'Fresh',
+    type: 'Octavian Mortgage Leads',
+    price: 35,
+    amount: '$1400.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TOO52GHAeFkU5hv2G8khRrV',
+  }
+];
+
+export const _legacyMortgagePricingPlans = [
+  {
+    credit: '20',
+    opportunity: 'Fresh',
+    type: 'Legacy Mortgage Leads',
+    price: 45,
+    amount: '$900.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TOO2zGHAeFkU5hv4SY5WKy4',
+  },
+  {
+    credit: '30',
+    opportunity: 'Fresh',
+    type: 'Legacy Mortgage Leads',
+    price: 42,
+    amount: '$1260.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TOO3NGHAeFkU5hvRzX6qMyH',
+  },
+  {
+    credit: '40',
+    opportunity: 'Fresh',
     type: 'Legacy Mortgage Leads',
     price: 39,
     amount: '$1560.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
-    priceId: 'price_1TKN1oGHAeFkU5hvHlbOJBnL',
+    priceId: 'price_1TOO4jGHAeFkU5hvbAp7dLGO',
+  },
+  {
+    credit: '50',
+    opportunity: 'Fresh',
+    type: 'Legacy Mortgage Leads',
+    price: 36,
+    amount: '$1400.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TOO5VGHAeFkU5hvcApxOVYA',
   }
 ];
 

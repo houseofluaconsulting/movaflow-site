@@ -13,7 +13,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import { getCustomer } from 'src/actions/customer';
-import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans, _veteranWebsiteMixedPricingPlans, _veteranWebsiteAgedPricingPlans, _legacyWebsiteMixedPricingPlans, _legacyWebsiteAgedPricingPlans, _octavianMortgagePricingPlans} from 'src/_mock';
+import { _veteranWebsitePricingPlans, _legacyWebsitePricingPlans, _veteranWebsiteMixedPricingPlans, _veteranWebsiteAgedPricingPlans, _legacyWebsiteMixedPricingPlans, _legacyWebsiteAgedPricingPlans, _octavianMortgagePricingPlans, _legacyMortgagePricingPlans } from 'src/_mock';
 
 import { LoadingScreen } from 'src/components/loading-screen';
 
@@ -60,7 +60,7 @@ export function PricingView() {
   const availableTabs = [
     ...(leadTypes?.VeteranWebsite?.Active ? [{ key: 'VeteranWebsite', label: 'Veteran Leads' }] : []),
     ...(leadTypes?.LegacyWebsite?.Active ? [{ key: 'LegacyWebsite', label: 'Legacy Leads' }] : []),
-    ...(leadTypes?.OctavianMortgage?.Active ? [{ key: 'OctavianMortgage', label: 'Mortgage Leads' }] : []),
+    ...(leadTypes?.OctavianMortgage?.Active || leadTypes?.LegacyMortgage?.Active ? [{ key: 'MortgageLeads', label: 'Mortgage Leads' }] : []),
   ];
 
   const arrowIcon = () => (
@@ -155,21 +155,39 @@ export function PricingView() {
           )}
 
           {/* OctavianMortgage */}
-          {availableTabs[currentTab]?.key === 'OctavianMortgage' && (
+          {availableTabs[currentTab]?.key === 'MortgageLeads' && (
             <>
-              <Box
-                sx={{
-                  display: 'grid',
-                  gap: 3,
-                  alignItems: { md: 'center' },
-                  gridTemplateColumns: { md: 'repeat(4, 1fr)' },
-                  mb: 2,
-                }}
-              >
-                {_octavianMortgagePricingPlans.map((card, index) => (
-                  <PricingCard key={card.priceId} card={card} index={index} />
-                ))}
-              </Box>
+              {leadTypes?.LegacyMortgage?.Active && (
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gap: 3,
+                    alignItems: { md: 'center' },
+                    gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                    mb: 2,
+                  }}
+                >
+                  {_legacyMortgagePricingPlans.map((card, index) => (
+                    <PricingCard key={card.priceId} card={card} index={index} />
+                  ))}
+                </Box>
+              )}
+
+              {leadTypes?.OctavianMortgage?.Active && (
+                <Box
+                  sx={{
+                    display: 'grid',
+                    gap: 3,
+                    alignItems: { md: 'center' },
+                    gridTemplateColumns: { md: 'repeat(4, 1fr)' },
+                    mb: 2,
+                  }}
+                >
+                  {_octavianMortgagePricingPlans.map((card, index) => (
+                    <PricingCard key={card.priceId} card={card} index={index} />
+                  ))}
+                </Box>
+              )}
             </>
           )}
 

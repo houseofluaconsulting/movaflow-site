@@ -62,10 +62,10 @@ export async function getCustomer(customerId, idToken) {
             RingyAuthTokenLegacyWebsite: customer.LeadType?.LegacyWebsite?.Fresh?.CRMIntegration?.Ringy?.AuthToken,
             RingySIDLegacyWebsiteAged: customer.LeadType?.LegacyWebsite?.Aged?.CRMIntegration?.Ringy?.SID,
             RingyAuthTokenLegacyWebsiteAged: customer.LeadType?.LegacyWebsite?.Aged?.CRMIntegration?.Ringy?.AuthToken,
-            RingySIDOctavianMortgage: customer.LeadType?.OctavianMortgage?.Fresh?.CRMIntegration?.Ringy?.SID,
-            RingyAuthTokenOctavianMortgage: customer.LeadType?.OctavianMortgage?.Fresh?.CRMIntegration?.Ringy?.AuthToken,
-            RingySIDOctavianMortgageAged: customer.LeadType?.OctavianMortgage?.Aged?.CRMIntegration?.Ringy?.SID,
-            RingyAuthTokenOctavianMortgageAged: customer.LeadType?.OctavianMortgage?.Aged?.CRMIntegration?.Ringy?.AuthToken,
+            RingySIDLegacyMortgage: customer.LeadType?.LegacyMortgage?.Fresh?.CRMIntegration?.Ringy?.SID,
+            RingyAuthTokenLegacyMortgage: customer.LeadType?.LegacyMortgage?.Fresh?.CRMIntegration?.Ringy?.AuthToken,
+            RingySIDLegacyMortgageAged: customer.LeadType?.LegacyMortgage?.Aged?.CRMIntegration?.Ringy?.SID,
+            RingyAuthTokenLegacyMortgageAged: customer.LeadType?.LegacyMortgage?.Aged?.CRMIntegration?.Ringy?.AuthToken,
             GHLAccessToken: customer.CRMIntegration?.GoHighLevel?.AccessToken,
             GHLocationID: customer.CRMIntegration?.GoHighLevel?.LocationID,
             CloseCRMAPIKey: customer.CRMIntegration?.CloseCRM?.APIKey,
@@ -84,7 +84,7 @@ export async function getCustomer(customerId, idToken) {
     }
 }
 
-export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsiteAged, ringyAuthTokenOctavianMortgage, ringySIDOctavianMortgage, ringyAuthTokenOctavianMortgageAged, ringySIDOctavianMortgageAged, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications, idToken) {
+export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsiteAged, ringyAuthTokenLegacyMortgage, ringySIDLegacyMortgage, ringyAuthTokenLegacyMortgageAged, ringySIDLegacyMortgageAged, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications, idToken) {
     try {
         const docClient = getDynamoDBClient(idToken);
         const tableEnv = import.meta.env.VITE_DYNAMODB_TABLE_ENV;
@@ -109,10 +109,10 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
                 "#LeadType.#LegacyWebsite.#Fresh.#CRM.#Ringy.#SID = :legacySid, " +
                 "#LeadType.#LegacyWebsite.#Aged.#CRM.#Ringy.#AuthToken = :legacyAuthTokenAged, " +
                 "#LeadType.#LegacyWebsite.#Aged.#CRM.#Ringy.#SID = :legacySidAged, " +
-                "#LeadType.#OctavianMortgage.#Fresh.#CRM.#Ringy.#AuthToken = :octAuthToken, " +
-                "#LeadType.#OctavianMortgage.#Fresh.#CRM.#Ringy.#SID = :octSid, " +
-                "#LeadType.#OctavianMortgage.#Aged.#CRM.#Ringy.#AuthToken = :octAuthTokenAged, " +
-                "#LeadType.#OctavianMortgage.#Aged.#CRM.#Ringy.#SID = :octSidAged",
+                "#LeadType.#LegacyMortgage.#Fresh.#CRM.#Ringy.#AuthToken = :octAuthToken, " +
+                "#LeadType.#LegacyMortgage.#Fresh.#CRM.#Ringy.#SID = :octSid, " +
+                "#LeadType.#LegacyMortgage.#Aged.#CRM.#Ringy.#AuthToken = :octAuthTokenAged, " +
+                "#LeadType.#LegacyMortgage.#Aged.#CRM.#Ringy.#SID = :octSidAged",
             ExpressionAttributeNames: {
                 "#StateLicenses": "StateLicenses",
                 "#EmailNotifications": "EmailNotifications",
@@ -126,7 +126,7 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
                 "#LeadType": "LeadType",
                 "#VeteranWebsite": "VeteranWebsite",
                 "#LegacyWebsite": "LegacyWebsite",
-                "#OctavianMortgage": "OctavianMortgage",
+                "#LegacyMortgage": "LegacyMortgage",
                 "#Fresh": "Fresh",
                 "#Aged": "Aged",
                 "#Ringy": "Ringy",
@@ -148,10 +148,10 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
                 ":legacySid": ringySIDLegacyWebsite.replace(/\s+/g, ""),
                 ":legacyAuthTokenAged": ringyAuthTokenLegacyWebsiteAged.replace(/\s+/g, ""),
                 ":legacySidAged": ringySIDLegacyWebsiteAged.replace(/\s+/g, ""),
-                ":octAuthToken": ringyAuthTokenOctavianMortgage.replace(/\s+/g, ""),
-                ":octSid": ringySIDOctavianMortgage.replace(/\s+/g, ""),
-                ":octAuthTokenAged": ringyAuthTokenOctavianMortgageAged.replace(/\s+/g, ""),
-                ":octSidAged": ringySIDOctavianMortgageAged.replace(/\s+/g, "")
+                ":octAuthToken": ringyAuthTokenLegacyMortgage.replace(/\s+/g, ""),
+                ":octSid": ringySIDLegacyMortgage.replace(/\s+/g, ""),
+                ":octAuthTokenAged": ringyAuthTokenLegacyMortgageAged.replace(/\s+/g, ""),
+                ":octSidAged": ringySIDLegacyMortgageAged.replace(/\s+/g, "")
             },
             ReturnValues: "UPDATED_NEW"
         });

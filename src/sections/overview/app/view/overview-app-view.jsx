@@ -181,21 +181,21 @@ export function OverviewAppView() {
           </>
         )}
 
-        {data?.LeadType?.OctavianMortgage?.Active && (
+        {(data?.LeadType?.LegacyMortgage?.Active || data?.LeadType?.OctavianMortgage?.Active) && (
           <>
             <Grid size={{ xs: 12, md: 3 }}>
               <LeadCreditSummary
-                type="Octavian Mortgage"
+                type="Legacy Mortgage"
                 opportunity="Fresh"
-                total={data['OctavianMortgageFresh']}
+                total={data['LegacyMortgageFresh']}
               />
             </Grid>
 
             <Grid size={{ xs: 12, md: 3 }}>
               <LeadCreditSummary
-                type="Octavian Mortgage"
+                type="Legacy Mortgage"
                 opportunity="Aged"
-                total={data['OctavianMortgageAged']}
+                total={data['LegacyMortgageAged']}
               />
             </Grid>
           </>
