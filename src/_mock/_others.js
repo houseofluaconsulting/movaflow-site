@@ -466,7 +466,7 @@ export const _legacyMortgagePricingPlans = [
     opportunity: 'Fresh',
     type: 'Legacy Mortgage Leads',
     price: 36,
-    amount: '$1400.00',
+    amount: '$1800.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
     labelAction: 'Purchase',
     priceId: 'price_1TOO5VGHAeFkU5hvcApxOVYA',
