@@ -27,7 +27,7 @@ import { useAuthContext } from 'src/auth/hooks';
 
 // ----------------------------------------------------------------------
 
-export function PricingCard({ card, sx, ...other }) {
+export function PricingCard({ card, logo, sx, ...other }) {
   const { user } = useAuthContext();
   const { credit, opportunity, type, price, originalPrice, originalAmount, amount, lists, labelAction, priceId } = card;
   const termsConstentConfirmDialog = useBoolean();
@@ -275,6 +275,14 @@ export function PricingCard({ card, sx, ...other }) {
         <Label color="success" sx={{ position: 'absolute', top: 16, right: 16 }}>
           ON SALE
         </Label>
+      )}
+      {logo && (
+        <Box
+          component="img"
+          src={logo}
+          alt="logo"
+          sx={{ position: 'absolute', top: 16, right: 16, width: 80, height: 80, objectFit: 'contain' }}
+        />
       )}
       {renderIcon()}
       {renderSubscription()}

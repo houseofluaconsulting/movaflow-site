@@ -184,7 +184,7 @@ export function PricingView() {
                   }}
                 >
                   {_octavianMortgagePricingPlans.map((card, index) => (
-                    <PricingCard key={card.priceId} card={card} index={index} />
+                    <PricingCard key={card.priceId} card={card} index={index} logo="/assets/images/logos/octavianlogo.png" />
                   ))}
                 </Box>
               )}
