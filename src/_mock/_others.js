@@ -477,7 +477,7 @@ export const _finalExpensePricingPlans = [
   {
     credit: '30',
     opportunity: 'Fresh',
-    type: 'Legacy Mortgage Leads',
+    type: 'Final Expense Leads',
     price: 29,
     amount: '$870.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
@@ -487,7 +487,7 @@ export const _finalExpensePricingPlans = [
   {
     credit: '40',
     opportunity: 'Fresh',
-    type: 'Legacy Mortgage Leads',
+    type: 'Final Expense Leads',
     price: 28,
     amount: '$1120.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
@@ -497,7 +497,7 @@ export const _finalExpensePricingPlans = [
   {
     credit: '50',
     opportunity: 'Fresh',
-    type: 'Legacy Mortgage Leads',
+    type: 'Final Expense Leads',
     price: 26,
     amount: '$1300.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
@@ -507,7 +507,7 @@ export const _finalExpensePricingPlans = [
   {
     credit: '60',
     opportunity: 'Fresh',
-    type: 'Legacy Mortgage Leads',
+    type: 'Final Expense Leads',
     price: 24,
     amount: '$1440.00',
     lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
