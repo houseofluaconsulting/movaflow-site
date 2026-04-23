@@ -52,6 +52,8 @@ export const UpdateUserSchema = zod.object({
   ringyAuthTokenLegacyMortgage: zod.string(),
   ringySIDLegacyMortgageAged: zod.string(),
   ringyAuthTokenLegacyMortgageAged: zod.string(),
+  ringySIDFinalExpense: zod.string(),
+  ringyAuthTokenFinalExpense: zod.string(),
   ghlAccessToken: zod.string(),
   ghlLocationID: zod.string(),
   closeCRMAPIKey: zod.string(),
@@ -97,10 +99,12 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyWebsiteAged: userData['RingyAuthTokenLegacyWebsiteAged'] ?? "",
     ringySIDLegacyWebsiteAged: userData['RingySIDLegacyWebsiteAged'] ?? "",
     ringyAuthTokenLegacyWebsite: userData['RingyAuthTokenLegacyWebsite'] ?? "",
-    ringySIDLegacyMortgage: userData['RingySIDOctavianMortgage'] ?? "",
-    ringyAuthTokenLegacyMortgage: userData['RingyAuthTokenOctavianMortgage'] ?? "",
-    ringySIDLegacyMortgageAged: userData['RingySIDOctavianMortgageAged'] ?? "",
-    ringyAuthTokenLegacyMortgageAged: userData['RingyAuthTokenOctavianMortgageAged'] ?? "",
+    ringySIDLegacyMortgage: userData['RingySIDLegacyMortgage'] ?? "",
+    ringyAuthTokenLegacyMortgage: userData['RingyAuthTokenLegacyMortgage'] ?? "",
+    ringySIDLegacyMortgageAged: userData['RingySIDLegacyMortgageAged'] ?? "",
+    ringyAuthTokenLegacyMortgageAged: userData['RingyAuthTokenLegacyMortgageAged'] ?? "",
+    ringySIDFinalExpense: userData['RingySIDFinalExpense'] ?? "",
+    ringyAuthTokenFinalExpense: userData['RingyAuthTokenFinalExpense'] ?? "",
     ghlAccessToken: userData['GHLAccessToken'] ?? "",
     ghlLocationID: userData['GHLocationID'] ?? "",
     closeCRMAPIKey: userData['CloseCRMAPIKey'] ?? "",
@@ -128,6 +132,8 @@ export function AccountGeneral() {
     ringyAuthTokenLegacyMortgage: '',
     ringySIDLegacyMortgageAged: '',
     ringyAuthTokenLegacyMortgageAged: '',
+    ringySIDFinalExpense: '',
+    ringyAuthTokenFinalExpense: '',
     ghlAccessToken: '',
     ghlLocationID: '',
     closeCRMAPIKey: '',
@@ -151,7 +157,7 @@ export function AccountGeneral() {
   const onSubmit = handleSubmit(async (data) => {
     // console.log(data)
 
-    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ringyAuthTokenLegacyMortgage, data.ringySIDLegacyMortgage, data.ringyAuthTokenLegacyMortgageAged, data.ringySIDLegacyMortgageAged, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications, user.idToken.toString());
+    const promise = updateCustomer(user?.id, data.stateLicenses, data.ringyAuthTokenVeteranWebsite, data.ringySIDVeteranWebsite, data.ringyAuthTokenVeteranWebsiteAged, data.ringySIDVeteranWebsiteAged, data.ringyAuthTokenLegacyWebsite, data.ringySIDLegacyWebsite, data.ringyAuthTokenLegacyWebsiteAged, data.ringySIDLegacyWebsiteAged, data.ringyAuthTokenLegacyMortgage, data.ringySIDLegacyMortgage, data.ringyAuthTokenLegacyMortgageAged, data.ringySIDLegacyMortgageAged, data.ringyAuthTokenFinalExpense, data.ringySIDFinalExpense, data.ghlAccessToken, data.ghlLocationID, data.closeCRMAPIKey, data.closeCRMLeadSourceCustomField, data.emailNotifications, user.idToken.toString());
 
     try {
       await promise;
@@ -492,7 +498,7 @@ export function AccountGeneral() {
                   <Field.Text name="ringyAuthTokenLegacyMortgage" label="authToken" />
 
                 </Stack>
-                <Stack spacing={2} sx={{ mt: 0 }}>
+                {/* <Stack spacing={2} sx={{ mt: 0 }}>
                   <Box sx={{
                     display: 'flex',
                     columnGap: 1,
@@ -517,6 +523,46 @@ export function AccountGeneral() {
 
                   <Field.Text name="ringySIDLegacyMortgageAged" label="sid" />
                   <Field.Text name="ringyAuthTokenLegacyMortgageAged" label="authToken" />
+
+                </Stack> */}
+              </Box>
+              )}
+
+              {leadTypes?.FinalExpense?.Active && (
+              <Box
+                sx={{
+                  rowGap: 3,
+                  columnGap: 20,
+                  display: 'grid',
+                  mt: -1,
+                  gridTemplateColumns: { xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' },
+                }}
+              >
+                <Stack spacing={2} sx={{ mt: 0 }}>
+                  <Box sx={{
+                    display: 'flex',
+                    columnGap: 1,
+                  }}>
+
+                    <Typography variant="subtitle2" sx={{ textTransform: 'capitalize', fontWeight: 400 }}>
+                      Final Expense
+                    </Typography>
+
+                    <Label
+                      variant="soft"
+                      color='primary'
+                      sx={{
+                        alignSelf: 'center',
+                        typography: 'text',
+                        fontWeight: 700
+                      }}
+                    >
+                      Fresh
+                    </Label>
+                  </Box>
+
+                  <Field.Text name="ringySIDFinalExpense" label="sid" />
+                  <Field.Text name="ringyAuthTokenFinalExpense" label="authToken" />
 
                 </Stack>
               </Box>

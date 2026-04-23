@@ -191,13 +191,33 @@ export function OverviewAppView() {
               />
             </Grid>
 
-            <Grid size={{ xs: 12, md: 3 }}>
+            {/* <Grid size={{ xs: 12, md: 3 }}>
               <LeadCreditSummary
                 type="Legacy Mortgage"
                 opportunity="Aged"
                 total={data['LegacyMortgageAged']}
               />
+            </Grid> */}
+          </>
+        )}
+
+        {data?.LeadType?.FinalExpense?.Active && (
+          <>
+            <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Final Expense"
+                opportunity="Fresh"
+                total={data['FinalExpenseFresh']}
+              />
             </Grid>
+
+            {/* <Grid size={{ xs: 12, md: 3 }}>
+              <LeadCreditSummary
+                type="Final Expense"
+                opportunity="Aged"
+                total={data['FinalExpenseAged']}
+              />
+            </Grid> */}
           </>
         )}
       </Grid>

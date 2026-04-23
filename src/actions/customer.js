@@ -66,6 +66,8 @@ export async function getCustomer(customerId, idToken) {
             RingyAuthTokenLegacyMortgage: customer.LeadType?.LegacyMortgage?.Fresh?.CRMIntegration?.Ringy?.AuthToken,
             RingySIDLegacyMortgageAged: customer.LeadType?.LegacyMortgage?.Aged?.CRMIntegration?.Ringy?.SID,
             RingyAuthTokenLegacyMortgageAged: customer.LeadType?.LegacyMortgage?.Aged?.CRMIntegration?.Ringy?.AuthToken,
+            RingySIDFinalExpense: customer.LeadType?.FinalExpense?.Fresh?.CRMIntegration?.Ringy?.SID,
+            RingyAuthTokenFinalExpense: customer.LeadType?.FinalExpense?.Fresh?.CRMIntegration?.Ringy?.AuthToken,
             GHLAccessToken: customer.CRMIntegration?.GoHighLevel?.AccessToken,
             GHLocationID: customer.CRMIntegration?.GoHighLevel?.LocationID,
             CloseCRMAPIKey: customer.CRMIntegration?.CloseCRM?.APIKey,
@@ -84,7 +86,7 @@ export async function getCustomer(customerId, idToken) {
     }
 }
 
-export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsiteAged, ringyAuthTokenLegacyMortgage, ringySIDLegacyMortgage, ringyAuthTokenLegacyMortgageAged, ringySIDLegacyMortgageAged, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications, idToken) {
+export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWebsite, ringySIDVeteranWebsite, ringyAuthTokenVeteranWebsiteAged, ringySIDVeteranWebsiteAged, ringyAuthTokenLegacyWebsite, ringySIDLegacyWebsite, ringyAuthTokenLegacyWebsiteAged, ringySIDLegacyWebsiteAged, ringyAuthTokenLegacyMortgage, ringySIDLegacyMortgage, ringyAuthTokenLegacyMortgageAged, ringySIDLegacyMortgageAged, ringyAuthTokenFinalExpense, ringySIDFinalExpense, ghlAccessToken, ghlLocationID, closeCRMAPIKey, closeCRMLeadSourceCustomField, emailNotifications, idToken) {
     try {
         const docClient = getDynamoDBClient(idToken);
         const tableEnv = import.meta.env.VITE_DYNAMODB_TABLE_ENV;
@@ -112,7 +114,9 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
                 "#LeadType.#LegacyMortgage.#Fresh.#CRM.#Ringy.#AuthToken = :octAuthToken, " +
                 "#LeadType.#LegacyMortgage.#Fresh.#CRM.#Ringy.#SID = :octSid, " +
                 "#LeadType.#LegacyMortgage.#Aged.#CRM.#Ringy.#AuthToken = :octAuthTokenAged, " +
-                "#LeadType.#LegacyMortgage.#Aged.#CRM.#Ringy.#SID = :octSidAged",
+                "#LeadType.#LegacyMortgage.#Aged.#CRM.#Ringy.#SID = :octSidAged, " +
+                "#LeadType.#FinalExpense.#Fresh.#CRM.#Ringy.#AuthToken = :feAuthToken, " +
+                "#LeadType.#FinalExpense.#Fresh.#CRM.#Ringy.#SID = :feSid",
             ExpressionAttributeNames: {
                 "#StateLicenses": "StateLicenses",
                 "#EmailNotifications": "EmailNotifications",
@@ -127,6 +131,7 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
                 "#VeteranWebsite": "VeteranWebsite",
                 "#LegacyWebsite": "LegacyWebsite",
                 "#LegacyMortgage": "LegacyMortgage",
+                "#FinalExpense": "FinalExpense",
                 "#Fresh": "Fresh",
                 "#Aged": "Aged",
                 "#Ringy": "Ringy",
@@ -151,7 +156,9 @@ export async function updateCustomer(id, stateLicenses, ringyAuthTokenVeteranWeb
                 ":octAuthToken": ringyAuthTokenLegacyMortgage.replace(/\s+/g, ""),
                 ":octSid": ringySIDLegacyMortgage.replace(/\s+/g, ""),
                 ":octAuthTokenAged": ringyAuthTokenLegacyMortgageAged.replace(/\s+/g, ""),
-                ":octSidAged": ringySIDLegacyMortgageAged.replace(/\s+/g, "")
+                ":octSidAged": ringySIDLegacyMortgageAged.replace(/\s+/g, ""),
+                ":feAuthToken": ringyAuthTokenFinalExpense.replace(/\s+/g, ""),
+                ":feSid": ringySIDFinalExpense.replace(/\s+/g, "")
             },
             ReturnValues: "UPDATED_NEW"
         });

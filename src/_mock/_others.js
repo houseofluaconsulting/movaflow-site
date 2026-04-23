@@ -473,6 +473,49 @@ export const _legacyMortgagePricingPlans = [
   }
 ];
 
+export const _finalExpensePricingPlans = [
+  {
+    credit: '30',
+    opportunity: 'Fresh',
+    type: 'Legacy Mortgage Leads',
+    price: 29,
+    amount: '$870.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TPUaHGHAeFkU5hveUrk0rjb',
+  },
+  {
+    credit: '40',
+    opportunity: 'Fresh',
+    type: 'Legacy Mortgage Leads',
+    price: 28,
+    amount: '$1120.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TPUafGHAeFkU5hvaJ9TnPYE',
+  },
+  {
+    credit: '50',
+    opportunity: 'Fresh',
+    type: 'Legacy Mortgage Leads',
+    price: 26,
+    amount: '$1300.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TPUb2GHAeFkU5hvhE4occa5',
+  },
+  {
+    credit: '60',
+    opportunity: 'Fresh',
+    type: 'Legacy Mortgage Leads',
+    price: 24,
+    amount: '$1440.00',
+    lists: ['Disconnected number replacement', 'Exclusive Leads', 'Live lead transfer directly to your CRM', 'Includes call scripts, text templates, and weekly team Q&A sessions'],
+    labelAction: 'Purchase',
+    priceId: 'price_1TPUbSGHAeFkU5hvHPq1e03K',
+  }
+];
+
 // ----------------------------------------------------------------------
 
 export const _testimonials = [
