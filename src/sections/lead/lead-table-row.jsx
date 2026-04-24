@@ -159,7 +159,7 @@ export function UserTableRow({ row, campaigns, selected, editHref, onSelectRow, 
                 : row.LeadType === 'OctavianMortgage'
                   ? 'Octavian Mortgage'
                   : row.LeadType === 'LegacyMortgage'
-                    ? 'Legacy Mortgage'
+                    ? 'Mortgage'
                     : row.LeadType}
         </TableCell>
 
