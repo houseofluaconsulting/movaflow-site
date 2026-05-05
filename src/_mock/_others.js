@@ -420,7 +420,7 @@ export const _octavianMortgagePricingPlans = [
 
 export const _legacyMortgagePricingPlans = [
   {
-    credit: '30',
+    credit: '20',
     opportunity: 'Fresh',
     type: 'Mortgage Leads',
     price: 36,
