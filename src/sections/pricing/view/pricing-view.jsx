@@ -92,7 +92,7 @@ export function PricingView() {
         Purchase Leads
       </Typography>
 
-      
+
 
       {showPricing ? (
         <>
@@ -112,7 +112,15 @@ export function PricingView() {
           {/* VeteranWebsite */}
           {availableTabs[currentTab]?.key === 'VeteranWebsite' && (
             <>
-              <Box
+              <Alert
+                variant="outlined"
+                severity="info"
+                sx={{ mb: 2, display: 'flex', alignItems: 'center' }}
+              >
+                Purchasing of <b>Fresh Veteran Leads</b> is suspended to fill current orders. Purchasing will resume as soon as possible. Thank you for your patience!
+              </Alert>
+
+              {/* <Box
                 sx={{
                   display: 'grid',
                   gap: 3,
@@ -124,9 +132,9 @@ export function PricingView() {
                 {_veteranWebsitePricingPlans.map((card, index) => (
                   <PricingCard key={card.priceId} card={card} index={index} />
                 ))}
-              </Box>
+              </Box> */}
 
-              <Box
+              {/* <Box
                 sx={{
                   display: 'grid',
                   gap: 3,
@@ -138,7 +146,7 @@ export function PricingView() {
                 {_veteranWebsiteMixedPricingPlans.map((card, index) => (
                   <MixedPricingCard key={card.priceId} card={card} index={index} />
                 ))}
-              </Box>
+              </Box> */}
               <Box
                 sx={{
                   display: 'grid',
