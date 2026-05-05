@@ -461,7 +461,7 @@ export function AccountGeneral() {
               </Box>
               )}
 
-              {leadTypes?.OctavianMortgage?.Active && (
+              {leadTypes?.LegacyMortgage?.Active && (
               <Box
                 sx={{
                   rowGap: 3,
