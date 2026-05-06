@@ -890,6 +890,15 @@ function ObjectionBlocks({ blocks }) {
   );
 }
 
+function SectionHeading({ icon, children }) {
+  return (
+    <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 0.5 }}>
+      <Iconify icon={icon} width={26} />
+      <Typography variant="h5">{children}</Typography>
+    </Stack>
+  );
+}
+
 function SectionNav() {
   return (
     <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1 }}>
@@ -935,9 +944,7 @@ function VeteranResources() {
       </Box>
 
       <Box id="call-script" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
-          Call Script
-        </Typography>
+        <SectionHeading icon="solar:document-text-bold-duotone">Call Script</SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0 }}>
           Steps 1–6
         </Typography>
@@ -975,9 +982,9 @@ function VeteranResources() {
       <Divider />
 
       <Box id="objection-handlers" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
+        <SectionHeading icon="solar:shield-warning-bold-duotone">
           Objection Handlers
-        </Typography>
+        </SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
           Common objections and how to respond.
         </Typography>
@@ -1000,9 +1007,9 @@ function VeteranResources() {
       <Divider />
 
       <Box id="text-drip" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
+        <SectionHeading icon="solar:chat-round-line-bold-duotone">
           2-Week Text Drip Sequence
-        </Typography>
+        </SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0 }}>
           7 messages — cadence: Days 1, 2, 4, 6, 9, 12, 14.
         </Typography>
@@ -1048,9 +1055,7 @@ function LegacyFexResources() {
       </Box>
 
       <Box id="call-script" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
-          Call Script
-        </Typography>
+        <SectionHeading icon="solar:document-text-bold-duotone">Call Script</SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0 }}>
           Steps 1–5
         </Typography>
@@ -1067,9 +1072,9 @@ function LegacyFexResources() {
       <Divider />
 
       <Box id="objection-handlers" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
+        <SectionHeading icon="solar:shield-warning-bold-duotone">
           Objection Handlers
-        </Typography>
+        </SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
           Common objections and how to respond.
         </Typography>
@@ -1098,9 +1103,9 @@ function LegacyFexResources() {
       <Divider />
 
       <Box id="text-drip" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
+        <SectionHeading icon="solar:chat-round-line-bold-duotone">
           14-Day Text Drip
-        </Typography>
+        </SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
           Fires when agent can’t reach on first call attempt. Stops automatically on reply or booking.
         </Typography>
@@ -1125,9 +1130,7 @@ function MortgageResources() {
       </Box>
 
       <Box id="call-script" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
-          Call Script
-        </Typography>
+        <SectionHeading icon="solar:document-text-bold-duotone">Call Script</SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0 }}>
           Steps 1–5
         </Typography>
@@ -1144,9 +1147,9 @@ function MortgageResources() {
       <Divider />
 
       <Box id="objection-handlers" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
+        <SectionHeading icon="solar:shield-warning-bold-duotone">
           Objection Handler Reference
-        </Typography>
+        </SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
           Common objections and how to respond
         </Typography>
@@ -1175,9 +1178,9 @@ function MortgageResources() {
       <Divider />
 
       <Box id="text-drip" sx={{ scrollMarginTop: 80 }}>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
+        <SectionHeading icon="solar:chat-round-line-bold-duotone">
           14-Day Text Drip
-        </Typography>
+        </SectionHeading>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
           Fires when agent can’t reach on first call attempt. Stops automatically on reply or booking.
         </Typography>
