@@ -67,8 +67,8 @@ export const navData = [
       { title: 'Leads', path: paths.dashboard.leads, icon: ICONS.user },
       { title: 'Purchase', path: paths.dashboard.purchase, icon: ICONS.order },
       { title: 'Orders', path: paths.dashboard.orders, icon: ICONS.invoice },
-      { title: 'Rewards', path: paths.dashboard.rewards, icon: <Iconify icon="solar:star-bold-duotone" width={24} />, info: <Label color="info" variant="inverted">New!</Label> },
-      { title: 'Agent Resources', path: paths.dashboard.leadResources, icon: <Iconify icon="solar:book-bold-duotone" width={24} /> },
+      { title: 'Rewards', path: paths.dashboard.rewards, icon: <Iconify icon="solar:star-bold-duotone" width={24} /> },
+      { title: 'Agent Resources', path: paths.dashboard.leadResources, icon: <Iconify icon="solar:book-bold-duotone" width={24} />, info: <Label color="info" variant="inverted">New!</Label> },
     ],
   },
   /**
