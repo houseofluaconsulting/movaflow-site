@@ -1,24 +1,32 @@
-import Stack from '@mui/material/Stack';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router';
 
 import { BackToTopButton } from 'src/components/animate/back-to-top-button';
 import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll-progress';
 
+import { HomeCTA } from '../home-cta';
 import { HomeHero } from '../home-hero';
-import { HomeFAQs } from '../home-faqs';
-import { HomeZoneUI } from '../home-zone-ui';
-import { HomeMinimal } from '../home-minimal';
-import { HomePricing } from '../home-pricing';
-import { HomeForDesigner } from '../home-for-designer';
-import { HomeTestimonials } from '../home-testimonials';
-import { HomeIntegrations } from '../home-integrations';
-import { HomeAdvertisement } from '../home-advertisement';
-import { HomeHugePackElements } from '../home-hugepack-elements';
-import { HomeHighlightFeatures } from '../home-highlight-features';
+import { HomeContact } from '../home-contact';
+import { HomeFeatures } from '../home-features';
+import { HomeTechnology } from '../home-technology';
+import { HomeHowItWorks } from '../home-how-it-works';
+import { HomeCRMIntegrations } from '../home-crm-integrations';
 
 // ----------------------------------------------------------------------
 
 export function HomeView() {
   const pageProgress = useScrollProgress();
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    const target = hash?.slice(1);
+    if (!target) return undefined;
+    // Defer so the target element exists after the section renders.
+    const id = window.requestAnimationFrame(() => {
+      document.getElementById(target)?.scrollIntoView({ behavior: 'smooth' });
+    });
+    return () => window.cancelAnimationFrame(id);
+  }, [hash]);
 
   return (
     <>
@@ -31,7 +39,12 @@ export function HomeView() {
       <BackToTopButton />
 
       <HomeHero />
-
+      <HomeFeatures />
+      <HomeHowItWorks />
+      <HomeCRMIntegrations />
+      <HomeCTA />
+      <HomeTechnology />
+      <HomeContact />
     </>
   );
 }

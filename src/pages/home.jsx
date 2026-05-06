@@ -3,9 +3,9 @@ import { HomeView } from 'src/sections/home/view';
 // ----------------------------------------------------------------------
 
 const metadata = {
-  title: 'LifeJacket Leads by Mova',
+  title: 'Mova Flow — Lead Distribution Platform',
   description:
-    'Make more money from less leads.',
+    'Mova Flow is a lead distribution platform connecting lead-generation teams with buyers. Manage leads, track metrics, and reward growth — all in one place.',
 };
 
 export default function Page() {

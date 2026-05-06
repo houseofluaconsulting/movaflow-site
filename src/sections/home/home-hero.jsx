@@ -7,14 +7,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
-
-import { _mock } from 'src/_mock';
-import { CONFIG } from 'src/global-config';
-
 import { varFade, MotionContainer } from 'src/components/animate';
-
 
 // ----------------------------------------------------------------------
 
@@ -35,9 +28,6 @@ export function HomeHero({ sx, ...other }) {
 
   const y1 = useTransformY(scrollProgress.scrollY, distance * -7);
   const y2 = useTransformY(scrollProgress.scrollY, distance * -6);
-  const y3 = useTransformY(scrollProgress.scrollY, distance * -5);
-  const y4 = useTransformY(scrollProgress.scrollY, distance * -4);
-  const y5 = useTransformY(scrollProgress.scrollY, distance * -3);
 
   const opacity = useTransform(
     scrollProgress.scrollY,
@@ -67,10 +57,10 @@ export function HomeHero({ sx, ...other }) {
         ]}
       >
         <Box component="span" sx={{ width: 1, opacity: 1 }}>
-          LifeJacket Leads
+          Lead distribution,
         </Box>
 
-        <div className="container" style={{ opacity: 0.24}}>
+        <div className="container" style={{ opacity: 0.24 }}>
           powered by
         </div>
 
@@ -93,7 +83,7 @@ export function HomeHero({ sx, ...other }) {
             }),
           ]}
         >
-          mova
+          mova flow
         </Box>
       </Box>
     </m.div>
@@ -106,12 +96,13 @@ export function HomeHero({ sx, ...other }) {
         sx={[
           (theme) => ({
             mx: 'auto',
-            [theme.breakpoints.up(smKey)]: { whiteSpace: 'pre' },
+            maxWidth: 640,
+            [theme.breakpoints.up(smKey)]: { whiteSpace: 'normal' },
             [theme.breakpoints.up(lgKey)]: { fontSize: 20, lineHeight: '36px' },
           }),
         ]}
       >
-        {`Make more money from less leads. \n`}
+        Connect lead generators with buyers, track every metric, and distribute rewards — all in one platform.
       </Typography>
     </m.div>
   );
@@ -178,7 +169,6 @@ export function HomeHero({ sx, ...other }) {
             <m.div style={{ y: y2 }}>{renderText()}</m.div>
           </Stack>
         </Container>
-
       </Box>
     </Box>
   );

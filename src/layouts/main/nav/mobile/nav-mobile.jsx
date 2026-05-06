@@ -4,15 +4,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 
-import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
+import { RouterLink } from 'src/routes/components';
 
 import { Logo } from 'src/components/logo';
 import { Scrollbar } from 'src/components/scrollbar';
 
 import { Nav, NavUl } from '../components';
 import { NavList } from './nav-mobile-list';
-import { SignInButton } from '../../../components/sign-in-button';
 
 // ----------------------------------------------------------------------
 
@@ -74,16 +73,17 @@ export function NavMobile({ data, open, onClose, slots, sx }) {
       </Scrollbar>
 
       {slots?.bottomArea ?? (
-        <Box
-          sx={{
-            py: 3,
-            px: 2.5,
-            gap: 1.5,
-            display: 'flex',
-          }}
-        >
-          <SignInButton fullWidth />
-
+        <Box sx={{ py: 3, px: 2.5, display: 'flex' }}>
+          <Button
+            fullWidth
+            component={RouterLink}
+            href="/#contact"
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+            Contact
+          </Button>
         </Box>
       )}
     </Drawer>
