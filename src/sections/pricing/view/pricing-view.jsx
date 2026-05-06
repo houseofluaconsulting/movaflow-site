@@ -4,6 +4,9 @@ import { varAlpha } from 'minimal-shared/utils';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import Card from '@mui/material/Card';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
@@ -20,6 +23,63 @@ import { LoadingScreen } from 'src/components/loading-screen';
 import { useAuthContext } from 'src/auth/hooks';
 
 import { PricingCard, MixedPricingCard } from '../pricing-card';
+
+// ----------------------------------------------------------------------
+
+const LEAD_TYPE_DESCRIPTIONS = {
+  VeteranWebsite: {
+    category: 'Veteran Life',
+    title: 'Veteran leads',
+    description:
+      'U.S. military veterans who have actively requested information on life insurance coverage. Generated fresh, routed through a dedicated landing page, and OTP-verified prior to delivery.',
+    tags: ['Generated Fresh', 'OTP verified', 'Veteran-specific funnel'],
+  },
+  LegacyWebsite: {
+    category: 'General Life',
+    title: 'General life leads',
+    description:
+      'Consumers actively seeking life insurance coverage. Generated fresh from targeted campaigns, routed through a landing page, and OTP-verified to confirm intent and contact accuracy.',
+    tags: ['Generated Fresh', 'OTP verified', 'Broad market'],
+  },
+  MortgageLeads: {
+    category: 'Mortgage Protection',
+    title: 'Mortgage leads',
+    description:
+      'Homeowners and recent buyers requesting information on mortgage protection coverage. Generated fresh, landing page routed, and OTP-verified — high intent tied to an active financial event.',
+    tags: ['Generated Fresh', 'OTP verified', 'Homeowner-specific'],
+  },
+  FinalExpense: {
+    category: 'Final Expense',
+    title: 'FEX leads',
+    description:
+      'Seniors seeking final expense coverage to protect their families from end-of-life costs. Generated fresh, routed through a dedicated landing page, and OTP-verified before delivery.',
+    tags: ['Generated Fresh', 'OTP verified', 'Senior-focused funnel'],
+  },
+};
+
+function LeadTypeDescription({ tabKey }) {
+  const data = LEAD_TYPE_DESCRIPTIONS[tabKey];
+  if (!data) return null;
+
+  return (
+    <Card sx={{ p: 3, mb: 3 }}>
+      <Chip
+        label={data.category}
+        size="small"
+        variant="outlined"
+        sx={{ mb: 1.5, color: 'primary.main', borderColor: 'primary.main' }}
+      />
+      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+        {data.description}
+      </Typography>
+      <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1 }}>
+        {data.tags.map((tag) => (
+          <Chip key={tag} label={tag} size="small" variant="outlined" />
+        ))}
+      </Stack>
+    </Card>
+  );
+}
 
 // ----------------------------------------------------------------------
 
@@ -107,6 +167,10 @@ export function PricingView() {
                 <Tab key={tab.key} label={tab.label} />
               ))}
             </Tabs>
+          )}
+
+          {availableTabs[currentTab]?.key && (
+            <LeadTypeDescription tabKey={availableTabs[currentTab].key} />
           )}
 
           {/* VeteranWebsite */}
