@@ -827,7 +827,11 @@ function ObjectionBlocks({ blocks }) {
             <Typography key={idx} variant="body2">
               <Box
                 component="span"
-                sx={{ fontWeight: 700, color: 'primary.main', mr: 0.75 }}
+                sx={{
+                  fontWeight: 700,
+                  color: block.speaker === 'Client' ? 'primary.main' : 'secondary.main',
+                  mr: 0.75,
+                }}
               >
                 {block.speaker}:
               </Box>
@@ -885,16 +889,37 @@ function VeteranResources() {
           Call Script
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0 }}>
-          Steps 1–6 — fresh form submission
+          Steps 1–6
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-          <strong>Goal:</strong> close on the call or warm-transfer to a specialist
+          <strong>Goal:</strong> close on the call
         </Typography>
         <Stack spacing={3}>
           {VETERAN_SCRIPT_STEPS.map((step) => (
             <ScriptStepCard key={step.step} step={step} />
           ))}
         </Stack>
+      </Box>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Card sx={{ p: 3, maxWidth: 1180, width: '100%' }}>
+          <Typography variant="h5" sx={{ mb: 0.5 }}>
+            Notes for Agents
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+            Tone and framing reminders for the call.
+          </Typography>
+          <Stack spacing={1} sx={{ pl: 1 }}>
+            {VETERAN_AGENT_NOTES.map((note, idx) => (
+              <Box key={idx} sx={{ display: 'flex', gap: 1 }}>
+                <Typography variant="body2" sx={{ color: 'secondary.main', lineHeight: 1.5 }}>
+                  •
+                </Typography>
+                <Typography variant="body2">{note}</Typography>
+              </Box>
+            ))}
+          </Stack>
+        </Card>
       </Box>
 
       <Divider />
@@ -926,24 +951,6 @@ function VeteranResources() {
 
       <Box>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
-          Notes for Agents
-        </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-          Tone and framing reminders for the call.
-        </Typography>
-        <Stack spacing={1.5}>
-          {VETERAN_AGENT_NOTES.map((note, idx) => (
-            <Card key={idx} sx={{ p: 2 }}>
-              <Typography variant="body2">{note}</Typography>
-            </Card>
-          ))}
-        </Stack>
-      </Box>
-
-      <Divider />
-
-      <Box>
-        <Typography variant="h5" sx={{ mb: 0.5 }}>
           2-Week Text Drip Sequence
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0 }}>
@@ -958,17 +965,22 @@ function VeteranResources() {
           ))}
         </Stack>
 
-        <Box sx={{ mt: 3 }}>
-          <Typography variant="subtitle2" sx={{ mb: 1.5 }}>
-            Drip notes
-          </Typography>
-          <Stack spacing={1.5}>
-            {VETERAN_DRIP_NOTES.map((note, idx) => (
-              <Card key={idx} sx={{ p: 2 }}>
-                <Typography variant="body2">{note}</Typography>
-              </Card>
-            ))}
-          </Stack>
+        <Box sx={{ mt: 3, display: 'flex', justifyContent: 'center' }}>
+          <Card sx={{ p: 3, maxWidth: 1250, width: '100%' }}>
+            <Typography variant="h5" sx={{ mb: 1.5 }}>
+              Drip Notes
+            </Typography>
+            <Stack spacing={1} sx={{ pl: 1 }}>
+              {VETERAN_DRIP_NOTES.map((note, idx) => (
+                <Box key={idx} sx={{ display: 'flex', gap: 1 }}>
+                  <Typography variant="body2" sx={{ color: 'secondary.main', lineHeight: 1.5 }}>
+                    •
+                  </Typography>
+                  <Typography variant="body2">{note}</Typography>
+                </Box>
+              ))}
+            </Stack>
+          </Card>
         </Box>
       </Box>
     </Stack>
@@ -1019,7 +1031,7 @@ function LegacyFexResources() {
               <AccordionDetails>
                 <Typography
                   variant="caption"
-                  sx={{ fontWeight: 700, color: 'primary.main', display: 'block', mb: 1 }}
+                  sx={{ fontWeight: 700, color: 'secondary.main', display: 'block', mb: 1 }}
                 >
                   YOUR RESPONSE
                 </Typography>
@@ -1093,7 +1105,7 @@ function MortgageResources() {
               <AccordionDetails>
                 <Typography
                   variant="caption"
-                  sx={{ fontWeight: 700, color: 'primary.main', display: 'block', mb: 1 }}
+                  sx={{ fontWeight: 700, color: 'secondary.main', display: 'block', mb: 1 }}
                 >
                   YOUR RESPONSE
                 </Typography>
