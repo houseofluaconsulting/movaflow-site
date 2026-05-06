@@ -61,7 +61,7 @@ export function PricingView() {
     ...(leadTypes?.VeteranWebsite?.Active ? [{ key: 'VeteranWebsite', label: 'Veteran Leads' }] : []),
     ...(leadTypes?.LegacyWebsite?.Active ? [{ key: 'LegacyWebsite', label: 'Legacy Leads' }] : []),
     ...(leadTypes?.OctavianMortgage?.Active || leadTypes?.LegacyMortgage?.Active ? [{ key: 'MortgageLeads', label: 'Mortgage Leads' }] : []),
-    ...(leadTypes?.FinalExpense?.Active ? [{ key: 'FinalExpense', label: 'Final Expense' }] : []),
+    ...(leadTypes?.FinalExpense?.Active ? [{ key: 'FinalExpense', label: 'Final Expense Leads' }] : []),
   ];
 
   const arrowIcon = () => (
