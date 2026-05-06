@@ -21,6 +21,7 @@ const OrdersPage = lazy(() => import('src/pages/dashboard/orders'));
 const PurchasePage = lazy(() => import('src/pages/dashboard/purchase'));
 const RewardsPage = lazy(() => import('src/pages/dashboard/rewards'));
 const RewardsProgramPage = lazy(() => import('src/pages/dashboard/rewards-program'));
+const LeadResourcesPage = lazy(() => import('src/pages/dashboard/lead-resources'));
 const OverviewEcommercePage = lazy(() => import('src/pages/dashboard/ecommerce'));
 const OverviewAnalyticsPage = lazy(() => import('src/pages/dashboard/analytics'));
 const OverviewBankingPage = lazy(() => import('src/pages/dashboard/banking'));
@@ -119,6 +120,7 @@ export const dashboardRoutes = [
       { path: 'purchase', element: <PurchasePage /> },
       { path: 'rewards', element: <RewardsPage /> },
       { path: 'rewards-program', element: <RewardsProgramPage /> },
+      { path: 'lead-resources', element: <LeadResourcesPage /> },
       { path: 'ecommerce', element: <OverviewEcommercePage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
       { path: 'banking', element: <OverviewBankingPage /> },
