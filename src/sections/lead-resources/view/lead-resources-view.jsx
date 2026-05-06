@@ -5,11 +5,15 @@ import Tab from '@mui/material/Tab';
 import Card from '@mui/material/Card';
 import Tabs from '@mui/material/Tabs';
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Accordion from '@mui/material/Accordion';
 import Typography from '@mui/material/Typography';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
+
+import { paths } from 'src/routes/paths';
+import { useRouter } from 'src/routes/hooks';
 
 import { getCustomer } from 'src/actions/customer';
 import { DashboardContent } from 'src/layouts/dashboard';
@@ -1138,6 +1142,7 @@ function MortgageResources() {
 // ----------------------------------------------------------------------
 
 export function LeadResourcesView() {
+  const router = useRouter();
   const { user } = useAuthContext();
   const [customerData, setCustomerData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -1174,12 +1179,34 @@ export function LeadResourcesView() {
 
   return (
     <DashboardContent>
-      <Typography variant="h4" sx={{ mb: 0.5 }}>
-        Agent Resources
-      </Typography>
-      <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
-        Resources for working your leads
-      </Typography>
+      <Box
+        sx={{
+          mb: 3,
+          gap: 2,
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'flex-start', sm: 'center' },
+          justifyContent: 'space-between',
+        }}
+      >
+        <Box>
+          <Typography variant="h4" sx={{ mb: 0.5 }}>
+            Agent Resources
+          </Typography>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            Resources for working your leads
+          </Typography>
+        </Box>
+
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => router.push(paths.dashboard.maximizeContactRate)}
+          endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
+        >
+          Maximize Your Contact Rate
+        </Button>
+      </Box>
 
       {availableTabs.length > 0 && (
         <Tabs

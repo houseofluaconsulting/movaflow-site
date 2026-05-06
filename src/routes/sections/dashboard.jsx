@@ -22,6 +22,7 @@ const PurchasePage = lazy(() => import('src/pages/dashboard/purchase'));
 const RewardsPage = lazy(() => import('src/pages/dashboard/rewards'));
 const RewardsProgramPage = lazy(() => import('src/pages/dashboard/rewards-program'));
 const LeadResourcesPage = lazy(() => import('src/pages/dashboard/lead-resources'));
+const MaximizeContactRatePage = lazy(() => import('src/pages/dashboard/lead-resources/maximize-contact-rate'));
 const OverviewEcommercePage = lazy(() => import('src/pages/dashboard/ecommerce'));
 const OverviewAnalyticsPage = lazy(() => import('src/pages/dashboard/analytics'));
 const OverviewBankingPage = lazy(() => import('src/pages/dashboard/banking'));
@@ -120,7 +121,8 @@ export const dashboardRoutes = [
       { path: 'purchase', element: <PurchasePage /> },
       { path: 'rewards', element: <RewardsPage /> },
       { path: 'rewards-program', element: <RewardsProgramPage /> },
-      { path: 'lead-resources', element: <LeadResourcesPage /> },
+      { path: 'agent-resources', element: <LeadResourcesPage /> },
+      { path: 'agent-resources/maximize-contact-rate', element: <MaximizeContactRatePage /> },
       { path: 'ecommerce', element: <OverviewEcommercePage /> },
       { path: 'analytics', element: <OverviewAnalyticsPage /> },
       { path: 'banking', element: <OverviewBankingPage /> },
