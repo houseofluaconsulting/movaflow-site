@@ -25,6 +25,15 @@ import { useAuthContext } from 'src/auth/hooks';
 
 // ----------------------------------------------------------------------
 
+const scrollToSection = (id) => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+
+// ----------------------------------------------------------------------
+
 const MORTGAGE_SCRIPT_STEPS = [
   {
     step: 'STEP 01',
@@ -881,14 +890,51 @@ function ObjectionBlocks({ blocks }) {
   );
 }
 
+function SectionNav() {
+  return (
+    <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1 }}>
+      <Button
+        variant="outlined"
+        color="inherit"
+        size="small"
+        startIcon={<Iconify icon="solar:document-text-bold-duotone" />}
+        onClick={() => scrollToSection('call-script')}
+      >
+        Call Script
+      </Button>
+      <Button
+        variant="outlined"
+        color="inherit"
+        size="small"
+        startIcon={<Iconify icon="solar:shield-warning-bold-duotone" />}
+        onClick={() => scrollToSection('objection-handlers')}
+      >
+        Objection Handlers
+      </Button>
+      <Button
+        variant="outlined"
+        color="inherit"
+        size="small"
+        startIcon={<Iconify icon="solar:chat-round-line-bold-duotone" />}
+        onClick={() => scrollToSection('text-drip')}
+      >
+        Text Drip
+      </Button>
+    </Stack>
+  );
+}
+
 function VeteranResources() {
   return (
     <Stack spacing={5}>
-      <Typography variant="h4" sx={{ color: 'primary.main' }}>
-        Benefits for Veterans
-      </Typography>
-
       <Box>
+        <Typography variant="h4" sx={{ color: 'primary.main', mb: 1.5 }}>
+          Benefits for Veterans
+        </Typography>
+        <SectionNav />
+      </Box>
+
+      <Box id="call-script" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
           Call Script
         </Typography>
@@ -928,7 +974,7 @@ function VeteranResources() {
 
       <Divider />
 
-      <Box>
+      <Box id="objection-handlers" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
           Objection Handlers
         </Typography>
@@ -953,7 +999,7 @@ function VeteranResources() {
 
       <Divider />
 
-      <Box>
+      <Box id="text-drip" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
           2-Week Text Drip Sequence
         </Typography>
@@ -994,11 +1040,14 @@ function VeteranResources() {
 function LegacyFexResources() {
   return (
     <Stack spacing={5}>
-      <Typography variant="h4" sx={{ color: 'primary.main' }}>
-        Final Expense / Legacy
-      </Typography>
-
       <Box>
+        <Typography variant="h4" sx={{ color: 'primary.main', mb: 1.5 }}>
+          Final Expense / Legacy
+        </Typography>
+        <SectionNav />
+      </Box>
+
+      <Box id="call-script" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
           Call Script
         </Typography>
@@ -1017,7 +1066,7 @@ function LegacyFexResources() {
 
       <Divider />
 
-      <Box>
+      <Box id="objection-handlers" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
           Objection Handlers
         </Typography>
@@ -1048,9 +1097,9 @@ function LegacyFexResources() {
 
       <Divider />
 
-      <Box>
+      <Box id="text-drip" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
-          Legacy Financial — 14-Day Text Drip
+          14-Day Text Drip
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
           Fires when agent can’t reach on first call attempt. Stops automatically on reply or booking.
@@ -1068,11 +1117,14 @@ function LegacyFexResources() {
 function MortgageResources() {
   return (
     <Stack spacing={5}>
-      <Typography variant="h4" sx={{ color: 'primary.main' }}>
-        Mortgage Protection
-      </Typography>
-
       <Box>
+        <Typography variant="h4" sx={{ color: 'primary.main', mb: 1.5 }}>
+          Mortgage Protection
+        </Typography>
+        <SectionNav />
+      </Box>
+
+      <Box id="call-script" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
           Call Script
         </Typography>
@@ -1091,7 +1143,7 @@ function MortgageResources() {
 
       <Divider />
 
-      <Box>
+      <Box id="objection-handlers" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
           Objection Handler Reference
         </Typography>
@@ -1122,12 +1174,12 @@ function MortgageResources() {
 
       <Divider />
 
-      <Box>
+      <Box id="text-drip" sx={{ scrollMarginTop: 80 }}>
         <Typography variant="h5" sx={{ mb: 0.5 }}>
-          Legacy Financial — 14-Day Text Drip
+          14-Day Text Drip
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary', mb: 3 }}>
-          8 touches over 14 days
+          Fires when agent can’t reach on first call attempt. Stops automatically on reply or booking.
         </Typography>
         <Stack spacing={2}>
           {MORTGAGE_TEXT_DRIP.map((item) => (
