@@ -1,15 +1,12 @@
 import { useRef, useCallback } from 'react';
 import { useBoolean } from 'minimal-shared/hooks';
-import { varAlpha, isActiveLink, isExternalLink } from 'minimal-shared/utils';
+import { isActiveLink, isExternalLink } from 'minimal-shared/utils';
 
 import Collapse from '@mui/material/Collapse';
 
-import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
 
-import { CONFIG } from 'src/global-config';
-
-import { navSectionClasses, NavSectionVertical } from 'src/components/nav-section';
+import { NavSectionVertical } from 'src/components/nav-section';
 
 import { NavLi } from '../components';
 import { NavItem } from './nav-mobile-item';
@@ -20,9 +17,7 @@ export function NavList({ data, sx, ...other }) {
   const pathname = usePathname();
   const navItemRef = useRef(null);
 
-  const isNotRootOrDocs = !['/', paths.docs].includes(pathname);
-  const isNotComponentsPath = !pathname.startsWith(paths.components);
-  const isOpenPath = !!data.children && isNotRootOrDocs && isNotComponentsPath;
+  const isOpenPath = !!data.children && pathname !== '/';
 
   const isActive = isActiveLink(pathname, data.path, data.deepMatch ?? !!data.children);
 
@@ -55,31 +50,7 @@ export function NavList({ data, sx, ...other }) {
   const renderCollapse = () =>
     !!data.children && (
       <Collapse in={open}>
-        <NavSectionVertical
-          data={data.children}
-          sx={{ px: 1.5 }}
-          slotProps={{
-            rootItem: {
-              sx: [
-                (theme) => ({
-                  minHeight: 36,
-                  '&[aria-label="Dashboard"]': {
-                    [`& .${navSectionClasses.item.title}`]: {
-                      display: 'none',
-                    },
-                    height: 180,
-                    borderRadius: 1.5,
-                    backgroundSize: 'auto 88%',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundImage: `url(${CONFIG.assetsDir}/assets/illustrations/illustration-dashboard.webp)`,
-                    border: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
-                  },
-                }),
-              ],
-            },
-          }}
-        />
+        <NavSectionVertical data={data.children} sx={{ px: 1.5 }} />
       </Collapse>
     );
 

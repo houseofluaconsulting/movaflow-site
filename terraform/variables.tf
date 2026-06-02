@@ -28,10 +28,16 @@ variable "verify_from_identity" {
   default     = true
 }
 
+variable "verify_to_identity" {
+  description = "Create an SES email identity for to_email. Needed in SES sandbox, which restricts sending to verified addresses only."
+  type        = bool
+  default     = false
+}
+
 variable "allowed_origins" {
   description = "Origins allowed by the API's CORS policy. Include local dev URLs and the deployed site URL."
   type        = list(string)
-  default     = ["http://localhost:3032", "https://movaflow.io"]
+  default     = ["http://localhost:3032", "https://movaflow.io", "https://movaflow.co"]
 }
 
 variable "lambda_memory_mb" {

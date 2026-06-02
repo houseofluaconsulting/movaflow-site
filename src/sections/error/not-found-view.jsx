@@ -1,12 +1,12 @@
 import { m } from 'framer-motion';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import { SimpleLayout } from 'src/layouts/simple';
 import { PageNotFoundIllustration } from 'src/assets/illustrations';
 
 import { varBounce, MotionContainer } from 'src/components/animate';
@@ -15,9 +15,14 @@ import { varBounce, MotionContainer } from 'src/components/animate';
 
 export function NotFoundView() {
   return (
-    <SimpleLayout
-      slotProps={{
-        content: { compact: true },
+    <Box
+      sx={{
+        py: 12,
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
       }}
     >
       <Container component={MotionContainer}>
@@ -42,6 +47,6 @@ export function NotFoundView() {
           Go to home
         </Button>
       </Container>
-    </SimpleLayout>
+    </Box>
   );
 }

@@ -4,14 +4,13 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 
-import { usePathname } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
 import { Logo } from 'src/components/logo';
 
+import { HomeFooter } from './footer';
 import { NavMobile } from './nav/mobile';
 import { NavDesktop } from './nav/desktop';
-import { Footer, HomeFooter } from './footer';
 import { MenuButton } from '../components/menu-button';
 import { navData as mainNavData } from '../nav-config-main';
 import { SettingsButton } from '../components/settings-button';
@@ -20,11 +19,7 @@ import { MainSection, LayoutSection, HeaderSection } from '../core';
 // ----------------------------------------------------------------------
 
 export function MainLayout({ sx, cssVars, children, slotProps, layoutQuery = 'md' }) {
-  const pathname = usePathname();
-
   const { value: open, onFalse: onClose, onTrue: onOpen } = useBoolean();
-
-  const isHomePage = pathname === '/';
 
   const navData = slotProps?.nav?.data ?? mainNavData;
 
@@ -93,12 +88,7 @@ export function MainLayout({ sx, cssVars, children, slotProps, layoutQuery = 'md
     );
   };
 
-  const renderFooter = () =>
-    isHomePage ? (
-      <HomeFooter sx={slotProps?.footer?.sx} />
-    ) : (
-      <Footer sx={slotProps?.footer?.sx} layoutQuery={layoutQuery} />
-    );
+  const renderFooter = () => <HomeFooter sx={slotProps?.footer?.sx} />;
 
   const renderMain = () => <MainSection {...slotProps?.main}>{children}</MainSection>;
 
