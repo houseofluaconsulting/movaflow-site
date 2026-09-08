@@ -30,7 +30,9 @@ No mobile information will be shared with third parties or affiliates for market
     title: '5. SMS and Text Messaging',
     body: `If you provide your mobile phone number and affirmatively consent, we may send you SMS text messages related to your account and our services — including lead delivery alerts, lead credit balance updates, rewards notifications, promotional offers, and customer care responses.
 
-Consent to receive SMS messages is obtained through a clearly labeled, unchecked opt-in checkbox on our web sign-up form, separate from any other agreement. Consent to receive marketing text messages is not a condition of purchase or of using our services.
+Consent is obtained at account registration through two separate, independent checkboxes on our web sign-up form, each unchecked by default and separate from any other agreement: one for automated account alerts and one for recurring marketing and promotional messages.
+
+Neither checkbox is required. You can create an account and use every part of the platform without consenting to either, and consent to receive marketing text messages is never a condition of purchase. Account alerts are sent only to users who opted in to them, and marketing or promotional messages only to users who separately opted in to those.
 
 Mobile opt-in data and consent are never shared or sold to third parties or affiliates for marketing or promotional purposes. We share your mobile number only with the messaging service providers strictly necessary to transmit messages you have asked to receive, and those providers are contractually prohibited from using it for any other purpose.
 
