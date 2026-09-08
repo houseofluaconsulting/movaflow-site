@@ -7,6 +7,8 @@ import { SplashScreen } from 'src/components/loading-screen';
 // ----------------------------------------------------------------------
 
 const HomePage = lazy(() => import('src/pages/home'));
+const RewardsPage = lazy(() => import('src/pages/rewards'));
+const PurchasePage = lazy(() => import('src/pages/purchase'));
 const PrivacyPolicyPage = lazy(() => import('src/pages/privacy-policy'));
 const TermsConditionsPage = lazy(() => import('src/pages/terms-conditions'));
 const Page404 = lazy(() => import('src/pages/error/404'));
@@ -18,6 +20,26 @@ export const routesSection = [
       <Suspense fallback={<SplashScreen />}>
         <MainLayout>
           <HomePage />
+        </MainLayout>
+      </Suspense>
+    ),
+  },
+  {
+    path: '/rewards',
+    element: (
+      <Suspense fallback={<SplashScreen />}>
+        <MainLayout>
+          <RewardsPage />
+        </MainLayout>
+      </Suspense>
+    ),
+  },
+  {
+    path: '/purchase',
+    element: (
+      <Suspense fallback={<SplashScreen />}>
+        <MainLayout>
+          <PurchasePage />
         </MainLayout>
       </Suspense>
     ),

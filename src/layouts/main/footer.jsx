@@ -34,6 +34,24 @@ export function HomeFooter({ sx, ...other }) {
           >
             <Link
               component={RouterLink}
+              href="/purchase"
+              variant="body2"
+              color="text.secondary"
+              underline="hover"
+            >
+              Purchase Leads
+            </Link>
+            <Link
+              component={RouterLink}
+              href="/rewards"
+              variant="body2"
+              color="text.secondary"
+              underline="hover"
+            >
+              Mova Rewards
+            </Link>
+            <Link
+              component={RouterLink}
               href="/privacy-policy"
               variant="body2"
               color="text.secondary"
